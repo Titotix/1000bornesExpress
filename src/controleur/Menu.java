@@ -35,14 +35,52 @@ public class Menu {
 		
 	}
 	
-	public void creationJoueurs() {
+	public void creationJoueurs(Menu menu) {
+		
+		String nomJoueur;
+		
+		Humain[] humain = new Humain[menu.getNbHumain()];
+		
+		for(int i = 1; i <= this.nbHumain+1; i++) {
+			
+			humain[i] =  new Humain();
+			humain[i].setNom(this.getNomHumain(i) ); 
+			humain[i].setNumPassage(i);
+		}
+		
+		Robot[] robot = new Robot[menu.getNbRobot()];
+		
+		for(int i = 1; i <= this.nbRobot+1; i++) {
+			
+			robot[i] =  new Robot();
+			robot[i].setNom(this.getNomRobot(i) ); 
+			robot[i].setNumPassage(i + menu.getNbHumain());
+		}
+	}
+	
+	
+	public String getNomHumain(int i) {
 		String nomJoueur;
 		Scanner clavier = new Scanner(System.in);
-		for(int i = 0; i <= this.nbHumain; i++) {
-			System.out.println("Veuillez entrer le nom du joueur numero " + (i+1));
-			nomJoueur = clavier.nextLine();
-			Humain nomJoueur = new Humain();
-		}
+		System.out.println("Veuillez entrer le nom du joueur numero " + i);
+		nomJoueur = clavier.nextLine();
+		return nomJoueur;
+		
+	}
+	/**
+	 * Génére des noms prédéfini pour les robots
+	 * @param i
+	 * @return nom de robot
+	 */
+	public String getNomRobot(int i) {
+		String[] nomRobot = new String[5];
+		nomRobot[1] = "Gérard";
+		nomRobot[2] = "Jeau-Paul";
+		nomRobot[3] = "Jean-Luc";
+		nomRobot[4] = "Grégoire";
+		nomRobot[5] = "Thibault";
+		return nomRobot[i];
+		
 	}
 	
 	//D�finir nombre d'IA
@@ -73,7 +111,6 @@ public class Menu {
 	public int getNbRobot() {
 		return this.nbRobot;
 	}
-	
 	
 
 

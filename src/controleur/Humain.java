@@ -2,10 +2,10 @@ package controleur;
 import controleur.*;
 import modele.*;
 
-public class Humain {
+public class Humain extends Joueur {
 
 	
-	public Humain (){
+	public Humain(){
 		
 	}
 	
@@ -14,14 +14,11 @@ public class Humain {
 		
 	}
 	
-	//Selectionner le numero du joueur
-	public void setNumeroPassage(){
-		
-	}
 	
 	//action de selectionner une carte parmis la main
 	public void choixCarte(){
 		
 	}
 	
+
 }

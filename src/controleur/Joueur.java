@@ -2,8 +2,8 @@ package controleur;
 
 public class Joueur {
 
-	private String nom;
-	private int numeroPassage;
+	protected String nom;
+	protected int numPassage;
 	/** 
 	 * TODO
 	 * Creer une partie
@@ -69,5 +69,22 @@ public class Joueur {
 		
 	}
 	
+	public String getNom() {
+		return this.nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+		
+	}
+	
+	public int getNumPassage() {
+		return this.numPassage;
+	}
+
+	public void setNumPassage(int numPassage) {
+		this.numPassage = numPassage;
+		
+	}
 	
 }

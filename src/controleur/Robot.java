@@ -2,7 +2,7 @@ package controleur;
 import controleur.*;
 import modele.*;
 
-public class Robot {
+public class Robot extends Joueur {
 	
 	private int strategy; //TODO
 	/**Constructeur
