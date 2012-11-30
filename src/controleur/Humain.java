@@ -9,7 +9,7 @@ public class Humain {
 		
 	}
 	
-	//cr�er un humain test
+	//cr�er un humain
 	public void creer(){
 		
 	}

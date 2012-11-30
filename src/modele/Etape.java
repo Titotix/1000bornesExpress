@@ -10,8 +10,8 @@ public class Etape extends Carte {
 	private int nombreKilometres;
 	
 	//constructeur
-	public Etape (int nombreKilometres){
-		this.nombreKilometres=nombreKilometres;
+	public Etape (int nombreKilometres,int ID){
+		
 		
 	}
 	

@@ -18,7 +18,7 @@ public class Botte extends Carte  {
 	
 
 	//constructeur
-	public Botte() {
+	public Botte(String nom, int ID) {
 		
 	}
 	

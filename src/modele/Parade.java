@@ -15,7 +15,7 @@ public class Parade extends Carte {
 	
 	
 	//constructeur
-	public Parade(){
+	public Parade(String nom, int ID){
 		
 	}
 	

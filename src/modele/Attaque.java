@@ -20,7 +20,7 @@ public class Attaque extends Carte {
 	
 	
 	//constructeur
-	public Attaque (){
+	public Attaque (String nom, int ID){
 		
 	}
 	
