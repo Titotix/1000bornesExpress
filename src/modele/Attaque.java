@@ -22,6 +22,7 @@ public class Attaque extends Carte {
 	//constructeur
 	public Attaque (String nom, int ID){
 		
+		
 	}
 	
 	
