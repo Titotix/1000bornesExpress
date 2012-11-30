@@ -4,13 +4,16 @@ import modele.*;
 
 public class Robot extends Joueur {
 	
+	public Robot(String nomJoueur, int numPassage) {
+		super(nomJoueur, numPassage);
+		// TODO Auto-generated constructor stub
+	}
+
 	private int strategy; //TODO
 	/**Constructeur
 	 * 
 	 */
-	public Robot (){
-		
-	}
+
 	
 	/**Choisir le numero de passage
 	 * 

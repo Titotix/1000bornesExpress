@@ -22,7 +22,7 @@ public class Joueur {
 	//constructeur
 	public Joueur (String nomJoueur, int numPassage){
 		this.nom=nomJoueur;
-		this.numeroPassage=numPassage;
+		this.numPassage=numPassage;
 	}
 	
 	

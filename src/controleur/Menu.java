@@ -41,29 +41,30 @@ public class Menu {
 		
 		Humain[] humain = new Humain[menu.getNbHumain()];
 		
-		for(int i = 1; i <= this.nbHumain+1; i++) {
-			
-			humain[i] =  new Humain();
-			humain[i].setNom(this.getNomHumain(i) ); 
-			humain[i].setNumPassage(i);
+		for(int i = 0; i < this.nbHumain; i++) {
+
+			humain[i] =  new Humain(this.getNomHumain(i+1), i+1);
+	
 		}
-		
+
 		Robot[] robot = new Robot[menu.getNbRobot()];
-		
-		for(int i = 1; i <= this.nbRobot+1; i++) {
+
+		for(int j = 0; j < this.nbRobot; j++) {
 			
-			robot[i] =  new Robot();
-			robot[i].setNom(this.getNomRobot(i) ); 
-			robot[i].setNumPassage(i + menu.getNbHumain());
-		}
+			robot[j] =  new Robot(this.getNomRobot(j+1), j+1+menu.getNbHumain());
 	}
+		
+		
+		
+	}
+	
 	
 	
 	public String getNomHumain(int i) {
 		String nomJoueur;
 		Scanner clavier = new Scanner(System.in);
 		System.out.println("Veuillez entrer le nom du joueur numero " + i);
-		nomJoueur = clavier.nextLine();
+		nomJoueur = clavier.next();
 		return nomJoueur;
 		
 	}
@@ -73,12 +74,12 @@ public class Menu {
 	 * @return nom de robot
 	 */
 	public String getNomRobot(int i) {
-		String[] nomRobot = new String[5];
+		String[] nomRobot = new String[6];
 		nomRobot[1] = "Gérard";
 		nomRobot[2] = "Jeau-Paul";
-		nomRobot[3] = "Jean-Luc";
+		nomRobot[3] = "Jeannine";
 		nomRobot[4] = "Grégoire";
-		nomRobot[5] = "Thibault";
+		nomRobot[5] = "Paulette";
 		return nomRobot[i];
 		
 	}
@@ -97,7 +98,7 @@ public class Menu {
 
 		Scanner clavier2 = new Scanner(System.in);
 		System.out.println("Entrez le nombre d'adversaire humain avec qui vous allez jouer, en vous incluant vous même.");
-		this.nbRobot = clavier2.nextInt();
+		this.nbHumain = clavier2.nextInt();
 	}
 	
 	public int getNbJoueurTotal() {

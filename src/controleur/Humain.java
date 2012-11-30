@@ -5,10 +5,13 @@ import modele.*;
 public class Humain extends Joueur {
 
 	
-	public Humain(){
-		
-	}
 	
+	public Humain(String nomJoueur, int numPassage) {
+		super(nomJoueur, numPassage);
+		// TODO Auto-generated constructor stub
+	}
+
+
 	//cr�er un humain
 	public void creer(){
 		
