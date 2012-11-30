@@ -1,0 +1,6 @@
+Classe qui doivent implémenter l'interface observable :
+	JeuSurTable
+	Main
+	Defausse
+	Talon
+	Carte (a voir l'utilité)
