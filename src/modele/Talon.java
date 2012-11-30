@@ -13,14 +13,13 @@ public class Talon extends Observable {
 	private int nombreCarteActuel;
 	private static LinkedList<Carte> pileCarte; //TODO
 	
-	//constructeur
+	//constructeur, qui créé la pile de carte contenant toutes les cartes
 	public Talon (){
 		pileCarte=new LinkedList<Carte>();
 		this.creerCartes();
-		
-		
-
-	}
+			}
+	
+	
 	/**
 	 * Permet la creation des cartes grace aux constructeurs des types
 	 * @param 
