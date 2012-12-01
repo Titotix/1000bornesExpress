@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.*;
+import controleur.*;
 
 public class Talon extends Observable {
 	
@@ -127,8 +128,8 @@ public class Talon extends Observable {
 			
 			}
 		
-		
-		System.out.println(pileCarte.toString());
+		//Ce message permet d'avoir la liste de toutes les cartes de la pileCarte
+		//System.out.println(pileCarte.toString());
 		
 		
 	}
@@ -149,7 +150,12 @@ public class Talon extends Observable {
 	}
 	
 	//Distribuer les cartes depuis le talon
-	public void distribuer(){
+	public void distribuer(Menu menu){
+		int i=0;
+		while( this.nbCarteADistribuer(menu) > 0 ) {
+			humain[i].ajouterCarte(pileCarte.removeFirst());
+			
+		}
 		
 	}
 	

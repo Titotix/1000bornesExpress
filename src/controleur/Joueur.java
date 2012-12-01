@@ -1,7 +1,12 @@
 package controleur;
 
+import modele.JeuSurTable;
+import modele.Main;
+
 public class Joueur {
 
+	protected Main main;
+	protected JeuSurTable jeu;
 	protected String nom;
 	protected int numPassage;
 	/** 
@@ -23,10 +28,13 @@ public class Joueur {
 	public Joueur (String nomJoueur, int numPassage){
 		this.nom=nomJoueur;
 		this.numPassage=numPassage;
+
+		this.main = new Main();
+		this.jeu = new JeuSurTable();
 	}
 	
 	
-	//Le choix de la carte
+	//Le choix de la carte a jouer.
 	public void choixCarte (){
 		
 	}

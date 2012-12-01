@@ -12,6 +12,7 @@ public class main {
 	menu.nouvellePartie();
 	menu.creationJoueurs(menu);
 	Talon talon = new Talon();
+	humain[0].
 	
 	
 	}

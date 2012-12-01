@@ -3,18 +3,16 @@ package modele;
 import java.util.*;
 
 import controleur.*;
-import modele.*;
 
 public class Main extends Observable{
 
 	private int nombreCarte;
 	private boolean carteJouee;
-	private Carte cartes;//TODO Revenir dessus pour faire une collection
+	private LinkedList<Carte> main;//TODO Revenir dessus pour faire une collection
 	
-	public Main (int nombreCarte, boolean carteJouee){
-		this.nombreCarte=nombreCarte;
-		this.carteJouee=carteJouee;
-
+	public Main(){
+		
+		
 	}
 	
 	//Permet d'ajouter une carte apres la pioche
