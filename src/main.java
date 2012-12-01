@@ -1,5 +1,7 @@
-import controleur.*;
+
 import modele.*;
+import modele.*;
+import controleur.*;
 
 public class main {
 
@@ -9,6 +11,7 @@ public class main {
 	Menu menu = new Menu();
 	menu.nouvellePartie();
 	menu.creationJoueurs(menu);
+	Talon talon = new Talon();
 	
 	
 	}

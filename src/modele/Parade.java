@@ -7,22 +7,24 @@ import modele.*;
 
 public class Parade extends Carte {
 	
-	public final static int ROUE_SECOURS=1;
-	public final static int FEU_VERT=2;
-	public final static int ESSENCE=3;
-	public final static int FIN_LIMITE_VITESSE=4;
-	public final static int REPARATION=5;
+	public final static int ROUE_SECOURS=0;
+	public final static int FEU_VERT=1;
+	public final static int ESSENCE=2;
+	public final static int FIN_LIMITE_VITESSE=3;
+	public final static int REPARATION=4;
 	
-	
+	private int type;
 	//constructeur
-	public Parade(String nom, int ID){
-		
+	public Parade(int type){
+		this.type = type;
 	}
 	
 	
 	//Enum�ration des types de parade accessibles par Parade.TYPE[this.valeur]
 	public final static String[] TYPE= {"Roue de secours", "Feu Vert", "Essence","Fin de limite de Vitesse", "Reparation"};
 	
-	
+	public String toString() {
+		return this.TYPE[this.type];
+	}
 
 }

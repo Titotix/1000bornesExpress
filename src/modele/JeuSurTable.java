@@ -3,7 +3,6 @@ package modele;
 import java.util.*;
 
 import controleur.*;
-import modele.*;
 
 public class JeuSurTable extends Observable {
 

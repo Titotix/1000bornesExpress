@@ -1,5 +1,5 @@
 package controleur;
-import controleur.*;
+
 import modele.*;
 
 public class Humain extends Joueur {

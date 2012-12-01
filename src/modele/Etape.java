@@ -3,15 +3,15 @@ package modele;
 import java.util.*;
 
 import controleur.*;
-import modele.*;
+
 
 public class Etape extends Carte {
 	
 	private int nombreKilometres;
 	
 	//constructeur
-	public Etape (int nombreKilometres,int ID){
-		
+	public Etape (int nombreKilometres){
+		this.nombreKilometres = nombreKilometres;
 		
 	}
 	
@@ -19,5 +19,10 @@ public class Etape extends Carte {
 	public void augmenterKmParcourus(){
 		
 	}
+	
+	public String toString() {
+		return "" + nombreKilometres; 
+	}
+	
 
 }

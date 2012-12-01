@@ -7,12 +7,13 @@ import modele.*;
 
 public class Attaque extends Carte {
 	
-	public final static int CREVAISON=1;
-	public final static int FEU_ROUGE=2;
-	public final static int PANNE_ESSENCE=3;
-	public final static int LIMITE_VITESSE=4;
-	public final static int ACCIDENT=5;
+	public final static int CREVAISON=0;
+	public final static int FEU_ROUGE=1;
+	public final static int PANNE_ESSENCE=2;
+	public final static int LIMITE_VITESSE=3;
+	public final static int ACCIDENT=4;
 	
+	private int type;
 	
 	
 	//Enum�ration des types d'attaque accessibles par Attaque.TYPE[this.valeur]
@@ -20,8 +21,8 @@ public class Attaque extends Carte {
 	
 	
 	//constructeur
-	public Attaque (String nom, int ID){
-		
+	public Attaque (int type){
+		this.type = type;
 		
 	}
 	
@@ -31,5 +32,8 @@ public class Attaque extends Carte {
 		
 	}
 	
+	public String toString() {
+		return this.TYPE[this.type];
+	}
 
 }
