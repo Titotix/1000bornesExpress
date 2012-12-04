@@ -7,13 +7,22 @@ import modele.*;
 
 public class Defausse extends Observable {
 
-	private int nombreCarteActuel;
-	private Carte pileCarte;
+	private LinkedList<Carte> pileCarte;
+	private static Defausse defausse = null;
 	
 	//constructeur
-	public Defausse (int nbCarte, Carte pileCarte){
-		this.nombreCarteActuel=nbCarte;
-		this.pileCarte=pileCarte;
+	public Defausse (){
+		pileCarte = new LinkedList<Carte>();
+	}
+	
+	
+	//constructeur
+	
+	public static Defausse getInstance() {
+		if(defausse == null) {
+			defausse = new Defausse();
+		}
+		return defausse;
 	}
 	
 	
@@ -43,5 +52,8 @@ public class Defausse extends Observable {
 		
 	}
 	
-	
+
+	public LinkedList<Carte> getPileCarte() {
+		return this.pileCarte;
+	}
 }

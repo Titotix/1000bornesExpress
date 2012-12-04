@@ -17,8 +17,11 @@ public class JeuSurTable extends Observable {
 	private boolean stoppe;
 	
 	private int nbKmMax;
+	
+	private ArrayList<Carte> jeu;
 
 	public JeuSurTable() {
+		this.jeu = new ArrayList();
 		
 	}
 	/** 
@@ -52,6 +55,7 @@ public class JeuSurTable extends Observable {
 	
 	public boolean verifDepassementKm()
 	{
+		return true;
 		//TODO
 	}
 	
