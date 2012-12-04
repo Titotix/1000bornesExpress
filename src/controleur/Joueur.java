@@ -73,6 +73,12 @@ public class Joueur {
 		
 	}
 	
+	public void defausser(Carte carte) {
+		Defausse defausse = Defausse.getInstance();
+		this.main.retirerCarte(carte);  //va retirer la carte de la main du joueur
+		defausse.ajouterCarte(carte);  //ajoute la carte défausser à la défausse
+	}
+	
 	//Pour finir son tour et que ce soit au joueur suivant
 	public void joueurSuivant (){
 		

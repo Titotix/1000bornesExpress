@@ -15,9 +15,7 @@ public class Defausse extends Observable {
 		pileCarte = new LinkedList<Carte>();
 	}
 	
-	
-	//constructeur
-	
+	//singleton
 	public static Defausse getInstance() {
 		if(defausse == null) {
 			defausse = new Defausse();
@@ -27,29 +25,26 @@ public class Defausse extends Observable {
 	
 	
 	//Piocher une carte dans la d�fausse
-	public void piocherDefausse (){
+	public Carte piocherDefausse (){
+		return this.pileCarte.removeFirst();
 		
 	}
+	/**
+	 * 
+	 * 
+	 * @param carte1 : premiere carte a etre defausser
+	 * @param carte2 : carte qui restera apparente après le defausse des 2 cartes
+	 */
 	
-	
-	//Enlever la carte de la defausse (quand elle est pioch�e)
-	public void retirerCarte (){
+	public void ajouter2Carte(Carte carte1, Carte carte2) {
+		this.pileCarte.addFirst(carte1);
+		this.pileCarte.addFirst(carte2);
 		
 	}
 	
 	//Mettre la carte dans la defausse 
-	public void ajouterCarte (){
-		
-	}
-
-	//Mettre la carte accident dans la d�fausse
-	public void defausseAccident(){
-		
-	}
-	
-	//Mettre la carte Repa dans la defausse
-	public void defausseReparation(){
-		
+	public void ajouterCarte (Carte carte){
+		this.pileCarte.addFirst(carte);
 	}
 	
 

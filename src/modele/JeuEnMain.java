@@ -12,7 +12,6 @@ public class JeuEnMain extends Observable{
 	
 	public JeuEnMain(){
 		this.main = new LinkedList();
-		
 	}
 	
 	//Permet d'ajouter une carte apres la pioche

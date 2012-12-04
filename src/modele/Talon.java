@@ -9,14 +9,15 @@ public class Talon extends Observable {
 	private int nombreCarteADistribuer;
 	private int nombreCarteActuel;
 	private LinkedList<Carte> pileCarte; 
+	private static Talon talon = null;
 	
-	//constructeur, qui cr�� la pile de carte contenant toutes les cartes
+	//constructeur
 	public Talon () {
 		pileCarte = new LinkedList<Carte>();
 	}
 	
-	private static Talon talon = null;
-	//constructeur
+
+	//singleton
 	
 	public static Talon getInstance() {
 		if(talon == null) {
@@ -75,12 +76,11 @@ public class Talon extends Observable {
 	public Carte piocherTalon(){
 		return this.pileCarte.removeFirst();
 	}
+	
 	public void afficherJeuDesHumains () {
 		Menu menu = Menu.getInstance();
-		for(int i=0; i < menu.getNbHumain(); i++) {
-			
+		for(int i=0; i < menu.getNbHumain(); i++) {			
 			System.out.println(menu.getHumain()[i].getMain().toString());
-
 			}
 	}
 
