@@ -1,6 +1,6 @@
 package controleur;
 import java.util.*;
-import controleur.*;
+
 import modele.*;
 
 public class Menu {
@@ -55,7 +55,7 @@ public class Menu {
 	}
 		
 		
-		
+
 	}
 	
 	

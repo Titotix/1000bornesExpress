@@ -1,14 +1,15 @@
 package controleur;
 
-import modele.JeuSurTable;
-import modele.Main;
+import modele.*;
 
 public class Joueur {
 
-	protected Main main;
+	
 	protected JeuSurTable jeu;
-	protected String nom;
+	protected JeuEnMain main;
 	protected int numPassage;
+	protected String nom;
+	
 	/** 
 	 * TODO
 	 * Creer une partie
@@ -29,7 +30,7 @@ public class Joueur {
 		this.nom=nomJoueur;
 		this.numPassage=numPassage;
 
-		this.main = new Main();
+		this.main = new JeuEnMain();
 		this.jeu = new JeuSurTable();
 	}
 	

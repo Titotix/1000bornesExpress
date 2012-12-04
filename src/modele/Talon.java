@@ -26,7 +26,6 @@ public class Talon extends Observable {
 	public void creerCartes() {
 		int i;
 		//Les attaques
-		System.out.println("Pour attaque :");
 		for (i=1;i<3;i++){
 			Attaque crevaison=new Attaque(Attaque.CREVAISON);// Fonctionne avec le i comme ca ? TODO
 			pileCarte.add(crevaison);
@@ -59,7 +58,6 @@ public class Talon extends Observable {
 		
 		//Les parades
 		
-		System.out.println("Pour parades");
 		for (i=11;i<15;i++){
 			Parade roueDeSecours=new Parade(Parade.ROUE_SECOURS);
 			pileCarte.add(roueDeSecours);
@@ -101,7 +99,6 @@ public class Talon extends Observable {
 		pileCarte.add(citerne);
 		
 		//Les �tapes
-		System.out.println("Pour etapes");
 		for (i=36;i<42;i++){
 			Etape etape=new Etape(25);
 			pileCarte.add(etape);

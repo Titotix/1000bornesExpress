@@ -24,7 +24,6 @@ public class JeuSurTable extends Observable {
 	 */
 	public void ajouterCarte()
 	{
-		
 		//TODO
 	}
 	
