@@ -6,12 +6,13 @@ import controleur.*;
 public class main {
 
 	public static void main(String[] args) {
-		int i;
+	
 		
-	Menu menu = new Menu();
+	Menu menu = Menu.getInstance();
 	menu.nouvellePartie();
-	menu.creationJoueurs(menu);
+	menu.creationJoueurs();
 	Talon talon = new Talon();
+	talon.distribuer();
 	
 	
 	

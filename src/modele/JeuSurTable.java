@@ -18,6 +18,9 @@ public class JeuSurTable extends Observable {
 	
 	private int nbKmMax;
 
+	public JeuSurTable() {
+		
+	}
 	/** 
 	 * @param Carte
 	 * 

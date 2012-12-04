@@ -8,14 +8,13 @@ public class Talon extends Observable {
 	private final int nombreCarteInitial = 66;
 	private int nombreCarteADistribuer;
 	private int nombreCarteActuel;
-	private static LinkedList<Carte> pileCarte; 
-	
+	private LinkedList<Carte> pileCarte; 
 	
 	//constructeur, qui cr�� la pile de carte contenant toutes les cartes
 	public Talon () {
 		pileCarte = new LinkedList<Carte>();
 		this.creerCartes();
-			}
+	}
 	
 	
 	/**
@@ -28,64 +27,54 @@ public class Talon extends Observable {
 		//Les attaques
 		for (i=1;i<3;i++){
 			Attaque crevaison=new Attaque(Attaque.CREVAISON);// Fonctionne avec le i comme ca ? TODO
-			pileCarte.add(crevaison);
-			
+			pileCarte.add(crevaison);			
 			}
 			
 		for (i=3;i<5;i++){
 			Attaque accident=new Attaque(Attaque.ACCIDENT);
-			pileCarte.add(accident);
-			
+			pileCarte.add(accident);		
 			}
 		
 		for (i=5;i<7;i++){
 			Attaque panneEssence=new Attaque(Attaque.PANNE_ESSENCE);
-			pileCarte.add(panneEssence);
-			
+			pileCarte.add(panneEssence);			
 			}
 		
 		for (i=7;i<9;i++){
 			Attaque limiteVitesse=new Attaque(Attaque.LIMITE_VITESSE);
-			pileCarte.add(limiteVitesse);
-			
+			pileCarte.add(limiteVitesse);			
 			}
 		
 		for (i=9;i<11;i++){
 			Attaque feuRouge=new Attaque(Attaque.FEU_ROUGE);
-			pileCarte.add(feuRouge);
-		
+			pileCarte.add(feuRouge);		
 			}
 		
 		//Les parades
 		
 		for (i=11;i<15;i++){
 			Parade roueDeSecours=new Parade(Parade.ROUE_SECOURS);
-			pileCarte.add(roueDeSecours);
-			
+			pileCarte.add(roueDeSecours);			
 			}
 		
 		for (i=15;i<19;i++){
 			Parade reparation=new Parade(Parade.REPARATION);
-			pileCarte.add(reparation);
-			
+			pileCarte.add(reparation);			
 			}
 		
 		for (i=19;i<23;i++){
 			Parade essence=new Parade(Parade.ESSENCE);
-			pileCarte.add(essence);
-			
+			pileCarte.add(essence);		
 			}
 		
 		for (i=23;i<27;i++){
 			Parade finLimiteVitesse=new Parade(Parade.FIN_LIMITE_VITESSE);
-			pileCarte.add(finLimiteVitesse);
-			
+			pileCarte.add(finLimiteVitesse);			
 			}
 		
 		for (i=27;i<32;i++){
 			Parade feuVert=new Parade(Parade.FEU_VERT);
-			pileCarte.add(feuVert);
-			
+			pileCarte.add(feuVert);			
 			}
 		
 		//Les bottes
@@ -101,32 +90,31 @@ public class Talon extends Observable {
 		//Les �tapes
 		for (i=36;i<42;i++){
 			Etape etape=new Etape(25);
-			pileCarte.add(etape);
-		
+			pileCarte.add(etape);		
 			}
+		
 		for (i=42;i<48;i++){
 			Etape etape=new Etape(50);
-			pileCarte.add(etape);
-			
+			pileCarte.add(etape);			
 			}
+		
 		for (i=48;i<54;i++){
 			Etape etape=new Etape(75);
-			pileCarte.add(etape);
-			
+			pileCarte.add(etape);			
 			}
+		
 		for (i=54;i<64;i++){
 			Etape etape=new Etape(100);
-			pileCarte.add(etape);
-		
+			pileCarte.add(etape);	
 			}
+		
 		for (i=64;i<67;i++){
 			Etape etape=new Etape(200);
-			pileCarte.add(etape);
-			
+			pileCarte.add(etape);		
 			}
 		
 		//Ce message permet d'avoir la liste de toutes les cartes de la pileCarte
-		//System.out.println(pileCarte.toString());
+	System.out.println(pileCarte.toString()); //TODO ( a virer a l'avenir)
 		
 		
 	}
@@ -136,8 +124,8 @@ public class Talon extends Observable {
 	 * @param menu
 	 * @return nombre de carte a distribuer au total
 	 */
-	public int nbCarteADistribuer(Menu menu){
-	
+	public int nbCarteADistribuer(){
+		Menu menu = Menu.getInstance();
 		return menu.getNbJoueurTotal() * 4; 
 	}
 	
@@ -147,12 +135,37 @@ public class Talon extends Observable {
 	}
 	
 	//Distribuer les cartes depuis le talon
-	public void distribuer(Menu menu){
-		int i=0;
-		while( this.nbCarteADistribuer(menu) > 0 ) {
-			humain[i].ajouterCarte(pileCarte.removeFirst());
+	public void distribuer() {
+		Menu menu = Menu.getInstance();
+		Humain[] humain = menu.getHumain();
+		Robot[] robot = menu.getRobot();
+		int nbCarteADistribuer = this.nbCarteADistribuer();
+		
+		while( nbCarteADistribuer > 0 ) {
 			
+			for(int j=0; j < menu.getNbHumain() ; j++) {
+				nbCarteADistribuer--;
+				
+				humain[j].getMain().ajouterCarte(this.pileCarte.removeFirst());
+			}
+			
+			for(int k=0; k < menu.getNbRobot() ; k++) {
+				nbCarteADistribuer--;
+				robot[k].getMain().ajouterCarte(this.pileCarte.removeFirst());
+			}
 		}
+		
+		
+			for(int i=0; i < menu.getNbRobot(); i++) {
+						
+			System.out.println(menu.getRobot()[i].getMain().toString());
+			}
+			for(int i=0; i < menu.getNbHumain(); i++) {
+				
+			System.out.println(menu.getHumain()[i].getMain().toString());
+
+			}
+		//TODO //System.out.println(pileCarte.toString());
 		
 	}
 	
@@ -160,6 +173,13 @@ public class Talon extends Observable {
 	public Carte piocheTalon(){
 		
 	}*/
-	
+	public void afficherJeuDesHumains () {
+		Menu menu = Menu.getInstance();
+		for(int i=0; i < menu.getNbHumain(); i++) {
+			
+			System.out.println(menu.getHumain()[i].getMain().toString());
+
+			}
+	}
 
 }

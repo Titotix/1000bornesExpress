@@ -8,7 +8,7 @@ public class Humain extends Joueur {
 	
 	public Humain(String nomJoueur, int numPassage) {
 		super(nomJoueur, numPassage);
-
+		
 		
 	}
 	

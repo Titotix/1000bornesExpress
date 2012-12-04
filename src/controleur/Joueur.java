@@ -4,7 +4,7 @@ import modele.*;
 
 public class Joueur {
 
-	
+	protected static Joueur[] joueur;
 	protected JeuSurTable jeu;
 	protected JeuEnMain main;
 	protected int numPassage;
@@ -94,6 +94,14 @@ public class Joueur {
 	public void setNumPassage(int numPassage) {
 		this.numPassage = numPassage;
 		
+	}
+	
+	public JeuSurTable getJeu() {
+		return jeu;
+	}
+	
+	public JeuEnMain getMain() {
+		return main;
 	}
 	
 }

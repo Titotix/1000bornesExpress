@@ -7,10 +7,18 @@ public class Menu {
 	
 	private int nbRobot, nbHumain;
 	private byte variante;
+	private Humain[] humain;
+	private Robot[] robot;
+	private static Menu menu = null;
 	//constructeur
-	public Menu(){
-		
+	
+	public static Menu getInstance() {
+		if(menu == null) {
+			menu = new Menu();
+		}
+		return menu;
 	}
+	
 	//Cette méthode n'a de raison d'etre que tant qu'on a pas implementer l'interface graphique,
 	// c'est la vue qui fera ce travail.
 	public void contextuel() {
@@ -35,28 +43,26 @@ public class Menu {
 		
 	}
 	
-	public void creationJoueurs(Menu menu) {
+	public void creationJoueurs() {
 		
 		String nomJoueur;
 		
-		Humain[] humain = new Humain[menu.getNbHumain()];
+		humain = new Humain[this.getNbHumain()];
 		
 		for(int i = 0; i < this.nbHumain; i++) {
 
 			humain[i] =  new Humain(this.getNomHumain(i+1), i+1);
-	
 		}
 
-		Robot[] robot = new Robot[menu.getNbRobot()];
+		robot = new Robot[this.getNbRobot()];
 
 		for(int j = 0; j < this.nbRobot; j++) {
 			
-			robot[j] =  new Robot(this.getNomRobot(j+1), j+1+menu.getNbHumain());
+			robot[j] =  new Robot(this.getNomRobot(j+1), j+1+this.getNbHumain());
+		}
 	}
-		
 		
 
-	}
 	
 	
 	
@@ -111,6 +117,14 @@ public class Menu {
 	
 	public int getNbRobot() {
 		return this.nbRobot;
+	}
+	
+	public Humain[] getHumain() {
+		return this.humain;
+	}
+	
+	public Robot[] getRobot() {
+		return this.robot;
 	}
 	
 
