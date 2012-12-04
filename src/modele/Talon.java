@@ -114,7 +114,7 @@ public class Talon extends Observable {
 			}
 		
 		//Ce message permet d'avoir la liste de toutes les cartes de la pileCarte
-	System.out.println(pileCarte.toString()); //TODO ( a virer a l'avenir)
+	//System.out.println(pileCarte.toString()); //TODO ( a virer a l'avenir)
 		
 		
 	}
@@ -155,16 +155,6 @@ public class Talon extends Observable {
 			}
 		}
 		
-		
-			for(int i=0; i < menu.getNbRobot(); i++) {
-						
-			System.out.println(menu.getRobot()[i].getMain().toString());
-			}
-			for(int i=0; i < menu.getNbHumain(); i++) {
-				
-			System.out.println(menu.getHumain()[i].getMain().toString());
-
-			}
 		//TODO //System.out.println(pileCarte.toString());
 		
 	}
@@ -182,4 +172,11 @@ public class Talon extends Observable {
 			}
 	}
 
+	public void afficherJeuDesRobots () {
+		Menu menu = Menu.getInstance();
+		for(int i=0; i < menu.getNbRobot(); i++) {
+			
+			System.out.println(menu.getRobot()[i].getMain().toString());
+		}
+	}
 }
