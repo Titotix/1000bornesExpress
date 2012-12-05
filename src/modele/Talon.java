@@ -52,6 +52,8 @@ public class Talon extends Observable {
 		Robot[] robot = menu.getRobot();
 		int nbCarteADistribuer = this.nbCarteADistribuer();
 		
+		System.out.println(this.pileCarte.toString());
+		
 		while( nbCarteADistribuer > 0 ) {
 			
 			for(int j=0; j < menu.getNbHumain() ; j++) {

@@ -10,9 +10,9 @@ public class main {
 		
 	Menu menu = Menu.getInstance();
 	menu.nouvellePartie();
-	menu.creationJoueurs();
-	Talon talon = new Talon();
-	talon.distribuer();
+	Talon talon = Talon.getInstance();
+	talon.afficherJeuDesHumains();
+	talon.afficherJeuDesRobots();
 	
 	
 	

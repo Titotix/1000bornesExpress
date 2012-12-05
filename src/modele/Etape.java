@@ -17,11 +17,11 @@ public class Etape extends Carte {
 	}
 	
 	//Augmenter le nb de km parcourus
-	public void augmenterKmParcourus(){
-		JeuSurTable jeu=new JeuSurTable();
+	/*public void augmenterKmParcourus(){
+		/*JeuSurTable jeu=new JeuSurTable();
 		this.kmParcourus=jeu.getNbKilometreParcouru()+this.nombreKilometres;//Utile ? Psk quelque chose semblable dans JeuSurTable
 		
-	}
+	}*/
 	
 	public String toString() {
 		return "" + nombreKilometres; 

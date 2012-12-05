@@ -36,9 +36,17 @@ public class Menu {
 	
 	//Cr�er une nouvelle partie
 	public void nouvellePartie (){
-	
+		
 		this.setNbRobot();
 		this.setNbHumain();
+		this.creationJoueurs();
+		Talon talon = Talon.getInstance();
+		this.creerCartes();
+		talon.aleatoirePileCarte();
+		
+		
+		
+		talon.distribuer();
 		
 		
 	}

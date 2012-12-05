@@ -103,7 +103,7 @@ public class Joueur {
 	//Pour finir son tour et que ce soit au joueur suivant
 	public void joueurSuivant (){
 		/* if clic sur bouton FINTOUR(interface graphique)
-		tourFini=true; (et tourFini=false à chaque début de tour d'un joueur humain)
+		tourFini=true; (et tourFini=false ï¿½ chaque dï¿½but de tour d'un joueur humain)
 		*/
 	}
 	
