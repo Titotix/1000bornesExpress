@@ -44,7 +44,7 @@ public class Defausse extends Observable {
 	
 	//Mettre la carte dans la defausse 
 	public void ajouterCarte (Carte carte){
-		this.pileCarte.addFirst(carte);
+		this.pileCarte.addFirst(carte);//Pourquoi un addFirst ici ?  un add serait mieux ?
 	}
 	
 

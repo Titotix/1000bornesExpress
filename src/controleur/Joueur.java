@@ -9,6 +9,7 @@ public class Joueur {
 	protected JeuEnMain jeuEnMain;
 	protected int numPassage;
 	protected String nom;
+	protected boolean tourFini;
 	
 	/** 
 	 * TODO
@@ -101,7 +102,9 @@ public class Joueur {
 	
 	//Pour finir son tour et que ce soit au joueur suivant
 	public void joueurSuivant (){
-		
+		/* if clic sur bouton FINTOUR(interface graphique)
+		tourFini=true; (et tourFini=false à chaque début de tour d'un joueur humain)
+		*/
 	}
 	
 	public String getNom() {

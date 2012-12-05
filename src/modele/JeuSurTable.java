@@ -28,18 +28,18 @@ public class JeuSurTable extends Observable {
 	 * @param Carte
 	 * 
 	 */
-	public void ajouterCarte()
+	public void ajouterCarte(Carte carte)
 	{
-		//TODO
+		this.jeu.add(carte);
 	}
 	
 	/*
 	 * @param Carte
 	 * 
 	 */
-	public void retirerCarte()
+	public void retirerCarte(Carte carte)
 	{
-		//TODO
+		this.jeu.add(carte);
 		
 	}
 	
@@ -55,6 +55,11 @@ public class JeuSurTable extends Observable {
 	
 	public boolean verifDepassementKm()
 	{
+		/*si la valeur de la carte etape ajoutée > (nbKmMax-nbKilometreParcouru)
+		alors on ne peut pas poser la carte (ou alors le joueur a perdu ?)
+		->Mettre tout ca dans la methode ajouterCarte directement ?
+		if (
+		*/
 		return true;
 		//TODO
 	}

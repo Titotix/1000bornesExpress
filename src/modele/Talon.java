@@ -40,6 +40,8 @@ public class Talon extends Observable {
 	
 	//Trier les cartes al�atoirement
 	public void aleatoirePileCarte(){
+		long seed =System.nanoTime();
+		Collections.shuffle(pileCarte, new Random(seed));
 		
 	}
 	
