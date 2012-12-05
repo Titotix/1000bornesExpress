@@ -25,7 +25,7 @@ public class Defausse extends Observable {
 	
 	
 	//Piocher une carte dans la d�fausse
-	public Carte piocherDefausse (){
+	public Carte piocher(){
 		return this.pileCarte.removeFirst();
 		
 	}

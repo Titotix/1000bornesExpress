@@ -6,15 +6,15 @@ import controleur.*;
 
 public class JeuSurTable extends Observable {
 
-	private int nbKilometreParcouru;
-	private boolean feuVertInitial;
-	private boolean increvable;
-	private boolean citerneEssence;
-	private boolean asDuVolant;
-	private boolean vehiculePrioritaire;
+	private int nbKilometreParcouru=0;
+	private boolean feuVertInitial=false;
+	private boolean increvable=false;
+	private boolean citerneEssence=false;
+	private boolean asDuVolant=false;
+	private boolean vehiculePrioritaire=false;
 	
-	private boolean vitesseLimitee;
-	private boolean stoppe;
+	private boolean vitesseLimitee=false;
+	private boolean stoppe=false;
 	
 	private int nbKmMax;
 	

@@ -5,8 +5,8 @@ import modele.*;
 public class Joueur {
 
 	protected static Joueur[] joueur;
-	protected JeuSurTable jeu;
-	protected JeuEnMain main;
+	protected JeuSurTable jeuSurTable;
+	protected JeuEnMain jeuEnMain;
 	protected int numPassage;
 	protected String nom;
 	
@@ -30,10 +30,20 @@ public class Joueur {
 		this.nom=nomJoueur;
 		this.numPassage=numPassage;
 
-		this.main = new JeuEnMain();
-		this.jeu = new JeuSurTable();
+		this.jeuEnMain = new JeuEnMain();
+		this.jeuSurTable = new JeuSurTable();
 	}
 	
+	public void piocherTalon() {
+		Talon talon = Talon.getInstance();
+		this.jeuEnMain.ajouterCarte(talon.piocher());
+		
+	}
+	
+	public void piocherDefausse() {
+		Defausse defausse = Defausse.getInstance();
+		this.jeuEnMain.ajouterCarte(defausse.piocher());
+	}
 	
 	//Le choix de la carte a jouer.
 	public void choixCarte (){
@@ -41,8 +51,9 @@ public class Joueur {
 	}
 
 	//Pour commencer � attaquer
-	public void attaquer (){
+	public void attaquer(Carte carte){
 		
+		//TODO
 	}
 	
 	
@@ -53,29 +64,38 @@ public class Joueur {
 	
 	
 	//Pour la limite de vitesse
-	public void poseLimiteVitesse (){
+	public void poseLimiteVitesse(){
 		
 	}
 	
 	
 	//Pour la parade
-	public void parade (){
+	public void parade(){
 		
 	}
 	
 	//Pour avancer
-	public void parcourir (){
+	public void parcourir(){
 		
 	}
 	
-	//Pour d�marrer
-	public void feuVertInitial (){
+	/** 
+	 * 
+	 * 
+	 */
+	public boolean feuVertInitial(){
+		if(!this.jeuSurTable.isFeuVertInitial()) {
+			this.jeuSurTable.setFeuVertInitial(true);
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 	
 	public void defausser(Carte carte) {
 		Defausse defausse = Defausse.getInstance();
-		this.main.retirerCarte(carte);  //va retirer la carte de la main du joueur
+		this.jeuEnMain.retirerCarte(carte);  //va retirer la carte de la main du joueur
 		defausse.ajouterCarte(carte);  //ajoute la carte défausser à la défausse
 	}
 	
@@ -103,11 +123,11 @@ public class Joueur {
 	}
 	
 	public JeuSurTable getJeu() {
-		return jeu;
+		return this.jeuSurTable;
 	}
 	
 	public JeuEnMain getMain() {
-		return main;
+		return this.jeuEnMain;
 	}
 	
 }

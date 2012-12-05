@@ -73,7 +73,7 @@ public class Talon extends Observable {
 	 * Piocher dans le talon
 	 * @return
 	 */
-	public Carte piocherTalon(){
+	public Carte piocher(){
 		return this.pileCarte.removeFirst();
 	}
 	
