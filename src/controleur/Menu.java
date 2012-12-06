@@ -92,65 +92,68 @@ public class Menu {
 		Talon talon = Talon.getInstance();
 		//Les attaques
 		for (i=1;i<3;i++){
-			Attaque crevaison=new Attaque(Attaque.CREVAISON);// Fonctionne avec le i comme ca ? TODO
+			Crevaison crevaison=new Crevaison();// Fonctionne avec le i comme ca ? TODO
 			talon.getPileCarte().add(crevaison);			
 			}
 			
 		for (i=3;i<5;i++){
-			Attaque accident=new Attaque(Attaque.ACCIDENT);
+			Accident accident=new Accident();
 			talon.getPileCarte().add(accident);		
 			}
 		
 		for (i=5;i<7;i++){
-			Attaque panneEssence=new Attaque(Attaque.PANNE_ESSENCE);
+			PanneEssence panneEssence=new PanneEssence();
 			talon.getPileCarte().add(panneEssence);			
 			}
 		
 		for (i=7;i<9;i++){
-			Attaque limiteVitesse=new Attaque(Attaque.LIMITE_VITESSE);
+			LimiteVitesse limiteVitesse=new LimiteVitesse();
 			talon.getPileCarte().add(limiteVitesse);			
 			}
 		
 		for (i=9;i<11;i++){
-			Attaque feuRouge=new Attaque(Attaque.FEU_ROUGE);
+			FeuRouge feuRouge=new FeuRouge();
 			talon.getPileCarte().add(feuRouge);		
 			}
 		
 		//Les parades
 		
 		for (i=11;i<15;i++){
-			Parade roueDeSecours=new Parade(Parade.ROUE_SECOURS);
+			RoueSecours roueDeSecours=new RoueSecours();
 			talon.getPileCarte().add(roueDeSecours);			
 			}
 		
 		for (i=15;i<19;i++){
-			Parade reparation=new Parade(Parade.REPARATION);
+			Reparation reparation=new Reparation();
 			talon.getPileCarte().add(reparation);			
 			}
 		
 		for (i=19;i<23;i++){
-			Parade essence=new Parade(Parade.ESSENCE);
+			Essence essence=new Essence();
 			talon.getPileCarte().add(essence);		
 			}
 		
 		for (i=23;i<27;i++){
-			Parade finLimiteVitesse=new Parade(Parade.FIN_LIMITE_VITESSE);
+			FinLimiteVitesse finLimiteVitesse=new FinLimiteVitesse();
 			talon.getPileCarte().add(finLimiteVitesse);			
 			}
 		
 		for (i=27;i<32;i++){
-			Parade feuVert=new Parade(Parade.FEU_VERT);
+			FeuVert feuVert=new FeuVert();
 			talon.getPileCarte().add(feuVert);			
 			}
 		
 		//Les bottes
-		Botte increvable=new Botte(Botte.INCREVABLE);
+		Increvable increvable=new Increvable();
 		talon.getPileCarte().add(increvable);
-		Botte asDuVolant=new Botte(Botte.AS_DU_VOLANT);
+		
+		AsDuVolant asDuVolant=new AsDuVolant();
 		talon.getPileCarte().add(asDuVolant);
-		Botte prioritaire=new Botte(Botte.PRIORITAIRE);
+		
+		Prioritaire prioritaire=new Prioritaire();
 		talon.getPileCarte().add(prioritaire);
-		Botte citerne=new Botte(Botte.CITERNE_ESSENCE);
+		
+		CiterneEssence citerne=new CiterneEssence();
 		talon.getPileCarte().add(citerne);
 		
 		//Les �tapes
@@ -180,7 +183,7 @@ public class Menu {
 			}
 		
 		//Ce message permet d'avoir la liste de toutes les cartes de la pileCarte
-	//System.out.println(talon.getPileCarte().toString()); //TODO ( a virer a l'avenir)
+	System.out.println(talon.getPileCarte().toString()); //TODO ( a virer a l'avenir)
 		
 		
 	}
