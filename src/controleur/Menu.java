@@ -5,8 +5,9 @@ import modele.*;
 
 public class Menu {
 	
+	private boolean variante =false;
 	private int nbRobot, nbHumain;
-	private byte variante;
+
 	private Humain[] humain;
 	private Robot[] robot;
 	private static Menu menu = null;
@@ -37,6 +38,7 @@ public class Menu {
 	//Cr�er une nouvelle partie
 	public void nouvellePartie (){
 		
+		this.choixVariante();
 		this.setNbRobot();
 		this.setNbHumain();
 		this.creationJoueurs();
@@ -49,6 +51,16 @@ public class Menu {
 		talon.distribuer();
 		
 		
+	}
+	
+	public void choixVariante() {
+		Scanner clavier = new Scanner(System.in);
+		System.out.println("Souhaitez vous jouer avec la variante (Kilometre à parcourir egal a 700 au lieu de 1000");
+		System.out.println("Veuillez entrer true/false");
+		
+		if(clavier.nextBoolean()) {
+			this.setVariante();
+		}
 	}
 	
 	public void creationJoueurs() {
@@ -176,7 +188,6 @@ public class Menu {
 
 	
 	
-	
 	public String getNomHumain(int i) {
 		String nomJoueur;
 		Scanner clavier = new Scanner(System.in);
@@ -239,6 +250,13 @@ public class Menu {
 	}
 	
 
+	private void setVariante() {
+		this.variante = true;
+	}
+	
+	public boolean isVariante() {
+		return this.variante;
+	}
 
 	
 }

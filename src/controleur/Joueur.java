@@ -10,6 +10,7 @@ public class Joueur {
 	protected int numPassage;
 	protected String nom;
 	protected boolean tourFini;
+
 	
 	/** 
 	 * TODO
@@ -59,25 +60,65 @@ public class Joueur {
 	
 	
 	//Pour l'attaque autre que limite de vitesse
-	public void poseCarteAttaque(){
+	public void poseCarteAttaque(Attaque carte){
 		
 	}
 	
 	
 	//Pour la limite de vitesse
-	public void poseLimiteVitesse(){
+	public void poseLimiteVitesse(Attaque carte){
 		
 	}
 	
 	
 	//Pour la parade
-	public void parade(){
+	public void parade(Parade parade) {
+	
+		if (parade.getType() == "ROUE_SECOURS") {
+			this.paradeCrevaison(parade);
+		} 
+		else if (parade.getType() == "FEU_ROUGE") {
+			this.paradeFeuRouge(parade);
+		} 
+		else if (parade.getType()== "FIN_LIMITE_VITESSE") {
+			this.paradeLimiteDeVitesse(parade);
+		}
+		else if (parade.getType() == "REPARATION") {
+			this.paradeAccident(parade);
+		}
+		else if (parade.getType() == "ESSENCE") {
+			this.paradePanneDEssence(parade);
+		}
 		
 	}
 	
+	public void paradeCrevaison(Parade parade) {
+		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.
+	}
+	
+	public void paradeFeuRouge(Parade parade) {
+
+		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.
+	}
+	
+	public void paradeLimiteDeVitesse (Parade parade) {
+
+		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.
+	}
+	
+	public void paradeAccident(Parade parade) {
+
+		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.
+	}
+	
+	public void paradePanneDEssence(Parade parade) {
+
+		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.
+	}
+	
 	//Pour avancer
-	public void parcourir(){
-		
+	public void parcourir(Etape etape){
+		this.jeuSurTable.setNbKilometreParcouru(etape.getNombreKilometres());		
 	}
 	
 	/** 
@@ -133,4 +174,5 @@ public class Joueur {
 		return this.jeuEnMain;
 	}
 	
+
 }

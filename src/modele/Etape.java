@@ -8,7 +8,7 @@ import controleur.*;
 public class Etape extends Carte {
 	
 	private int nombreKilometres;
-	private int kmParcourus=0;
+
 	
 	//constructeur
 	public Etape (int nombreKilometres){
@@ -16,7 +16,7 @@ public class Etape extends Carte {
 		
 	}
 	
-	//Augmenter le nb de km parcourus
+	//Augmenter le nb de km parcourus 
 	/*public void augmenterKmParcourus(){
 		/*JeuSurTable jeu=new JeuSurTable();
 		this.kmParcourus=jeu.getNbKilometreParcouru()+this.nombreKilometres;//Utile ? Psk quelque chose semblable dans JeuSurTable

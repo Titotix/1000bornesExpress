@@ -16,12 +16,17 @@ public class JeuSurTable extends Observable {
 	private boolean vitesseLimitee=false;
 	private boolean stoppe=false;
 	
-	private int nbKmMax;
+	private int nbKmMax=1000;
 	
 	private ArrayList<Carte> jeu;
 
 	public JeuSurTable() {
 		this.jeu = new ArrayList();
+		Menu menu = Menu.getInstance();
+		
+		if(menu.isVariante()) {
+			this.nbKmMax = 700;
+		}
 		
 	}
 	/** 
@@ -55,7 +60,7 @@ public class JeuSurTable extends Observable {
 	
 	public boolean verifDepassementKm()
 	{
-		/*si la valeur de la carte etape ajoutée > (nbKmMax-nbKilometreParcouru)
+		/*si la valeur de la carte etape ajoutï¿½e > (nbKmMax-nbKilometreParcouru)
 		alors on ne peut pas poser la carte (ou alors le joueur a perdu ?)
 		->Mettre tout ca dans la methode ajouterCarte directement ?
 		if (
@@ -72,7 +77,7 @@ public class JeuSurTable extends Observable {
 	}
 
 	/**
-	 * @param nbKilometreParcouru the nbKilometreParcouru to set
+	 * @param nbKilometreParcouru le nbre de kilometre a additionner Ã  la valeur actuelle
 	 */
 	public void setNbKilometreParcouru(int nbKilometreParcouru) {
 		this.nbKilometreParcouru += nbKilometreParcouru;

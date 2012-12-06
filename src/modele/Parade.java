@@ -20,8 +20,35 @@ public class Parade extends Carte {
 	}
 	
 	
-	//Enum�ration des types de parade accessibles par Parade.TYPE[this.valeur]
+	//Enum�ration des types de parade accessibles par Parade.TYPE[this.type]
 	public final static String[] TYPE= {"Roue de secours", "Feu Vert", "Essence","Fin de limite de Vitesse", "Reparation"};
+	
+	/**En utilisant les memes association int/string des constantes définies, on renvoie ici un string correspondant au type de parade.
+	 * 
+	 * 
+	 * @return type de la parade
+	 */
+	public String getType() {
+		
+		if (this.type == 0) {
+			return "ROUE_SECOURS";
+		}
+		else if (this.type == 1) {
+			return "FEU_VERT";
+		}
+		else if (this.type == 2) {
+			return "ESSENCE";
+		}
+		else if (this.type == 3) {
+			return "FIN_LIMITE_VITESSE";
+		}
+		else if (this.type == 4) {
+			return "REPARATION";
+		}
+		else {
+			return "ERROR";
+		}
+	}
 	
 	public String toString() {
 		return this.TYPE[this.type];
