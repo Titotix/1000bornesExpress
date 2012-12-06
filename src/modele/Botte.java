@@ -6,6 +6,8 @@ import controleur.*;
 
 public class Botte extends Carte  {
 	
+	protected int Kilometres;
+	
 	
 	
 	
@@ -17,7 +19,15 @@ public class Botte extends Carte  {
 	}
 	
 	//Augmenter les km lors de la pose d'une botte
-	public void augmenterKmParcourus(){
+	public void augmenterKmParcourus(JeuSurTable jeu){
+		Kilometres=jeu.getNbKilometreParcouru();
+		jeu.setNbKilometreParcouru(Kilometres+100);
+		
+	}
+	
+	public void coupFourre(){
+		
+		
 		
 	}
 	

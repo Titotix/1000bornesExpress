@@ -71,26 +71,7 @@ public class Joueur {
 	}
 	
 	
-	//Pour la parade
-	public void parade(Parade parade) {
 	
-		if (parade.getType() == "ROUE_SECOURS") {
-			this.paradeCrevaison(parade);
-		} 
-		else if (parade.getType() == "FEU_ROUGE") {
-			this.paradeFeuRouge(parade);
-		} 
-		else if (parade.getType()== "FIN_LIMITE_VITESSE") {
-			this.paradeLimiteDeVitesse(parade);
-		}
-		else if (parade.getType() == "REPARATION") {
-			this.paradeAccident(parade);
-		}
-		else if (parade.getType() == "ESSENCE") {
-			this.paradePanneDEssence(parade);
-		}
-		
-	}
 	
 	public void paradeCrevaison(Parade parade) {
 		//methode bas niveau a coder en supposant que tous les controle que la carte est approprié à poser sont faits.

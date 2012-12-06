@@ -18,10 +18,19 @@ public class JeuSurTable extends Observable {
 	
 	private int nbKmMax=1000;
 	
-	private ArrayList<Carte> jeu;
+	
+	private ArrayList<Carte> pileBataille;
+	private ArrayList<Carte> pileVitesse;
+	private ArrayList<Carte> pileBotte;
+	private ArrayList<Carte> pileEtape;
+	
 
 	public JeuSurTable() {
-		this.jeu = new ArrayList();
+		
+		this.pileBataille=new ArrayList();
+		this.pileVitesse=new ArrayList();
+		this.pileBotte=new ArrayList();
+		this.pileEtape=new ArrayList();
 		Menu menu = Menu.getInstance();
 		
 		if(menu.isVariante()) {
@@ -33,20 +42,45 @@ public class JeuSurTable extends Observable {
 	 * @param Carte
 	 * 
 	 */
-	public void ajouterCarte(Carte carte)
+	
+	public void ajouterCarteEtape(Etape carte)
 	{
-		this.jeu.add(carte);
+		this.pileEtape.add(carte);
+	}
+	
+	public void ajouterCarteBataille(Attaque carte)
+	{
+		this.pileBataille.add(carte);
+	}
+	
+	public void ajouterCarteVitesse(LimiteVitesse carte)
+	{
+		this.pileVitesse.add(carte);
+	}
+	
+	public void ajouterCarteBotte(Botte carte)
+	{
+		this.pileBotte.add(carte);
 	}
 	
 	/*
 	 * @param Carte
 	 * 
 	 */
-	public void retirerCarte(Carte carte)
+	
+	
+	public void retirerCarteVitesse(LimiteVitesse carte)
 	{
-		this.jeu.add(carte);
-		
+		this.pileVitesse.remove(carte);
 	}
+	
+	public void retirerCarteBataille(Attaque carte)
+	{
+		this.pileBataille.remove(carte);
+	}
+	
+	
+	
 	
 	public void verifVictoire()
 	{

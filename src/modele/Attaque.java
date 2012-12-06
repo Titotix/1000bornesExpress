@@ -20,6 +20,13 @@ public class Attaque extends Carte {
 		
 	}
 	
+	public void Jouer(JeuSurTable jeuAdverse, JeuEnMain jeu, Attaque carte){
+		
+		jeuAdverse.ajouterCarteBataille(carte);
+		jeu.retirerCarte(carte);
+		
+	}
+	
 	
 	//Appelle la m�thode setEtatBataille du jeu sur table adverse
 	public void changeEtatBataille (){

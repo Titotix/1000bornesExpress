@@ -30,6 +30,12 @@ public class Etape extends Carte {
 	public int getNombreKilometres(){
 		return this.nombreKilometres;
 	}
+	
+	public void Jouer(JeuSurTable notreJeu, JeuEnMain jeu, Etape carte){
+		notreJeu.ajouterCarteEtape(carte);
+		jeu.retirerCarte(carte);
+		
+	}
 
 	
 }
