@@ -7,12 +7,6 @@ import modele.*;
 
 public class Attaque extends Carte {
 	
-
-	
-	
-	
-	
-	
 	
 	//constructeur
 	public Attaque (){
@@ -20,7 +14,7 @@ public class Attaque extends Carte {
 		
 	}
 	
-	public void Jouer(JeuSurTable jeuAdverse, JeuEnMain jeu, Attaque carte){
+	public void jouer(JeuSurTable jeuAdverse, JeuEnMain jeu, Attaque carte){
 		
 		jeuAdverse.ajouterCarteBataille(carte);
 		jeu.retirerCarte(carte);

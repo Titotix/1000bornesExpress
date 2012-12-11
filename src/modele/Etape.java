@@ -7,12 +7,12 @@ import controleur.*;
 
 public class Etape extends Carte {
 	
-	private int nombreKilometres;
+	private int nbKm;
 
 	
 	//constructeur
 	public Etape (int nombreKilometres){
-		this.nombreKilometres = nombreKilometres;
+		this.nbKm = nombreKilometres;
 		
 	}
 	
@@ -24,14 +24,14 @@ public class Etape extends Carte {
 	}*/
 	
 	public String toString() {
-		return "" + nombreKilometres; 
+		return "" + this.nbKm; 
 	}
 	
-	public int getNombreKilometres(){
-		return this.nombreKilometres;
+	public int getNbKm(){
+		return this.nbKm;
 	}
 	
-	public void Jouer(JeuSurTable notreJeu, JeuEnMain jeu, Etape carte){
+	public void jouer(JeuSurTable notreJeu, JeuEnMain jeu, Etape carte){
 		notreJeu.ajouterCarteEtape(carte);
 		jeu.retirerCarte(carte);
 		

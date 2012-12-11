@@ -6,23 +6,16 @@ import controleur.*;
 
 public class JeuSurTable extends Observable {
 
-	private int nbKilometreParcouru=0;
-	private boolean feuVertInitial=false;
-	private boolean increvable=false;
-	private boolean citerneEssence=false;
-	private boolean asDuVolant=false;
-	private boolean vehiculePrioritaire=false;
-	
-	private boolean vitesseLimitee=false;
-	private boolean stoppe=false;
-	
 	private int nbKmMax=1000;
 	
+	private int nbKmParcouru=0;
 	
-	private ArrayList<Carte> pileBataille;
-	private ArrayList<Carte> pileVitesse;
-	private ArrayList<Carte> pileBotte;
-	private ArrayList<Carte> pileEtape;
+
+	private ArrayList<Attaque> pileBataille;
+	private ArrayList<LimiteVitesse> pileVitesse;
+	private ArrayList<Botte> pileBotte;
+	private ArrayList<Etape> pileEtape;
+	private ArrayList<FeuVert> pileFeuVertInitial;
 	
 
 	public JeuSurTable() {
@@ -31,6 +24,8 @@ public class JeuSurTable extends Observable {
 		this.pileVitesse=new ArrayList();
 		this.pileBotte=new ArrayList();
 		this.pileEtape=new ArrayList();
+		this.pileFeuVertInitial = new ArrayList();
+		
 		Menu menu = Menu.getInstance();
 		
 		if(menu.isVariante()) {
@@ -38,6 +33,8 @@ public class JeuSurTable extends Observable {
 		}
 		
 	}
+	
+	
 	/** 
 	 * @param Carte
 	 * 
@@ -79,13 +76,20 @@ public class JeuSurTable extends Observable {
 		this.pileBataille.remove(carte);
 	}
 	
-	
+	public int nbKmParcouru() {
+		int nbKmParcouru=0;
+		
+		for (Etape etape : pileEtape) {
+			nbKmParcouru += etape.getNbKm();
+		}
+		return nbKmParcouru;
+	}
 	
 	
 	public void verifVictoire()
 	{
 		
-		if(this.nbKilometreParcouru == this.nbKmMax)
+		if(this.nbKmParcouru() == this.nbKmMax)
 		{
 			//TODO VICTOIRE
 		}
@@ -103,117 +107,7 @@ public class JeuSurTable extends Observable {
 		//TODO
 	}
 	
-	/**
-	 * @return the nbKilometreParcouru
-	 */
-	public int getNbKilometreParcouru() {
-		return nbKilometreParcouru;
-	}
 
-	/**
-	 * @param nbKilometreParcouru le nbre de kilometre a additionner à la valeur actuelle
-	 */
-	public void setNbKilometreParcouru(int nbKilometreParcouru) {
-		this.nbKilometreParcouru += nbKilometreParcouru;
-	}
-
-	/**
-	 * @return the feuVertInitial
-	 */
-	public boolean isFeuVertInitial() {
-		return feuVertInitial;
-	}
-
-	/**
-	 * @param feuVertInitial the feuVertInitial to set
-	 */
-	public void setFeuVertInitial(boolean feuVertInitial) {
-		this.feuVertInitial = feuVertInitial;
-	}
-
-	/**
-	 * @return the increvable
-	 */
-	public boolean isIncrevable() {
-		return increvable;
-	}
-
-	/**
-	 * @param increvable the increvable to set
-	 */
-	public void setIncrevable(boolean increvable) {
-		this.increvable = increvable;
-	}
-
-	/**
-	 * @return the citerneEssence
-	 */
-	public boolean isCiterneEssence() {
-		return citerneEssence;
-	}
-
-	/**
-	 * @param citerneEssence the citerneEssence to set
-	 */
-	public void setCiterneEssence(boolean citerneEssence) {
-		this.citerneEssence = citerneEssence;
-	}
-
-	/**
-	 * @return the asDuVolant
-	 */
-	public boolean isAsDuVolant() {
-		return asDuVolant;
-	}
-
-	/**
-	 * @param asDuVolant the asDuVolant to set
-	 */
-	public void setAsDuVolant(boolean asDuVolant) {
-		this.asDuVolant = asDuVolant;
-	}
-
-	/**
-	 * @return the vehiculePrioritaire
-	 */
-	public boolean isVehiculePrioritaire() {
-		return vehiculePrioritaire;
-	}
-
-	/**
-	 * @param vehiculePrioritaire the vehiculePrioritaire to set
-	 */
-	public void setVehiculePrioritaire(boolean vehiculePrioritaire) {
-		this.vehiculePrioritaire = vehiculePrioritaire;
-	}
-
-	/**
-	 * @return the vitesseLimitee
-	 */
-	public boolean isVitesseLimitee() {
-		return vitesseLimitee;
-	}
-
-	/**
-	 * @param vitesseLimitee the vitesseLimitee to set
-	 */
-	public void setVitesseLimitee(boolean vitesseLimitee) {
-		this.vitesseLimitee = vitesseLimitee;
-	}
-
-	/**
-	 * @return the stoppe
-	 */
-	public boolean isStoppe() {
-		return stoppe;
-	}
-
-	/**
-	 * @param stoppe the stoppe to set
-	 */
-	public void setStoppe(boolean stoppe) {
-		this.stoppe = stoppe;
-	}
 
 	/**
 	 * @return the nbKmMax
@@ -229,5 +123,28 @@ public class JeuSurTable extends Observable {
 		this.nbKmMax = nbKmMax;
 	}
 	
+	public int getNbKmParcouru() {
+		return nbKmParcouru;
+	}
+	public void setNbKmParcouru(int nbKmParcouru) {
+		this.nbKmParcouru = nbKmParcouru;
+	}
+	
+	public ArrayList<Attaque> getPileBataille() {
+		return pileBataille;
+	}
+	public ArrayList<LimiteVitesse> getPileVitesse() {
+		return pileVitesse;
+	}
+	public ArrayList<Botte> getPileBotte() {
+		return pileBotte;
+	}
+	public ArrayList<Etape> getPileEtape() {
+		return pileEtape;
+	}
+	public ArrayList<FeuVert> getPileFeuVertInitial() {
+		return pileFeuVertInitial;
+	}
+
 	
 }

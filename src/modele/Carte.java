@@ -1,6 +1,7 @@
 package modele;
 
-public class Carte {
+public abstract class Carte {
 	
+	public abstract void jouer();
 
 }

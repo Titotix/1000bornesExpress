@@ -1,6 +1,8 @@
-Classe qui doivent implémenter l'interface observable :
+Classe qui doivent implï¿½menter l'interface observable :
 	JeuSurTable
 	Main
 	Defausse
 	Talon
-	Carte (a voir l'utilité)
+	Carte (a voir l'utilitï¿½
+	
+Ajouter une collection pour le feu vert initial.
