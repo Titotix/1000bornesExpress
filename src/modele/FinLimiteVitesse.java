@@ -11,4 +11,10 @@ public class FinLimiteVitesse extends Parade {
 		return "Fin Limite Vitesse";
 	}
 
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof LimiteVitesse) {
+			return true;
+		} else { return false; }
+	}
+
 }

@@ -26,6 +26,12 @@ public class JeuSurTable extends Observable {
 		this.pileEtape=new ArrayList();
 		this.pileFeuVertInitial = new ArrayList();
 		
+		this.pileBataille = null;
+		this.pileVitesse=null;
+		this.pileBotte=null;
+		this.pileEtape=null;
+		this.pileFeuVertInitial = null;
+		
 		Menu menu = Menu.getInstance();
 		
 		if(menu.isVariante()) {
@@ -60,6 +66,10 @@ public class JeuSurTable extends Observable {
 		this.pileBotte.add(carte);
 	}
 	
+	public void ajouterFeuVertInitial(FeuVert feuVert) {
+		this.pileFeuVertInitial.add(feuVert);
+	}
+	
 	/*
 	 * @param Carte
 	 * 
@@ -77,12 +87,12 @@ public class JeuSurTable extends Observable {
 	}
 	
 	public int nbKmParcouru() {
-		int nbKmParcouru=0;
+		
 		
 		for (Etape etape : pileEtape) {
-			nbKmParcouru += etape.getNbKm();
+			this.nbKmParcouru += etape.getNbKm();
 		}
-		return nbKmParcouru;
+		return this.nbKmParcouru;
 	}
 	
 	
@@ -98,6 +108,7 @@ public class JeuSurTable extends Observable {
 	
 	public boolean verifDepassementKm()
 	{
+		
 		/*si la valeur de la carte etape ajout�e > (nbKmMax-nbKilometreParcouru)
 		alors on ne peut pas poser la carte (ou alors le joueur a perdu ?)
 		->Mettre tout ca dans la methode ajouterCarte directement ?
@@ -106,7 +117,13 @@ public class JeuSurTable extends Observable {
 		return true;
 		//TODO
 	}
-	
+	/**
+	 * Pour savoir si ce jeu sur table a posé ou non un feu vert initiateur.
+	 * @return
+	 */
+	public boolean isDemarrer() {
+		return !(this.pileFeuVertInitial.isEmpty());
+	}
 
 
 	/**
@@ -124,27 +141,30 @@ public class JeuSurTable extends Observable {
 	}
 	
 	public int getNbKmParcouru() {
-		return nbKmParcouru;
+		return this.nbKmParcouru;
 	}
 	public void setNbKmParcouru(int nbKmParcouru) {
 		this.nbKmParcouru = nbKmParcouru;
 	}
 	
 	public ArrayList<Attaque> getPileBataille() {
-		return pileBataille;
+		return this.pileBataille;
 	}
 	public ArrayList<LimiteVitesse> getPileVitesse() {
-		return pileVitesse;
+		return this.pileVitesse;
 	}
 	public ArrayList<Botte> getPileBotte() {
-		return pileBotte;
+		return this.pileBotte;
 	}
 	public ArrayList<Etape> getPileEtape() {
-		return pileEtape;
+		return this.pileEtape;
 	}
 	public ArrayList<FeuVert> getPileFeuVertInitial() {
-		return pileFeuVertInitial;
+		return this.pileFeuVertInitial;
 	}
+
+
+	
 
 	
 }

@@ -11,4 +11,10 @@ public class Essence extends Parade{
 		return "Essence";
 	}
 
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof PanneEssence) {
+			return true;
+		} else { return false; }
+	}
+
 }

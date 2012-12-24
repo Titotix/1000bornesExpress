@@ -1,5 +1,7 @@
 package modele;
 
+import controleur.Joueur;
+
 public class Accident extends Attaque {
 
 	public Accident() {

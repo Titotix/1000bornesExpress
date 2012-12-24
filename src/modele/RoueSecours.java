@@ -11,4 +11,10 @@ public class RoueSecours extends Parade {
 		return "Roue Secours";
 	}
 
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof Crevaison) {
+			return true;
+		} else { return false; }
+	}
+
 }

@@ -5,7 +5,7 @@ import java.util.*;
 import controleur.*;
 import modele.*;
 
-public class Attaque extends Carte {
+public abstract class Attaque extends Carte {
 	
 	
 	//constructeur
@@ -14,10 +14,26 @@ public class Attaque extends Carte {
 		
 	}
 	
-	public void jouer(JeuSurTable jeuAdverse, JeuEnMain jeu, Attaque carte){
+	public boolean isJouable(Joueur adversaire) {
+		if(this instanceof Crevaison || this instanceof FeuRouge || this instanceof Accident|| this instanceof PanneEssence ) {
+			if(adversaire.getJeuSurTable().getPileBataille().isEmpty() && adversaire.getJeuSurTable().isDemarrer()) {		
+				return true;
+			} 
+		}
+		if(this instanceof LimiteVitesse) {
+			if(adversaire.getJeuSurTable().getPileVitesse().isEmpty()) {		
+				return true;
+			}
+			
+		} 
+		return false;
+	}
+	
+	
+	public void jouer(Joueur adversaire, JeuEnMain notreJeu, Attaque carte){
 		
-		jeuAdverse.ajouterCarteBataille(carte);
-		jeu.retirerCarte(carte);
+		adversaire.getJeuSurTable().ajouterCarteBataille(carte);
+		notreJeu.retirerCarte(carte);
 		
 	}
 	
@@ -26,6 +42,8 @@ public class Attaque extends Carte {
 	public void changeEtatBataille (){
 		
 	}
+
+	
 	
 	
 }

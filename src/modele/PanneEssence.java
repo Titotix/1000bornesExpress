@@ -11,4 +11,6 @@ public class PanneEssence extends Attaque {
 		return "Panne Essence";
 	}
 
+	
+
 }

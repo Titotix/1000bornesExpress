@@ -11,4 +11,11 @@ public class Reparation extends Parade {
 		return "Reparation";
 	}
 
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof Accident) {
+			return true;
+		} else { return false; }
+	}
+
+
 }

@@ -16,7 +16,7 @@ public class Botte extends Carte  {
 	
 	public void jouer(JeuSurTable jeu) { //TODO
 		jeu.ajouterCarteBotte(this);
-		jeu.setNbKilometreParcouru(jeu.getNbKmParcouru() + 100); //jouer une botte augmente de 100 le nb de Km parcouru
+		jeu.setNbKmParcouru(jeu.getNbKmParcouru() + 100); //jouer une botte augmente de 100 le nb de Km parcouru
 		if(jeu.getPileBataille().contains(o) ==)
 	}
 	
@@ -34,7 +34,12 @@ public class Botte extends Carte  {
 		
 		
 	}
-	
-	
+
+
+	public boolean isJouable() {
+		return true;
+	}
+
+
 	
 }

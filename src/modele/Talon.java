@@ -59,12 +59,12 @@ public class Talon extends Observable {
 			for(int j=0; j < menu.getNbHumain() ; j++) {
 				nbCarteADistribuer--;
 				
-				humain[j].getMain().ajouterCarte(this.pileCarte.removeFirst());
+				humain[j].getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
 			}
 			
 			for(int k=0; k < menu.getNbRobot() ; k++) {
 				nbCarteADistribuer--;
-				robot[k].getMain().ajouterCarte(this.pileCarte.removeFirst());
+				robot[k].getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
 			}
 		}
 		
@@ -84,7 +84,7 @@ public class Talon extends Observable {
 	public void afficherJeuDesHumains () {
 		Menu menu = Menu.getInstance();
 		for(int i=0; i < menu.getNbHumain(); i++) {			
-			System.out.println(menu.getHumain()[i].getMain().toString());
+			System.out.println(menu.getHumain()[i].getJeuEnMain().toString());
 			}
 	}
 
@@ -92,7 +92,7 @@ public class Talon extends Observable {
 		Menu menu = Menu.getInstance();
 		for(int i=0; i < menu.getNbRobot(); i++) {
 			
-			System.out.println(menu.getRobot()[i].getMain().toString());
+			System.out.println(menu.getRobot()[i].getJeuEnMain().toString());
 		}
 	}
 	

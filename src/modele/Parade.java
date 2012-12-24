@@ -5,7 +5,7 @@ import java.util.*;
 import controleur.*;
 import modele.*;
 
-public class Parade extends Carte {
+public abstract class Parade extends Carte {
 	
 
 	
@@ -14,15 +14,28 @@ public class Parade extends Carte {
 		
 	}
 	
+	public abstract boolean isCompatible(Attaque attaque);
 	
+	public boolean isJouable(JeuSurTable notreJeu) {
+		if (!notreJeu.isDemarrer() && this instanceof FeuVert) {			
+			return true;
+		}
+		if(this.isCompatible(notreJeu.getPileVitesse().get(0))) {
+			return true;
+		}
+		if (this.isCompatible(notreJeu.getPileBataille().get(0))) {
+			return true;
+		} else {
+			return false; 
+		}
+			
+		
+	}
 	
-	/**En utilisant les memes association int/string des constantes définies, on renvoie ici un string correspondant au type de parade.
-	 * 
-	 * 
-	 * @return type de la parade
-	 */
-
-	
-
-
+	public void jouer(Joueur joueur) {
+		
+		joueur.getJeuEnMain().retirerCarte(this);
+		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0),  this);
+		
+	}
 }
