@@ -1,6 +1,8 @@
 package controleur;
 import java.util.*;
 
+import vue.CmdLineInterface;
+
 import modele.*;
 
 public class Menu {
@@ -12,7 +14,10 @@ public class Menu {
 	private Robot[] robot;
 	private static Menu menu = null;
 	//constructeur
-	
+	private Menu() {
+		this.variante = false;
+		
+	}
 	public static Menu getInstance() {
 		if(menu == null) {
 			menu = new Menu();
@@ -22,45 +27,22 @@ public class Menu {
 	
 	//Cette méthode n'a de raison d'etre que tant qu'on a pas implementer l'interface graphique,
 	// c'est la vue qui fera ce travail.
-	public void contextuel() {
-		int choix;
-		System.out.println("Entrer le numero correspondant a ce que vous souhaitez");
-		System.out.println("\n 1. Nouvelle partie");
-		Scanner a = new Scanner(System.in);
-		choix = a.nextInt();
-		switch(choix) {
-		case 1: this.nouvellePartie();
-		break;
-		}
-	}
+
 	
 	
 	//Cr�er une nouvelle partie
 	public void nouvellePartie (){
 		
-		this.choixVariante();
 		this.setNbRobot();
 		this.setNbHumain();
 		this.creationJoueurs();
 		Talon talon = Talon.getInstance();
 		this.creerCartes();
 		talon.aleatoirePileCarte();
-		
-		
-		
+	
 		talon.distribuer();
 		
 		
-	}
-	
-	public void choixVariante() {
-		Scanner clavier = new Scanner(System.in);
-		System.out.println("Souhaitez vous jouer avec la variante (Kilometre à parcourir egal a 700 au lieu de 1000");
-		System.out.println("Veuillez entrer true/false");
-		
-		if(clavier.nextBoolean()) {
-			this.setVariante();
-		}
 	}
 	
 	public void creationJoueurs() {
@@ -182,9 +164,6 @@ public class Menu {
 			talon.getPileCarte().add(etape);		
 			}
 		
-		//Ce message permet d'avoir la liste de toutes les cartes de la pileCarte
-	System.out.println(talon.getPileCarte().toString()); //TODO ( a virer a l'avenir)
-		
 		
 	}
 		
@@ -216,7 +195,7 @@ public class Menu {
 	}
 	
 	//D�finir nombre d'IA
-	public void setNbRobot (){
+	public void setNbRobot (){ //TODO a virer
 		Scanner clavier = new Scanner(System.in);
 		System.out.println("Entrez le nombre d'adversaire géré par l'ordinateur que vous voulez créer.");
 		this.nbRobot = clavier.nextInt();
@@ -225,7 +204,7 @@ public class Menu {
 	}
 	
 	//D�finir nombre d'humains
-	public void setNbHumain (){
+	public void setNbHumain (){ //TODO A VIRER
 
 		Scanner clavier2 = new Scanner(System.in);
 		System.out.println("Entrez le nombre d'adversaire humain avec qui vous allez jouer, en vous incluant vous même.");
@@ -253,7 +232,7 @@ public class Menu {
 	}
 	
 
-	private void setVariante() {
+	public void setVariante() {
 		this.variante = true;
 	}
 	

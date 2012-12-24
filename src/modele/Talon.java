@@ -12,7 +12,7 @@ public class Talon extends Observable {
 	private static Talon talon = null;
 	
 	//constructeur
-	public Talon () {
+	private Talon () {
 		pileCarte = new LinkedList<Carte>();
 	}
 	
@@ -52,8 +52,6 @@ public class Talon extends Observable {
 		Robot[] robot = menu.getRobot();
 		int nbCarteADistribuer = this.nbCarteADistribuer();
 		
-		System.out.println(this.pileCarte.toString());
-		
 		while( nbCarteADistribuer > 0 ) {
 			
 			for(int j=0; j < menu.getNbHumain() ; j++) {
@@ -68,7 +66,7 @@ public class Talon extends Observable {
 			}
 		}
 		
-		//TODO //System.out.println(pileCarte.toString());
+		
 		
 	}
 	
@@ -81,20 +79,6 @@ public class Talon extends Observable {
 		return this.pileCarte.removeFirst();
 	}
 	
-	public void afficherJeuDesHumains () {
-		Menu menu = Menu.getInstance();
-		for(int i=0; i < menu.getNbHumain(); i++) {			
-			System.out.println(menu.getHumain()[i].getJeuEnMain().toString());
-			}
-	}
-
-	public void afficherJeuDesRobots () {
-		Menu menu = Menu.getInstance();
-		for(int i=0; i < menu.getNbRobot(); i++) {
-			
-			System.out.println(menu.getRobot()[i].getJeuEnMain().toString());
-		}
-	}
 	
 	public LinkedList<Carte> getPileCarte() {
 		return this.pileCarte;

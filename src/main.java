@@ -1,4 +1,5 @@
 
+import vue.CmdLineInterface;
 import modele.*;
 import modele.*;
 import controleur.*;
@@ -9,10 +10,11 @@ public class main {
 	
 		
 	Menu menu = Menu.getInstance();
-	menu.nouvellePartie();
+	CmdLineInterface cmd = new CmdLineInterface();
+	cmd.start();
 	Talon talon = Talon.getInstance();
-	talon.afficherJeuDesHumains();
-	talon.afficherJeuDesRobots();
+	cmd.afficherJeuDesHumains();
+	cmd.afficherJeuDesRobots();
 	
 	
 	
