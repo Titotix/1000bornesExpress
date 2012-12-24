@@ -1,45 +1,39 @@
 package modele;
 import java.util.*;
-
 import controleur.*;
 
 
-public class Botte extends Carte  {
+public abstract class Botte extends Carte  {
 	
 	protected int Kilometres;
 	
+	public abstract boolean isJouableCoupFourre(JeuSurTable notreJeu);
 
 	//constructeur
 	public Botte() {
 	
 	}
 	
-	public void jouer(JeuSurTable jeu) { //TODO
-		jeu.ajouterCarteBotte(this);
-		jeu.setNbKmParcouru(jeu.getNbKmParcouru() + 100); //jouer une botte augmente de 100 le nb de Km parcouru
-		if(jeu.getPileBataille().contains(o) ==)
-	}
-	
-	//Augmenter les km lors de la pose d'une botte
-	public void augmenterKmParcourus(JeuSurTable jeu){
-		Kilometres = jeu.getNbKmParcouru();
-		jeu.setNbKmParcouru(Kilometres + 100);
-		//TODO
+	public void jouer(Joueur joueur) { 
+		joueur.getJeuSurTable().ajouterCarteBotte(this);
+		//ajouter la carte au jeu sur table du joueur
+		joueur.getJeuSurTable().setNbKmParcouru(joueur.getJeuSurTable().getNbKmParcouru() + 100);
+		//jouer une botte augmente de 100 le nb de Km parcouru
+		joueur.getJeuEnMain().retirerCarte(this);
+		//retirer la botte de la main du joueur
 	}
 	
 	
-	
-	public void coupFourre(){
+	public void coupFourre(Joueur joueur) {
+		joueur.getJeuSurTable().ajouterCarteBotte(this);
+		//ajouter la carte au jeu sur table du joueur
+		joueur.getJeuSurTable().setNbKmParcouru(joueur.getJeuSurTable().getNbKmParcouru() + 300);
+		//un coup fourree augmente de 300 le nb de Km parcouru
+		joueur.getJeuEnMain().retirerCarte(this);
+		//retirer la botte de la main du joueur
+		//TODO : modification du tour de jeu
 		
 		
-		
 	}
-
-
-	public boolean isJouable() {
-		return true;
-	}
-
-
 	
 }

@@ -4,7 +4,14 @@ public class Prioritaire extends Botte {
 
 	public Prioritaire() {
 		
-		// TODO Auto-generated constructor stub
+	}
+	
+	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
+		if(notreJeu.getPileBataille().get(0) instanceof FeuRouge || notreJeu.getPileVitesse().get(0) instanceof LimiteVitesse) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public String toString() {

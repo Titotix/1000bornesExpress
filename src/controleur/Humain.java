@@ -16,6 +16,12 @@ public class Humain extends Joueur {
 	public void choixCarte(){
 		//TODO
 	}
+
+	@Override
+	public void jouer() {
+		this.piocher();
+		
+	}
 	
 
 }

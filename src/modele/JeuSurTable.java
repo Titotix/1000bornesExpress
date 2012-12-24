@@ -6,9 +6,9 @@ import controleur.*;
 
 public class JeuSurTable extends Observable {
 
-	private int nbKmMax=1000;
+	private int nbKmMax;
 	
-	private int nbKmParcouru=0;
+	private int nbKmParcouru;
 	
 
 	private ArrayList<Attaque> pileBataille;
@@ -32,6 +32,9 @@ public class JeuSurTable extends Observable {
 		this.pileEtape=null;
 		this.pileFeuVertInitial = null;
 		
+		
+		this.nbKmParcouru=0;
+		this.nbKmMax=1000;
 		Menu menu = Menu.getInstance();
 		
 		if(menu.isVariante()) {
@@ -70,12 +73,6 @@ public class JeuSurTable extends Observable {
 		this.pileFeuVertInitial.add(feuVert);
 	}
 	
-	/*
-	 * @param Carte
-	 * 
-	 */
-	
-	
 	public void retirerCarteVitesse(LimiteVitesse carte)
 	{
 		this.pileVitesse.remove(carte);
@@ -87,36 +84,14 @@ public class JeuSurTable extends Observable {
 	}
 	
 	public int nbKmParcouru() {
-		
-		
+				
 		for (Etape etape : pileEtape) {
 			this.nbKmParcouru += etape.getNbKm();
 		}
 		return this.nbKmParcouru;
 	}
 	
-	
-	public void verifVictoire()
-	{
-		
-		if(this.nbKmParcouru() == this.nbKmMax)
-		{
-			//TODO VICTOIRE
-		}
-		
-	}
-	
-	public boolean verifDepassementKm()
-	{
-		
-		/*si la valeur de la carte etape ajout�e > (nbKmMax-nbKilometreParcouru)
-		alors on ne peut pas poser la carte (ou alors le joueur a perdu ?)
-		->Mettre tout ca dans la methode ajouterCarte directement ?
-		if (
-		*/
-		return true;
-		//TODO
-	}
+
 	/**
 	 * Pour savoir si ce jeu sur table a posé ou non un feu vert initiateur.
 	 * @return

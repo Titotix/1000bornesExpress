@@ -2,7 +2,7 @@ package controleur;
 
 import modele.*;
 
-public class Joueur {
+public abstract class Joueur {
 
 	protected static Joueur[] joueur;
 	protected JeuSurTable jeuSurTable;
@@ -19,6 +19,12 @@ public class Joueur {
 
 		this.jeuEnMain = new JeuEnMain();
 		this.jeuSurTable = new JeuSurTable();
+	}
+	
+	public abstract void jouer(); 
+	
+	public void piocher() {
+		
 	}
 	
 	public void piocherTalon() {

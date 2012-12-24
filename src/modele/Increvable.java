@@ -4,7 +4,13 @@ public class Increvable extends Botte {
 
 	public Increvable() {
 		
-		// TODO Auto-generated constructor stub
+	}
+	
+	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
+		if(notreJeu.getPileBataille().get(0) instanceof Crevaison) {
+			return true;
+		}
+		return false;
 	}
 	
 	public String toString() {
