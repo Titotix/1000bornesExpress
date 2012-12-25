@@ -5,7 +5,7 @@ import java.util.*;
 import controleur.*;
 import modele.*;
 
-public class Defausse extends Observable {
+public class Defausse extends TasDeCarte {
 
 	private LinkedList<Carte> pileCarte;
 	private static Defausse defausse = null;

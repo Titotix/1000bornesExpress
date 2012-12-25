@@ -3,7 +3,7 @@ package modele;
 import java.util.*;
 import controleur.*;
 
-public class Talon extends Observable {
+public class Talon extends TasDeCarte {
 	
 	private final int nombreCarteInitial = 66;
 	private int nombreCarteADistribuer;

@@ -25,12 +25,8 @@ public class Menu {
 		return menu;
 	}
 	
-	//Cette méthode n'a de raison d'etre que tant qu'on a pas implementer l'interface graphique,
-	// c'est la vue qui fera ce travail.
-
 	
-	
-	//Cr�er une nouvelle partie
+	//Creer une nouvelle partie
 	public void nouvellePartie (){
 		
 		this.setNbRobot();
@@ -44,6 +40,8 @@ public class Menu {
 		
 		
 	}
+	
+	
 	
 	public void creationJoueurs() {
 		
@@ -170,7 +168,7 @@ public class Menu {
 
 	
 	
-	public String getNomHumain(int i) {
+	public String getNomHumain(int i) { //TODO a virer
 		String nomJoueur;
 		Scanner clavier = new Scanner(System.in);
 		System.out.println("Veuillez entrer le nom du joueur numero " + i);

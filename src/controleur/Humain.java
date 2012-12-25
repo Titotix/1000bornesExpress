@@ -8,20 +8,31 @@ public class Humain extends Joueur {
 	
 	public Humain(String nomJoueur, int numPassage) {
 		super(nomJoueur, numPassage);
-		
-		
-	}
-	
-	//action de selectionner une carte parmis la main
-	public void choixCarte(){
-		//TODO
+				
 	}
 
 	@Override
-	public void jouer() {
-		this.piocher();
+	public void jouer() { //TODO
+	//TODO
 		
 	}
+
+
+	@Override
+	public Carte choixCarte() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public TasDeCarte choixPioche(JeuEnMain jeuEnMain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 }

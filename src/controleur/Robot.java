@@ -9,21 +9,25 @@ public class Robot extends Joueur {
 	
 	}
 
-	private int strategy; //TODO
+	private Strategy strat;
 
 	@Override
 	public void jouer() {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	/**Choisir le numero de passage
-	 * 
-	 */
-	public void setNumeroPassage(){
-		
+
+
+	@Override
+	public Carte choixCarte() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
+	@Override
+	public TasDeCarte choixPioche(JeuEnMain jeuEnMain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

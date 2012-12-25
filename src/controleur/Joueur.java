@@ -9,7 +9,6 @@ public abstract class Joueur {
 	protected JeuEnMain jeuEnMain;
 	protected int numPassage;
 	protected String nom;
-	protected boolean tourFini;
 
 	
 	//constructeur
@@ -22,10 +21,10 @@ public abstract class Joueur {
 	}
 	
 	public abstract void jouer(); 
+
+	public abstract TasDeCarte choixPioche(JeuEnMain jeuEnMain);
 	
-	public void piocher() {
-		
-	}
+	public abstract Carte choixCarte();
 	
 	public void piocherTalon() {
 		Talon talon = Talon.getInstance();
@@ -38,10 +37,7 @@ public abstract class Joueur {
 		this.jeuEnMain.ajouterCarte(defausse.piocher());
 	}
 	
-	//Le choix de la carte a jouer.
-	public void choixCarte (){
-		
-	}
+
 
 	
 	public void defausser(Carte carte) {
@@ -50,12 +46,6 @@ public abstract class Joueur {
 		defausse.ajouterCarte(carte);  //ajoute la carte défausser à la défausse
 	}
 	
-	//Pour finir son tour et que ce soit au joueur suivant
-	public void joueurSuivant (){
-		/* if clic sur bouton FINTOUR(interface graphique)
-		tourFini=true; (et tourFini=false � chaque d�but de tour d'un joueur humain)
-		*/
-	}
 	
 	public String getNom() {
 		return this.nom;
@@ -83,5 +73,8 @@ public abstract class Joueur {
 		return this.jeuEnMain;
 	}
 	
+	public String toString() {
+		return this.nom;
+	}
 
 }

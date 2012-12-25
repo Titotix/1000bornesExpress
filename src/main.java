@@ -11,11 +11,14 @@ public class main {
 		
 	Menu menu = Menu.getInstance();
 	CmdLineInterface cmd = new CmdLineInterface();
-	cmd.start();
+	cmd.run();
 	Talon talon = Talon.getInstance();
 	cmd.afficherJeuDesHumains();
 	cmd.afficherJeuDesRobots();
-	
+	PartieDeJeu partie = new PartieDeJeu();
+	partie.jouerPartie();
+	cmd.afficherJeuDesHumains();
+	cmd.afficherJeuDesRobots();
 	
 	
 	}
