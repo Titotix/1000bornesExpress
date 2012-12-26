@@ -3,13 +3,14 @@ package controleur;
 import modele.Attaque;
 import modele.Carte;
 import modele.Defausse;
+import modele.JeuEnMain;
 import modele.Talon;
 import modele.TasDeCarte;
 
 public class AggressifTousJoueurs implements Strategy {
 
 	@Override
-	public Carte choixCarte() {
+	public Carte choixCarte(JeuEnMain jeuEnMain) {
 		// TODO Auto-generated method stub
 		return null;
 	}

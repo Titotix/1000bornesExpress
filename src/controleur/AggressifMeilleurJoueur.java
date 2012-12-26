@@ -6,7 +6,7 @@ import modele.*;
 public class AggressifMeilleurJoueur implements Strategy {
 
 	@Override
-	public Carte choixCarte() {
+	public Carte choixCarte(JeuEnMain jeuEnMain) {
 		// TODO Auto-generated method stub
 		return null;
 	}

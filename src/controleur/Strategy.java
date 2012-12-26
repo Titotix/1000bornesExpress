@@ -6,5 +6,5 @@ public interface Strategy {
 
 	
 	public TasDeCarte choixPioche();
-	public Carte choixCarte();
+	public Carte choixCarte(JeuEnMain jeuEnMain);
 }
