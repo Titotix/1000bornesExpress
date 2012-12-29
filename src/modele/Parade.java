@@ -15,18 +15,25 @@ public abstract class Parade extends Carte {
 	public abstract boolean isCompatible(Attaque attaque);
 	
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		if(joueur.getJeuSurTable().getPileVitesse().isEmpty() && joueur.getJeuSurTable().getPileBataille().isEmpty()) {
+			return false;
+		}
 		if (!joueur.getJeuSurTable().isDemarrer() && this instanceof FeuVert) {			
 			return true;
 		}
-		if(this.isCompatible(joueur.getJeuSurTable().getPileVitesse().get(0))) {
-			return true;
-		}
-		if (this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
-			return true;
-		} else {
-			return false; 
-		}
+		if(joueur.getJeuSurTable().getPileVitesse().isEmpty() == false) {
 			
+			if(this.isCompatible( joueur.getJeuSurTable().getPileVitesse().get(0) ) ) {
+				return true;
+			}
+		}
+		if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {
+			if (this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
+				return true;
+			}
+		}
+		
+		return false;
 		
 	}
 	

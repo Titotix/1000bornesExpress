@@ -26,13 +26,6 @@ public class JeuSurTable extends Observable {
 		this.pileEtape=new ArrayList();
 		this.pileFeuVertInitial = new ArrayList();
 		
-		this.pileBataille = null;
-		this.pileVitesse=null;
-		this.pileBotte=null;
-		this.pileEtape=null;
-		this.pileFeuVertInitial = null;
-		
-		
 		this.nbKmParcouru=0;
 		this.nbKmMax=1000;
 		Menu menu = Menu.getInstance();
@@ -84,10 +77,11 @@ public class JeuSurTable extends Observable {
 	}
 	
 	public int nbKmParcouru() {
-				
-		for (Etape etape : pileEtape) {
-			this.nbKmParcouru += etape.getNbKm();
+			
+		for(Iterator<Etape> it = this.pileEtape.iterator(); it.hasNext() ;) {
+			this.nbKmParcouru += it.next().getNbKm();
 		}
+		
 		return this.nbKmParcouru;
 	}
 	
@@ -139,7 +133,9 @@ public class JeuSurTable extends Observable {
 	}
 
 
-	
+	public String toString() {
+		return " pileBataille "+this.getPileBataille().toString() +"\n"+" pileBotte "+this.getPileBotte().toString() +"\n"+ "pileEtape "+this.getPileEtape().toString() + "\n"+" pileVitesse "+this.getPileVitesse().toString() +"\n"+ " pileFeuVertInitial "+this.getPileFeuVertInitial().toString();
+	}
 
 	
 }

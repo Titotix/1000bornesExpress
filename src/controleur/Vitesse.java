@@ -47,17 +47,10 @@ public class Vitesse implements Strategy {
 					Carte carte = it.next();
 					if( (carte instanceof Attaque)) {
 						//Si la carte est de tyoe Attaque
-						Menu menu = Menu.getInstance();
-						for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
-							//Alors on teste si cette carte est jouable contre un des joueurs adverses.
-							Joueur adversaire = it2.next();
-							if(adversaire != robot) {
-								if(carte.isJouable(robot, adversaire)) {
-									//Si la carte est jouable on retourne cette carte, c'est la carte choisie par la strategie.
-									return carte;
-								}
-							}					
-						}		
+						if(this.choixCible(robot,(Attaque) carte) != null) {
+							//Si la valeur retourne par choixCible n'est pas null alors on peut placer l'attaque sur un joueur.
+							return carte;
+						}
 					}
 				}
 				
@@ -94,9 +87,24 @@ public class Vitesse implements Strategy {
 		return talon;
 	}
 
-	@Override
-	public Joueur choixCible(Attaque carte) {
-		// TODO Auto-generated method stub
+	/**
+	 * Teste pour tous le sjoueurs adverses si la carte attaque est jouable
+	 * @param Attaque
+	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
+	 */
+	public Joueur choixCible(Joueur robot, Attaque carte) {
+		Menu menu = Menu.getInstance();
+		
+		for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
+		
+			Joueur adversaire = it2.next();
+			if(adversaire != robot) {
+				if(carte.isJouable(robot, adversaire)) {
+					//Si la carte est jouable on retourne l'adversaire sur lequel elle est jouable.
+					return adversaire;
+				}
+			}					
+		}
 		return null;
 	}
 	

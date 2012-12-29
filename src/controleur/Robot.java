@@ -16,9 +16,19 @@ public class Robot extends Joueur {
 
 	public void jouer() {
 		this.piocher(this.choixPioche());
-		if(this.choixAction()) { //si le robot a decidé de jouer une carte (et non de defausser)
-			this.choixCarte().jouer(this, );//TODO : ne fonctionne pas. 
+		
+		if(this.choixDefausser()) {
+			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
+		} else {
+			Carte carteChoisie = this.choixCarte(false);
+			if(carteChoisie instanceof Attaque) {
+				carteChoisie.jouer(this, this.choixCible((Attaque) carteChoisie));
+			} else {
+				carteChoisie.jouer(this, null);
+			}
+			
 		}
+		
 	}
 	
 	/**
@@ -48,9 +58,14 @@ public class Robot extends Joueur {
 	}
 	
 	public Carte choixCarte(boolean defausser) {
-		return this.strat.choixCarte(this.jeuEnMain, defausser);		
+		return this.strat.choixCarte(this, defausser);		
 	}
 
+	
+	public Joueur choixCible(Attaque carte) {
+		return this.strat.choixCible(this, carte);
+	}
+	
 	public TasDeCarte choixPioche() {
 		return this.strat.choixPioche();
 	}

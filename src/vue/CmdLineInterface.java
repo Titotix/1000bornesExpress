@@ -24,7 +24,15 @@ public class CmdLineInterface extends Thread implements Observer {
 	}
 		
 		
+	public void afficherJoueur(Joueur joueur) {
+		this.afficherMainJoueur(joueur);
+		this.afficherJeuSurTableJoueur(joueur);
+		System.out.println("\n\n");
+	}
 	
+	
+	
+
 	public void contextuel() {
 		Menu menu = Menu.getInstance();
 		int choix;
@@ -50,6 +58,10 @@ public class CmdLineInterface extends Thread implements Observer {
 	
 	public void afficherMainJoueur(Joueur joueur) {
 		System.out.println(joueur.getJeuEnMain().toString());
+	}
+	
+	public void afficherJeuSurTableJoueur(Joueur joueur) {
+		System.out.println(joueur.getJeuSurTable().toString());
 	}
 	
 	public void afficherJeuDesHumains () {

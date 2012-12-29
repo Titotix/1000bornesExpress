@@ -45,18 +45,11 @@ public class AggressifMeilleurJoueur implements Strategy {
 					//Si la carte est de type Attaque
 					
 					
-					Menu menu = Menu.getInstance();
+					if(this.choixCibleSecondaire(robot,(Attaque) carte) != null) {
+						//Si la carte est jouable contre un joueur alors on la retourne
+						return carte;
+					}
 					
-					for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
-						//Alors on teste si cette carte est jouable contre un des joueurs adverses.
-						Joueur adversaire = it2.next();
-						if(adversaire != robot) {
-							if(carte.isJouable(robot, adversaire)) {
-								//Si la carte est jouable on retourne cette carte, c'est la carte choisie par la strategie.
-								return carte;
-							}
-						}					
-					}		
 				} else if(carte instanceof FeuVert) {
 					//Si la carte est un feu vert et que le robot n'a pas démarré, alors il joue le feu vert
 					if(!robot.getJeuSurTable().isDemarrer()) {
@@ -129,9 +122,52 @@ public class AggressifMeilleurJoueur implements Strategy {
 		return talon;
 	}
 
-	@Override
-	public Joueur choixCible(Attaque carte) {
-		// TODO Auto-generated method stub
+	/**
+	 * @param Attaque
+	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
+	 */
+	public Joueur choixCible(Joueur robot, Attaque carte) {
+		Joueur ciblePrincipale = this.choixCiblePrincipale(robot, carte);
+		if(ciblePrincipale != null) {
+			return ciblePrincipale;
+		} else {
+			return this.choixCibleSecondaire(robot, carte);
+		}
+	}
+	
+	/**
+	 * Teste si l'attaque est jouable contre le meilleur joueur, retourne null si ce n'est pas le cas.
+	 * @param robot
+	 * @param carte
+	 * @return Joueur (null si carte n'est pas jouable sur le meilleur joueur)
+	 */
+	public Joueur choixCiblePrincipale(Joueur robot, Attaque carte) {
+		Joueur meilleurJoueur = this.meilleurJoueur();
+		if(carte.isJouable(robot, meilleurJoueur)) {
+			return meilleurJoueur;
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * Teste la carte attaque sur tous les joueurs. Si aucun n'est attaquable, retourne null.
+	 * @param robot dont c'est le tour
+	 * @param carte attaque
+	 * @return Joueur (null si carte n'est jouable contre personne)
+	 */
+	public Joueur choixCibleSecondaire(Joueur robot, Attaque carte) {
+		Menu menu = Menu.getInstance();
+		
+		for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
+		
+			Joueur adversaire = it2.next();
+			if(adversaire != robot) {
+				if(carte.isJouable(robot, adversaire)) {
+					//Si la carte est jouable on retourne l'adversaire sur lequel elle est jouable.
+					return adversaire;
+				}
+			}					
+		}
 		return null;
 	}
 

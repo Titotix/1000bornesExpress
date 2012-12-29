@@ -18,25 +18,4 @@ public class Humain extends Joueur {
 	}
 
 
-	@Override
-	public Carte choixCarte() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean choixDefausser() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public TasDeCarte choixPioche() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	
-
 }

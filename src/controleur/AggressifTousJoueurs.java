@@ -99,20 +99,26 @@ public class AggressifTousJoueurs implements Strategy {
 		return talon;
 	}
 
-	@Override
-	public Joueur choixCible(Attaque carte) {
-		// TODO Auto-generated method stub
+	/**
+	 * Teste pour tous le sjoueurs adverses si la carte attaque est jouable
+	 * @param Attaque
+	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
+	 */
+	public Joueur choixCible(Joueur robot, Attaque carte) {
+		Menu menu = Menu.getInstance();
+		
+		for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
+		
+			Joueur adversaire = it2.next();
+			if(adversaire != robot) {
+				if(carte.isJouable(robot, adversaire)) {
+					//Si la carte est jouable on retourne l'adversaire sur lequel elle est jouable.
+					return adversaire;
+				}
+			}					
+		}
 		return null;
 	}
 	
-	
-	//code pour checker tous les joueur et savoir si ils sont attaquable ou non
-	/* Menu menu = Menu.getInstance();
-		for(Iterator<Joueur> it = menu.getJoueurs().iterator(); it.hasNext() ; ) {
-			Joueur adversaire = it.next();
-			if(adversaire.getNumPassage() != joueurActuel.getNumPassage()) {
-				if(this.isJouableContre(adversaire)) {
-			}}
-		} */
 
 }
