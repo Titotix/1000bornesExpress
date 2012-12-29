@@ -31,21 +31,21 @@ public class Etape extends Carte {
 		return this.nbKm;
 	}
 	
-	public void jouer(Joueur joueur, Etape carte) {
-		joueur.getJeuSurTable().ajouterCarteEtape(carte);
-		joueur.getJeuEnMain().retirerCarte(carte);
+	public void jouer(Joueur joueur, Joueur inutile) {
+		joueur.getJeuSurTable().ajouterCarteEtape(this);
+		joueur.getJeuEnMain().retirerCarte(this);
 		
 	}
 	
-	public boolean isJouable(JeuSurTable notreJeu) {
-		if( (notreJeu.getNbKmMax() - notreJeu.nbKmParcouru() >= this.nbKm) && notreJeu.isDemarrer()) {
+	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		if( (joueur.getJeuSurTable().getNbKmMax() - joueur.getJeuSurTable().nbKmParcouru() >= this.nbKm) && joueur.getJeuSurTable().isDemarrer()) {
 			//Si on ne va pas depasser le nb de km max et que nous avons un feu vert
-			if (notreJeu.getPileVitesse().isEmpty()) { 
+			if (joueur.getJeuSurTable().getPileVitesse().isEmpty()) { 
 				//Si notre pile vitesse est vide l'etape est jouable
 				return true;
-			} else if(!notreJeu.getPileVitesse().isEmpty()) {
+			} else if(!joueur.getJeuSurTable().getPileVitesse().isEmpty()) {
 				//Si notre pile vitesse n'est pas vide
-				if(this.nbKm <=50) {
+				if(this.nbKm <= LimiteVitesse.getBorneMaxJouable()) {
 					return true;
 				}
 			}
@@ -54,5 +54,5 @@ public class Etape extends Carte {
 		return false;
 		
 	}
-	
+
 }

@@ -24,10 +24,14 @@ public class Humain extends Joueur {
 		return null;
 	}
 
-
+	@Override
+	public boolean choixDefausser() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public TasDeCarte choixPioche(JeuEnMain jeuEnMain) {
+	public TasDeCarte choixPioche() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -47,6 +47,10 @@ public class Defausse extends TasDeCarte {
 		this.pileCarte.addFirst(carte);//Pourquoi un addFirst ici ?  un add serait mieux ?
 	}
 	
+	public boolean isEmpty() {
+		return this.pileCarte.isEmpty();
+	}
+	
 
 	public LinkedList<Carte> getPileCarte() {
 		return this.pileCarte;

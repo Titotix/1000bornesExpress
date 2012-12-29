@@ -20,15 +20,17 @@ public class JeuEnMain extends Observable{
 		
 	}
 	
-	//Permet de retirer une carte de la main apres l'avoir pos�e
+	//Permet de retirer une carte de la main du joueur.
 	public void retirerCarte (Carte carte){
 		if(this.main.remove(carte)) {
+			
 			
 		} else {
 			//TODO la carte qui a voulu etre retire de la main n'était pas dans la main.
 		}
 			
 	}
+	
 
 	public int getNombreCarte() {
 		return nombreCarte;

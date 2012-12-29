@@ -21,16 +21,7 @@ public abstract class Joueur {
 	}
 	
 	public abstract void jouer();
-	/**
-	 * Renvoie vrai si l'action choisie est de jouer une carte.
-	 * Renvoie faux si l'action choisie est de défausser une carte.
-	 * @return boolean
-	 */
-	public abstract boolean choixAction(); //defausser ou jouer une carte
-	
-	public abstract TasDeCarte choixPioche();
-	
-	public abstract Carte choixCarte();
+
 	
 	public void piocher(TasDeCarte pioche) {
 		if(pioche instanceof Talon) {

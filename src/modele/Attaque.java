@@ -14,13 +14,24 @@ public abstract class Attaque extends Carte {
 		
 	}
 	
-	public boolean isJouable(Joueur adversaire) {
+	public boolean isJouable(Joueur joueurActuel, Joueur adversaire) { 
+		if(adversaire == null) {
+			return false;
+		}
+		return this.isJouableContre(adversaire);
+	}
+	
+	public boolean isJouableContre(Joueur adversaire) {
 		if(this instanceof Crevaison || this instanceof FeuRouge || this instanceof Accident|| this instanceof PanneEssence ) {
+			//Si l'instance est de type Crevaison, FeuROuge, Accident ou PanneEssence
+			
 			if(adversaire.getJeuSurTable().getPileBataille().isEmpty() && adversaire.getJeuSurTable().isDemarrer()) {		
+			//Si la pile de bataille de l'adversaire visé est vide et que cet adversaire a déjà démarrer
+			// alors l'attaque est jouable et on retourne true.
 				return true;
 			} 
-		}
-		if(this instanceof LimiteVitesse) {
+		} else if(this instanceof LimiteVitesse) {
+			//Si c'est une limite de vitesse il suffit que la pile de bataille soit vide pour que la limite de vitesse soit jouable.
 			if(adversaire.getJeuSurTable().getPileVitesse().isEmpty()) {		
 				return true;
 			}
@@ -30,20 +41,12 @@ public abstract class Attaque extends Carte {
 	}
 	
 	
-	public void jouer(Joueur adversaire, JeuEnMain notreJeu, Attaque carte){
+	public void jouer(Joueur joueur, Joueur adversaire){
 		
-		adversaire.getJeuSurTable().ajouterCarteBataille(carte);
-		notreJeu.retirerCarte(carte);
-		
-	}
-	
-	
-	//Appelle la m�thode setEtatBataille du jeu sur table adverse
-	public void changeEtatBataille (){
+		adversaire.getJeuSurTable().ajouterCarteBataille(this);
+		joueur.getJeuEnMain().retirerCarte(this);
 		
 	}
-
-	
 	
 	
 }

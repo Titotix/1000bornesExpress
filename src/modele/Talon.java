@@ -48,8 +48,8 @@ public class Talon extends TasDeCarte {
 	//Distribuer les cartes depuis le talon
 	public void distribuer() {
 		Menu menu = Menu.getInstance();
-		Humain[] humain = menu.getHumain();
-		Robot[] robot = menu.getRobot();
+		LinkedList<Humain> humain = menu.getHumain();
+		LinkedList<Robot> robot = menu.getRobot();
 		int nbCarteADistribuer = this.nbCarteADistribuer();
 		
 		while( nbCarteADistribuer > 0 ) {
@@ -57,17 +57,21 @@ public class Talon extends TasDeCarte {
 			for(int j=0; j < menu.getNbHumain() ; j++) {
 				nbCarteADistribuer--;
 				
-				humain[j].getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
+				humain.get(j).getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
 			}
 			
 			for(int k=0; k < menu.getNbRobot() ; k++) {
 				nbCarteADistribuer--;
-				robot[k].getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
+				robot.get(k).getJeuEnMain().ajouterCarte(this.pileCarte.removeFirst());
 			}
 		}
 		
 		
 		
+	}
+	
+	public boolean isEmpty() {
+		return this.pileCarte.isEmpty();
 	}
 	
 	/**

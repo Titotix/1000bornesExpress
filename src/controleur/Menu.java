@@ -10,8 +10,8 @@ public class Menu {
 	private boolean variante =false;
 	private int nbRobot, nbHumain;
 
-	private Humain[] humain;
-	private Robot[] robot;
+	private LinkedList<Humain> humain;
+	private LinkedList<Robot> robot;
 	private static Menu menu = null;
 	//constructeur
 	private Menu() {
@@ -37,28 +37,38 @@ public class Menu {
 		talon.aleatoirePileCarte();
 	
 		talon.distribuer();
-		
-		
 	}
-	
-	
 	
 	public void creationJoueurs() {
 		
 		String nomJoueur;
 		
-		humain = new Humain[this.getNbHumain()];
+		humain = new LinkedList<Humain>();
 		
 		for(int i = 0; i < this.nbHumain; i++) {
 
-			humain[i] =  new Humain(this.getNomHumain(i+1), i+1);
+			humain.add(new Humain(this.getNomHumain(i+1), i+1));
 		}
 
-		robot = new Robot[this.getNbRobot()];
+		robot = new LinkedList<Robot>();
 
 		for(int j = 0; j < this.nbRobot; j++) {
 			
-			robot[j] =  new Robot(this.getNomRobot(j+1), j+1+this.getNbHumain());
+			robot.add ( new Robot ( this.getNomRobot(j+1), j+1+this.getNbHumain(), this.getRandomStrategy() ) );
+		}
+	}
+	
+	
+	
+	public Strategy getRandomStrategy() {
+		Random r = new Random();
+		int i = r.nextInt(3);
+		if(i==1) {
+			return new Vitesse();
+		} else if (i==2) {
+			return new AggressifTousJoueurs();
+		} else {
+			return new AggressifMeilleurJoueur();
 		}
 	}
 	
@@ -221,15 +231,22 @@ public class Menu {
 		return this.nbRobot;
 	}
 	
-	public Humain[] getHumain() {
+	public LinkedList<Humain> getHumain() {
 		return this.humain;
 	}
 	
-	public Robot[] getRobot() {
+	public LinkedList<Robot> getRobot() {
 		return this.robot;
 	}
 	
 
+	public LinkedList<Joueur> getJoueurs() {
+		LinkedList<Joueur> joueur = new LinkedList<Joueur>();
+		joueur.addAll(menu.getHumain());
+		joueur.addAll(menu.getRobot());
+		return joueur;
+	}
+	
 	public void setVariante() {
 		this.variante = true;
 	}
@@ -237,6 +254,8 @@ public class Menu {
 	public boolean isVariante() {
 		return this.variante;
 	}
+	
+	
 
 	
 }

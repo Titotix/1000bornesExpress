@@ -14,7 +14,7 @@ public abstract class Botte extends Carte  {
 	
 	}
 	
-	public void jouer(Joueur joueur) { 
+	public void jouer(Joueur joueur, Joueur inutile) { 
 		joueur.getJeuSurTable().ajouterCarteBotte(this);
 		//ajouter la carte au jeu sur table du joueur
 		joueur.getJeuSurTable().setNbKmParcouru(joueur.getJeuSurTable().getNbKmParcouru() + 100);
@@ -34,6 +34,10 @@ public abstract class Botte extends Carte  {
 		//TODO : modification du tour de jeu
 		
 		
+	}
+	
+	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		return true;
 	}
 	
 }

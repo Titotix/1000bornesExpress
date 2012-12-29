@@ -2,6 +2,9 @@ package modele;
 
 public class LimiteVitesse extends Attaque {
 
+	private static int borneMaxJouable=50;
+
+
 	public LimiteVitesse() {
 	
 		// TODO Auto-generated constructor stub
@@ -16,6 +19,14 @@ public class LimiteVitesse extends Attaque {
 		jeuAdverse.ajouterCarteVitesse(carte);
 		jeu.retirerCarte(carte);
 		
+	}
+	
+	public static int getBorneMaxJouable() {
+		return borneMaxJouable;
+	}
+
+	public static void setBorneMaxJouable(int borneMaxJouable) {
+		LimiteVitesse.borneMaxJouable = borneMaxJouable;
 	}
 
 }

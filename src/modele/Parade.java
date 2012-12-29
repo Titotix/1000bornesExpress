@@ -7,8 +7,6 @@ import modele.*;
 
 public abstract class Parade extends Carte {
 	
-
-	
 	//constructeur
 	public Parade(){
 		
@@ -16,14 +14,14 @@ public abstract class Parade extends Carte {
 	
 	public abstract boolean isCompatible(Attaque attaque);
 	
-	public boolean isJouable(JeuSurTable notreJeu) {
-		if (!notreJeu.isDemarrer() && this instanceof FeuVert) {			
+	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		if (!joueur.getJeuSurTable().isDemarrer() && this instanceof FeuVert) {			
 			return true;
 		}
-		if(this.isCompatible(notreJeu.getPileVitesse().get(0))) {
+		if(this.isCompatible(joueur.getJeuSurTable().getPileVitesse().get(0))) {
 			return true;
 		}
-		if (this.isCompatible(notreJeu.getPileBataille().get(0))) {
+		if (this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
 			return true;
 		} else {
 			return false; 
@@ -32,7 +30,7 @@ public abstract class Parade extends Carte {
 		
 	}
 	
-	public void jouer(Joueur joueur) {
+	public void jouer(Joueur joueur, Joueur inutile) {
 		
 		joueur.getJeuEnMain().retirerCarte(this);
 		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0),  this);

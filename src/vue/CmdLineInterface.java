@@ -55,7 +55,7 @@ public class CmdLineInterface extends Thread implements Observer {
 	public void afficherJeuDesHumains () {
 		Menu menu = Menu.getInstance();
 		for(int i=0; i < menu.getNbHumain(); i++) {			
-			System.out.println(menu.getHumain()[i].getJeuEnMain().toString());
+			System.out.println(menu.getHumain().get(i).getJeuEnMain().toString());
 			}
 	}
 
@@ -63,7 +63,7 @@ public class CmdLineInterface extends Thread implements Observer {
 		Menu menu = Menu.getInstance();
 		for(int i=0; i < menu.getNbRobot(); i++) {
 			
-			System.out.println(menu.getRobot()[i].getJeuEnMain().toString());
+			System.out.println(menu.getRobot().get(i).getJeuEnMain().toString());
 		}
 	}
 	

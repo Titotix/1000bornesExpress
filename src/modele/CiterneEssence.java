@@ -1,5 +1,7 @@
 package modele;
 
+import controleur.*;
+
 public class CiterneEssence extends Botte{
 
 	public CiterneEssence() {
@@ -17,9 +19,5 @@ public class CiterneEssence extends Botte{
 	public String toString() {
 		return "Citerne Essence";
 	}
-
-
-
-	
 
 }
