@@ -15,6 +15,11 @@ public abstract class Parade extends Carte {
 	public abstract boolean isCompatible(Attaque attaque);
 	
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		
+		if(this instanceof FeuVert && joueur.getJeuSurTable().isDemarrer() == false) {
+			//si la carte est un feu vert et que le joueur n'a pas demarré alors la carte est jouable.
+			return true;
+		}
 		if(joueur.getJeuSurTable().getPileVitesse().isEmpty() && joueur.getJeuSurTable().getPileBataille().isEmpty()) {
 			return false;
 		}
@@ -38,9 +43,12 @@ public abstract class Parade extends Carte {
 	}
 	
 	public void jouer(Joueur joueur, Joueur inutile) {
+		joueur.getJeuEnMain().retirerCarte(this); // on retire la carte de la main
 		
-		joueur.getJeuEnMain().retirerCarte(this);
-		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0),  this);
-		
+		if(this instanceof FeuVert && joueur.getJeuSurTable().isDemarrer() == false) {
+			joueur.getJeuSurTable().getPileFeuVertInitial().add((FeuVert) this);
+		} else {
+			Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0),  this);
+		}
 	}
 }

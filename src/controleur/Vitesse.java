@@ -28,8 +28,7 @@ public class Vitesse implements Strategy {
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					//On teste toutes les cartes du jeu du robot
 					Carte carte = it.next();
-					
-					if( (carte instanceof Etape)) {
+					if(carte instanceof Etape) {
 						//Si la carte est de type etape
 						
 						if(carte.isJouable(robot, null)) {

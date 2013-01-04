@@ -13,6 +13,12 @@ public class Increvable extends Botte {
 		return false;
 	}
 	
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof Crevaison) {
+			return true;
+		} else { return false; }
+	}
+	
 	public String toString() {
 		return "Increvable";
 	}

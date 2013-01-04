@@ -80,7 +80,17 @@ public class Talon extends TasDeCarte {
 	 * @return
 	 */
 	public Carte piocher(){
-		return this.pileCarte.removeFirst();
+		try {
+			return this.pileCarte.removeFirst();
+	
+		} catch (NoSuchElementException e) {
+			//Si il n'y a plus de carte dans le talon
+			// on prend toutes les cartes de la defausse et on les place dans le talon.
+			Defausse defausse = Defausse.getInstance();
+			this.pileCarte.addAll(defausse.getPileCarte());
+			defausse.getPileCarte().removeAll(defausse.getPileCarte());
+			return this.pileCarte.removeFirst();
+		}
 	}
 	
 	

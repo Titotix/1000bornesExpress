@@ -27,7 +27,7 @@ public class CmdLineInterface extends Thread implements Observer {
 	public void afficherJoueur(Joueur joueur) {
 		this.afficherMainJoueur(joueur);
 		this.afficherJeuSurTableJoueur(joueur);
-		System.out.println("\n\n");
+	
 	}
 	
 	
@@ -36,15 +36,15 @@ public class CmdLineInterface extends Thread implements Observer {
 	public void contextuel() {
 		Menu menu = Menu.getInstance();
 		int choix;
-		System.out.println("Entrer le numero correspondant a ce que vous souhaitez");
-		System.out.println("\n 1. Nouvelle partie");
-		Scanner a = new Scanner(System.in);
-		choix = a.nextInt();
-		switch(choix) {
-		case 1: menu.nouvellePartie();
-		break;
-		}
+		//System.out.println("Entrer le numero correspondant a ce que vous souhaitez");
+		//System.out.println("\n 1. Nouvelle partie");
+		//Scanner a = new Scanner(System.in);
+		//choix = a.nextInt();
+		//switch(choix) {
+		/*case 1:*/ menu.nouvellePartie();
+		//break;
 	}
+	
 	
 	public void choixVariante() {
 		Scanner clavier = new Scanner(System.in);

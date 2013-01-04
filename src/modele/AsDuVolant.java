@@ -13,6 +13,11 @@ public class AsDuVolant extends Botte {
 		return false;
 	}
 	
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof Accident) {
+			return true;
+		} else { return false; }
+	}
 	
 	public String toString() {
 		return "AsDuVolant";

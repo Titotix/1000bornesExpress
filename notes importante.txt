@@ -1,8 +1,2 @@
-Classe qui doivent impl�menter l'interface observable :
-	JeuSurTable
-	Main
-	Defausse
-	Talon
-	Carte (a voir l'utilit�
-	
-Ajouter une collection pour le feu vert initial.
+Probleme de jeu : le feu vert d'après les règles reste dans la pile bataille, donc si 4 joueurs jouent,
+ensuite il ne reste plus de feu vert dans le jeu (il n'y en a que 4) et donc le feu rouge ne peut pas etre contrer.

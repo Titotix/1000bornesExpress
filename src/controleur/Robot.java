@@ -2,6 +2,8 @@ package controleur;
 
 import java.util.Iterator;
 
+import vue.CmdLineInterface;
+
 import modele.*;
 
 public class Robot extends Joueur {
@@ -16,19 +18,35 @@ public class Robot extends Joueur {
 
 	public void jouer() {
 		this.piocher(this.choixPioche());
-		
+		CmdLineInterface cmd = new CmdLineInterface();//TODO A VIRER
+		cmd.afficherMainJoueur(this);//TODO A VIRER
 		if(this.choixDefausser()) {
+			System.out.println(this.getNom()+" a decide de defausser"); //TODO A VIRER
 			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
 			if(carteChoisie instanceof Attaque) {
-				carteChoisie.jouer(this, this.choixCible((Attaque) carteChoisie));
+				Joueur adversaire = this.choixCible((Attaque) carteChoisie);
+				carteChoisie.jouer(this, adversaire);
+				
+				//On regarde si le joueur peut faire un coup fourre
+				if(adversaire.canCoupFourre()) {
+					adversaire.coupFourre();
+					
+					PartieDeJeu partie = PartieDeJeu.getInstance();
+					partie.setNumeroJoueurActuel(adversaire.getNumPassage()-1); //Pour que ce soit au joueur suivant de jouer
+
+				}
 			} else {
 				carteChoisie.jouer(this, null);
+				
+				PartieDeJeu partie = PartieDeJeu.getInstance();
+				partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que ce soit au joueur suivant de jouer
+				System.out.println("augmentation de 1 du joueur suivant");
 			}
 			
 		}
-		
+
 	}
 	
 	/**
@@ -66,8 +84,31 @@ public class Robot extends Joueur {
 		return this.strat.choixCible(this, carte);
 	}
 	
+	@Override
+	public void coupFourre() {
+		//On va tout d'abord rechercher la botte à jouer
+		for(Iterator<Carte> it = this.getJeuEnMain().getMain().iterator() ; it.hasNext() ; ) {
+			Carte carte = it.next();
+			if(carte instanceof Botte) {
+				if(((Botte) carte).isJouableCoupFourre(this.getJeuSurTable())) {
+					//Des qu'on trouve la bonne botte, on la joue en tant que coup Fourre.
+					((Botte)carte).coupFourre(this);
+				}
+			}
+		}
+		PartieDeJeu partie = PartieDeJeu.getInstance();
+		partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que le robot rejoue
+		
+	}
+
+	
 	public TasDeCarte choixPioche() {
 		return this.strat.choixPioche();
 	}
+	
+	public String toString() {
+		return ""+this.strat;
+	}
+
 
 }

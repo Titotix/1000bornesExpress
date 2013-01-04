@@ -15,7 +15,7 @@ public class main {
 	Talon talon = Talon.getInstance();
 	cmd.afficherJeuDesHumains();
 	cmd.afficherJeuDesRobots();
-	PartieDeJeu partie = new PartieDeJeu();
+	PartieDeJeu partie = PartieDeJeu.getInstance();
 	partie.jouerPartie();
 	cmd.afficherJeuDesHumains();
 	cmd.afficherJeuDesRobots();

@@ -14,6 +14,12 @@ public class Prioritaire extends Botte {
 		return false;
 	}
 	
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof FeuRouge) {
+			return true;
+		} else { return false; }
+	}
+	
 	public String toString() {
 		return "Prioritaire";
 	}

@@ -1,5 +1,7 @@
 package controleur;
 
+import java.util.Iterator;
+
 import modele.*;
 
 public abstract class Joueur {
@@ -22,6 +24,20 @@ public abstract class Joueur {
 	
 	public abstract void jouer();
 
+	public abstract void coupFourre() ;
+	
+	public boolean canCoupFourre() {
+		for(Iterator<Carte> it = this.getJeuEnMain().getMain().iterator() ; it.hasNext() ; ) {
+			Carte carte = it.next();
+			if(carte instanceof Botte) {
+				if(((Botte) carte).isJouableCoupFourre(this.getJeuSurTable())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	
 	public void piocher(TasDeCarte pioche) {
 		if(pioche instanceof Talon) {

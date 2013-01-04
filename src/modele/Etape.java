@@ -38,15 +38,34 @@ public class Etape extends Carte {
 	}
 	
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
+		
+		
 		if( (joueur.getJeuSurTable().getNbKmMax() - joueur.getJeuSurTable().nbKmParcouru() >= this.nbKm) && joueur.getJeuSurTable().isDemarrer()) {
 			//Si on ne va pas depasser le nb de km max et que nous avons un feu vert
-			if (joueur.getJeuSurTable().getPileVitesse().isEmpty()) { 
-				//Si notre pile vitesse est vide l'etape est jouable
-				return true;
-			} else if(!joueur.getJeuSurTable().getPileVitesse().isEmpty()) {
-				//Si notre pile vitesse n'est pas vide
-				if(this.nbKm <= LimiteVitesse.getBorneMaxJouable()) {
+			if(this.nbKm == 200) {
+				//si l'etape qu'on veut jouer est de 200 bornes
+				int nbEtape200=0;
+				for(Iterator<Etape> it = joueur.getJeuSurTable().getPileEtape().iterator(); it.hasNext() ;) {
+					Etape etape = it.next();
+					if(etape.nbKm == 200) {
+						//On compte le nombre d'etape de 200 bornes dans le jeu
+						nbEtape200++;
+					}
+				}
+				if(nbEtape200 >= 2) {
+					//si ce nombre est sup ou egal a 2, l'etape qu'on voulait poser n'est pas jouable.
+					return false;
+				}
+			}
+			if(joueur.getJeuSurTable().getPileBataille().isEmpty()) {	
+				if (joueur.getJeuSurTable().getPileVitesse().isEmpty()) { 
+					//Si notre pile vitesse est vide l'etape est jouable
 					return true;
+				} else {
+					//Si notre pile vitesse n'est pas vide
+					if(this.nbKm <= LimiteVitesse.getBorneMaxJouable()) {
+						return true;
+					}
 				}
 			}
 		}

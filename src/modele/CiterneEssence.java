@@ -15,6 +15,11 @@ public class CiterneEssence extends Botte{
 		return false;
 	}
 
+	public boolean isCompatible(Attaque attaque) {
+		if(attaque instanceof PanneEssence) {
+			return true;
+		} else { return false; }
+	}
 
 	public String toString() {
 		return "Citerne Essence";
