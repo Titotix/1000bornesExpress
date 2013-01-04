@@ -1,14 +1,16 @@
 
+import jeu.Menu;
+import jeu.PartieDeJeu;
+import tasDeCartes.Talon;
 import vue.CmdLineInterface;
-import modele.*;
-import modele.*;
-import controleur.*;
+import vue.MenuGraphique;
+
 
 public class main {
 
 	public static void main(String[] args) {
 	
-		
+	MenuGraphique menuGui = new MenuGraphique();
 	Menu menu = Menu.getInstance();
 	CmdLineInterface cmd = new CmdLineInterface();
 	cmd.run();
@@ -17,9 +19,6 @@ public class main {
 	cmd.afficherJeuDesRobots();
 	PartieDeJeu partie = PartieDeJeu.getInstance();
 	partie.jouerPartie();
-	cmd.afficherJeuDesHumains();
-	cmd.afficherJeuDesRobots();
-	
 	
 	}
 }

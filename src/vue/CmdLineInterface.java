@@ -1,8 +1,12 @@
 package vue;
 import java.util.*;
 
-import controleur.*;
-import modele.*;
+import tasDeCartes.Defausse;
+import tasDeCartes.Talon;
+
+import jeu.Menu;
+
+import joueurs.Joueur;
 
 public class CmdLineInterface extends Thread implements Observer {
 
@@ -17,7 +21,7 @@ public class CmdLineInterface extends Thread implements Observer {
 	}
 	public void run() { //TODO
 		this.contextuel();
-		this.choixVariante();
+	
 	}
 	
 	public void update(Observable o, Object arg) {
@@ -35,7 +39,7 @@ public class CmdLineInterface extends Thread implements Observer {
 
 	public void contextuel() {
 		Menu menu = Menu.getInstance();
-		int choix;
+		//int choix;
 		//System.out.println("Entrer le numero correspondant a ce que vous souhaitez");
 		//System.out.println("\n 1. Nouvelle partie");
 		//Scanner a = new Scanner(System.in);
@@ -47,13 +51,7 @@ public class CmdLineInterface extends Thread implements Observer {
 	
 	
 	public void choixVariante() {
-		Scanner clavier = new Scanner(System.in);
-		System.out.println("Souhaitez vous jouer avec la variante (Kilometre à parcourir egal a 700 au lieu de 1000");
-		System.out.println("Veuillez entrer true/false");
 		
-		if(clavier.nextBoolean()) {
-			menu.setVariante();
-		}
 	}
 	
 	public void afficherMainJoueur(Joueur joueur) {
