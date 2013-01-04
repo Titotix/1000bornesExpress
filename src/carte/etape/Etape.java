@@ -46,7 +46,7 @@ public class Etape extends Carte {
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
 		
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-		if( (partie.getNbKmMax() - joueur.getJeuSurTable().nbKmParcouru() >= this.nbKm) && joueur.getJeuSurTable().isDemarrer()) {
+		if( (partie.getNbKmMax() - joueur.getJeuSurTable().getNbKmParcouruTotal() >= this.nbKm) && joueur.getJeuSurTable().isDemarrer()) {
 			//Si on ne va pas depasser le nb de km max et que nous avons un feu vert
 			if(this.nbKm == 200) {
 				//si l'etape qu'on veut jouer est de 200 bornes

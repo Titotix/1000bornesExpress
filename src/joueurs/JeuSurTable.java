@@ -13,7 +13,8 @@ import carte.parade.FeuVert;
 
 public class JeuSurTable extends Observable {
 	
-	private int nbKmParcouru;
+	private int nbKmParcouruEtape;
+	private int nbKmParcouruBotte;
 	
 
 	private ArrayList<Attaque> pileBataille;
@@ -30,8 +31,9 @@ public class JeuSurTable extends Observable {
 		this.pileBotte=new ArrayList<Botte>();
 		this.pileEtape=new ArrayList<Etape>();
 		this.pileFeuVertInitial = new ArrayList<FeuVert>();
-		
-		this.nbKmParcouru=0;
+
+		this.nbKmParcouruEtape=0;
+		this.nbKmParcouruBotte=0;
 
 	}
 	
@@ -52,7 +54,7 @@ public class JeuSurTable extends Observable {
 			
 			this.pileBataille.add(carte);
 	
-		}
+		} 
 	}
 	
 	public void ajouterCarteVitesse(LimiteVitesse carte)
@@ -81,13 +83,11 @@ public class JeuSurTable extends Observable {
 		this.pileBataille.remove(carte);
 	}
 	
-	public int nbKmParcouru() {
+	public int getNbKmParcouruTotal() {
 			
-		for(Iterator<Etape> it = this.pileEtape.iterator(); it.hasNext() ;) {
-			this.nbKmParcouru += it.next().getNbKm();
-		}
 		
-		return this.nbKmParcouru;
+		
+		return this.nbKmParcouruEtape + this.nbKmParcouruBotte;
 	}
 	
 
@@ -99,14 +99,21 @@ public class JeuSurTable extends Observable {
 		return !(this.pileFeuVertInitial.isEmpty());
 	}
 	
-	public int getNbKmParcouru() {
-		return this.nbKmParcouru;
-	}
-	public void setNbKmParcouru(int nbKmParcouru) {
+	public int getNbKmParcouruEtape() {
+		this.nbKmParcouruEtape=0;
 		
-		this.nbKmParcouru = nbKmParcouru;
+		for(Iterator<Etape> it = this.pileEtape.iterator(); it.hasNext() ;) {
+			this.nbKmParcouruEtape += it.next().getNbKm();
+		}
+		
+		return this.nbKmParcouruEtape;
+	}
+	
+	public void addNbKmParcouruEtape(int nbKmParcouru) {
+		
+		this.nbKmParcouruEtape += nbKmParcouru;
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-		if(this.nbKmParcouru() >= partie.getNbKmMax()) {
+		if(this.getNbKmParcouruTotal() >= partie.getNbKmMax()) {
 			partie.setTermine(true);
 		}
 	}
@@ -130,6 +137,11 @@ public class JeuSurTable extends Observable {
 
 	public String toString() {
 		return " pileBataille "+this.getPileBataille().toString() +"\n"+" pileBotte "+this.getPileBotte().toString() +"\n"+ "pileEtape "+this.getPileEtape().toString() + "\n"+" pileVitesse "+this.getPileVitesse().toString() +"\n"+ " pileFeuVertInitial "+this.getPileFeuVertInitial().toString();
+	}
+
+
+	public void addNbKmParcouruBotte(int nbKm) {
+		this.nbKmParcouruBotte += nbKm;		
 	}
 
 	

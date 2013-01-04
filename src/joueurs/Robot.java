@@ -13,6 +13,7 @@ import carte.bottes.Botte;
 
 import strategie.Strategy;
 import tasDeCartes.Carte;
+import tasDeCartes.Defausse;
 import tasDeCartes.TasDeCarte;
 import vue.CmdLineInterface;
 
@@ -31,8 +32,12 @@ public class Robot extends Joueur {
 		CmdLineInterface cmd = new CmdLineInterface();//TODO A VIRER
 		cmd.afficherMainJoueur(this);//TODO A VIRER
 		if(this.choixDefausser()) {
-			System.out.println(this.getNom()+" a decide de defausser"); //TODO A VIRER
+			System.out.println(this.getNom()+" a decide de defausser "+this.choixCarte(true).toString()); //TODO A VIRER
+			
+			
 			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
+			
+			
 			PartieDeJeu partie = PartieDeJeu.getInstance();
 			partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que ce soit au joueur suivant de jouer
 			System.out.println("augmentation de 1 du joueur suivant"); //TODO A VIRER

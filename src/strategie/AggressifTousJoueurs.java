@@ -64,7 +64,7 @@ public class AggressifTousJoueurs implements Strategy {
 				}
 				
 				//Si on arrive ici, c'est qu'aucune carte du jeu du robot n'est une attaque ou qu'aucune de ces cartes Attaque n'est jouable
-				if(robot.getJeuSurTable().isDemarrer() && robot.getJeuSurTable().getPileBataille() == null) {
+				if(robot.getJeuSurTable().isDemarrer() && robot.getJeuSurTable().getPileBataille().isEmpty()) {
 					//Si le robot a démarré et que la pile bataille est vide
 					//Le robot va tenter de chercher une Etape a jouer.
 					for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {

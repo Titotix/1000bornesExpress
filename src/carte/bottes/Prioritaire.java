@@ -12,8 +12,10 @@ public class Prioritaire extends Botte {
 	}
 	
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
-		if(notreJeu.getPileBataille().get(0) instanceof FeuRouge || notreJeu.getPileVitesse().get(0) instanceof LimiteVitesse) {
-			return true;
+		if(notreJeu.getPileBataille().isEmpty() == false) {
+			if(notreJeu.getPileBataille().get(0) instanceof FeuRouge || notreJeu.getPileVitesse().get(0) instanceof LimiteVitesse) {
+				return true;
+			}
 		}
 		
 		return false;

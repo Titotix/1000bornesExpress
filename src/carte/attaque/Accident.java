@@ -1,5 +1,8 @@
 package carte.attaque;
 
+import carte.bottes.AsDuVolant;
+import carte.bottes.Botte;
+
 
 public class Accident extends Attaque {
 
@@ -11,4 +14,9 @@ public class Accident extends Attaque {
 		return "Accident";
 	}
 
+	public boolean isCompatible(Botte botte) {
+		if(botte instanceof AsDuVolant) {
+			return true;
+		} else { return false; }
+	}
 }

@@ -13,7 +13,7 @@ import joueurs.Joueur;
 import joueurs.Robot;
 
 
-
+import carte.bottes.*;
 import carte.attaque.Attaque;
 import carte.etape.Etape;
 import carte.parade.FeuVert;
@@ -28,7 +28,7 @@ public class Vitesse implements Strategy {
 			//il va chercher une carte qui n'est pas de type Etape à defausser.
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
-				if( !(carte instanceof Etape)) {
+				if(  (!(carte instanceof Etape))  &&  (!(carte instanceof Botte))   ) {
 					//si une des cartes de la main n'est pas une etape, le robot prefere s'en defausser.
 					return carte;
 				}
@@ -37,14 +37,16 @@ public class Vitesse implements Strategy {
 			return robot.getJeuEnMain().getMain().getFirst(); //amelioration : retourner la moins bonne etape.
 			
 		} else { //le robot peut alors jouer une carte
-			
+			System.out.println("le robot va jouer une carte !"); //TODO A VIRER
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					//On teste toutes les cartes du jeu du robot
 					Carte carte = it.next();
 					if(carte instanceof Etape) {
+						System.out.println("carte etape :"+carte.toString());
 						//Si la carte est de type etape
 						
 						if(carte.isJouable(robot, null)) {
+							System.out.println("elle est jouable, on la joue !"); //TODO A VIRER
 							return carte;
 						}
 					} else if(carte instanceof FeuVert) {
@@ -58,7 +60,7 @@ public class Vitesse implements Strategy {
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					Carte carte = it.next();
 					if( (carte instanceof Attaque)) {
-						//Si la carte est de tyoe Attaque
+						//Si la carte est de type Attaque
 						if(this.choixCible(robot,(Attaque) carte) != null) {
 							//Si la valeur retourne par choixCible n'est pas null alors on peut placer l'attaque sur un joueur.
 							return carte;
@@ -70,7 +72,8 @@ public class Vitesse implements Strategy {
 					//Si aucune des boucles précédente n'a mené à la fin de la methode
 					//on cherche toute carte jouable et le robot la jouera.
 					Carte carte = it.next();
-					if(carte.isJouable(robot, null)) { //null comme valeur a adversaire car les carte Attaque sont obligatoirement
+					if(carte.isJouable(robot, null)) { 
+						//null comme valeur a adversaire car les carte Attaque sont obligatoirement
 						// non jouables à cet instant.
 						return carte;
 					}

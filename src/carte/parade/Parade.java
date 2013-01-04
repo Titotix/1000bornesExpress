@@ -24,9 +24,7 @@ public abstract class Parade extends Carte {
 		if(joueur.getJeuSurTable().getPileVitesse().isEmpty() && joueur.getJeuSurTable().getPileBataille().isEmpty()) {
 			return false;
 		}
-		if (!joueur.getJeuSurTable().isDemarrer() && this instanceof FeuVert) {			
-			return true;
-		}
+	
 		if(joueur.getJeuSurTable().getPileVitesse().isEmpty() == false) {
 			
 			if(this.isCompatible( joueur.getJeuSurTable().getPileVitesse().get(0) ) ) {

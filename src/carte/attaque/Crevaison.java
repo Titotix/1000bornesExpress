@@ -1,5 +1,9 @@
 package carte.attaque;
 
+import carte.bottes.AsDuVolant;
+import carte.bottes.Botte;
+import carte.bottes.Increvable;
+
 public class Crevaison extends Attaque {
 
 	public Crevaison() {
@@ -11,6 +15,11 @@ public class Crevaison extends Attaque {
 		return "Crevaison";
 	}
 
+	public boolean isCompatible(Botte botte) {
+		if(botte instanceof Increvable) {
+			return true;
+		} else { return false; }
+	}
 	
 
 }

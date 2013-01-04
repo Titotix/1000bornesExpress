@@ -38,7 +38,7 @@ public abstract class Joueur {
 	
 	public boolean isGagnant() {
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-		if(this.getJeuSurTable().getNbKmParcouru() >= partie.getNbKmMax() ) {
+		if(this.getJeuSurTable().getNbKmParcouruTotal() >= partie.getNbKmMax() ) {
 			return true;
 		} 
 		return false;

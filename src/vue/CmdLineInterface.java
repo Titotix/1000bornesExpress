@@ -31,6 +31,7 @@ public class CmdLineInterface extends Thread implements Observer {
 	public void afficherJoueur(Joueur joueur) {
 		this.afficherMainJoueur(joueur);
 		this.afficherJeuSurTableJoueur(joueur);
+		System.out.println("Bornes parcouru : "+ joueur.getJeuSurTable().getNbKmParcouruTotal() );
 	
 	}
 	
@@ -66,7 +67,7 @@ public class CmdLineInterface extends Thread implements Observer {
 		Menu menu = Menu.getInstance();
 		for(int i=0; i < menu.getNbHumain(); i++) {			
 			System.out.println(menu.getHumain().get(i).getJeuEnMain().toString());
-			}
+		}
 	}
 
 	public void afficherJeuDesRobots () {

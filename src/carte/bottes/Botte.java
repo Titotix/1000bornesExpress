@@ -21,7 +21,7 @@ public abstract class Botte extends Carte  {
 		joueur.getJeuSurTable().ajouterCarteBotte(this);
 		//ajouter la carte au jeu sur table du joueur
 		
-		joueur.getJeuSurTable().setNbKmParcouru(joueur.getJeuSurTable().getNbKmParcouru() + 100);
+		joueur.getJeuSurTable().addNbKmParcouruBotte(100);
 		//jouer une botte augmente de 100 le nb de Km parcouru
 		
 		/*
@@ -73,7 +73,7 @@ public abstract class Botte extends Carte  {
 			}
 		}
 		
-		joueur.getJeuSurTable().setNbKmParcouru(joueur.getJeuSurTable().getNbKmParcouru() + 300);
+		joueur.getJeuSurTable().addNbKmParcouruBotte( 300);
 		//un coup fourree augmente de 300 le nb de Km parcouru
 		
 		joueur.getJeuEnMain().retirerCarte(this);
