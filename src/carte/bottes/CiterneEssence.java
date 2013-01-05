@@ -11,8 +11,10 @@ public class CiterneEssence extends Botte{
 	}
 
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
-		if(notreJeu.getPileBataille().get(0) instanceof PanneEssence) {
-			return true;
+		if(notreJeu.getPileBataille().isEmpty() == false) {
+			if(notreJeu.getPileBataille().get(0) instanceof PanneEssence) {
+				return true;
+			}
 		}
 		return false;
 	}

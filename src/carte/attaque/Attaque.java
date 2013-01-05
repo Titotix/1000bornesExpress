@@ -41,10 +41,12 @@ public abstract class Attaque extends Carte {
 							return false;
 						}
 					}
+				} else {
+					return true;
 				}
-			} 
+			}
 		} else if(this instanceof LimiteVitesse) {
-			//Si c'est une limite de vitesse il suffit que la pile de bataille soit vide pour que la limite de vitesse soit jouable.
+			//Si c'est une limite de vitesse il suffit que la pile de vitesse soit vide pour que la limite de vitesse soit jouable.
 			if(adversaire.getJeuSurTable().getPileVitesse().isEmpty()) {		
 				return true;
 			}
@@ -59,7 +61,9 @@ public abstract class Attaque extends Carte {
 	 * @param adversaire visé par l'attaque.
 	 * 
 	 */
-	public void jouer(Joueur joueur, Joueur adversaire){
+
+	public abstract void jouer(Joueur joueur, Joueur adversaire);
+	/*	public void jouer(Joueur joueur, Joueur adversaire){
 		if(this instanceof LimiteVitesse) {
 			System.out.println("C'est une limite vitesse :"+this.toString());
 			adversaire.getJeuSurTable().ajouterCarteVitesse((LimiteVitesse) this);
@@ -71,6 +75,6 @@ public abstract class Attaque extends Carte {
 		joueur.getJeuEnMain().retirerCarte(this);
 		
 	}
-	
+*/	
 	
 }

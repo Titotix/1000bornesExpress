@@ -134,5 +134,8 @@ public class AggressifTousJoueurs implements Strategy {
 		return null;
 	}
 	
+	public String toString() {
+		return "AggressifTousJoueur";
+	}
 
 }

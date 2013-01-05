@@ -73,6 +73,10 @@ public class Robot extends Joueur {
 
 	}
 	
+	public Strategy getStrat() {
+		return strat;
+	}
+
 	/**
 	 * Renvoie faux si l'action choisie est de jouer une carte.
 	 * Renvoie vrai si l'action choisie est de défausser une carte.

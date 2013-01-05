@@ -17,6 +17,7 @@ import joueurs.Robot;
 import carte.attaque.Attaque;
 import carte.etape.Etape;
 import carte.parade.FeuVert;
+import carte.bottes.*;
 
 public class AggressifMeilleurJoueur implements Strategy {
 
@@ -27,7 +28,7 @@ public class AggressifMeilleurJoueur implements Strategy {
 			//il va cherche rune carte qui n'est pas de type Attraque à defausser.
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
-				if( !(carte instanceof Attaque)) {
+				if( !(carte instanceof Attaque) && !(carte instanceof Botte)) {
 					//si une des cartes de la main n'est pas une attaque, elle prefere s'en defausser.
 					return carte;
 				}
@@ -40,7 +41,9 @@ public class AggressifMeilleurJoueur implements Strategy {
 			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				//On teste toutes les cartes du jeu du robot
+				
 				Carte carte = it.next();
+
 				if( (carte instanceof Attaque)) {
 					//Si la carte est de type Attaque
 					
@@ -196,4 +199,8 @@ public class AggressifMeilleurJoueur implements Strategy {
 		return null;
 	}
 
+	public String toString() {
+		return "AggressifMeilleurJoueur";
+	}
+	
 }

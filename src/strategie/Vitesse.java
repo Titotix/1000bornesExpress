@@ -37,16 +37,16 @@ public class Vitesse implements Strategy {
 			return robot.getJeuEnMain().getMain().getFirst(); //amelioration : retourner la moins bonne etape.
 			
 		} else { //le robot peut alors jouer une carte
-			System.out.println("le robot va jouer une carte !"); //TODO A VIRER
+
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					//On teste toutes les cartes du jeu du robot
 					Carte carte = it.next();
 					if(carte instanceof Etape) {
-						System.out.println("carte etape :"+carte.toString());
+
 						//Si la carte est de type etape
 						
 						if(carte.isJouable(robot, null)) {
-							System.out.println("elle est jouable, on la joue !"); //TODO A VIRER
+
 							return carte;
 						}
 					} else if(carte instanceof FeuVert) {
@@ -124,4 +124,7 @@ public class Vitesse implements Strategy {
 		return null;
 	}
 	
+	public String toString() {
+		return "Vitesse";
+	}
 }

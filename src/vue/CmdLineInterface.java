@@ -7,6 +7,7 @@ import tasDeCartes.Talon;
 import jeu.Menu;
 
 import joueurs.Joueur;
+import joueurs.Robot;
 
 public class CmdLineInterface extends Thread implements Observer {
 
@@ -32,6 +33,7 @@ public class CmdLineInterface extends Thread implements Observer {
 		this.afficherMainJoueur(joueur);
 		this.afficherJeuSurTableJoueur(joueur);
 		System.out.println("Bornes parcouru : "+ joueur.getJeuSurTable().getNbKmParcouruTotal() );
+		System.out.println("strat :"+((Robot) joueur).getStrat().toString());
 	
 	}
 	

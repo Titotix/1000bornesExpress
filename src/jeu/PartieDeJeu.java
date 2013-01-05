@@ -52,6 +52,10 @@ public class PartieDeJeu {
 			joueurActuel = joueur.get(this.numeroJoueurActuel);
 			joueurActuel.jouer();
 			
+			if(joueurActuel.isGagnant()) {
+				this.termine = true;
+			}
+			
 		}
 		this.victoire(joueurActuel);
 	}

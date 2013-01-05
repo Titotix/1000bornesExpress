@@ -11,8 +11,10 @@ public class AsDuVolant extends Botte {
 	}
 	
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
-		if(notreJeu.getPileBataille().get(0) instanceof Accident) {
-			return true;
+		if(notreJeu.getPileBataille().isEmpty() == false) {	
+			if(notreJeu.getPileBataille().get(0) instanceof Accident) {
+				return true;
+			}
 		}
 		return false;
 	}

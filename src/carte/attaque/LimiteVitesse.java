@@ -1,5 +1,6 @@
 package carte.attaque;
 
+import joueurs.Joueur;
 import carte.bottes.Botte;
 import carte.bottes.Prioritaire;
 
@@ -14,7 +15,7 @@ public class LimiteVitesse extends Attaque {
 	}
 	
 	public String toString() {
-		return "Accident";
+		return "LimiteVitesse";
 	}
 
 	
@@ -22,6 +23,14 @@ public class LimiteVitesse extends Attaque {
 		if(botte instanceof Prioritaire) {
 			return true;
 		} else { return false; }
+	}
+	
+	@Override
+	public void jouer(Joueur joueur, Joueur adversaire) {
+		
+		adversaire.getJeuSurTable().ajouterCarteVitesse(this);		
+		joueur.getJeuEnMain().retirerCarte(this);
+		
 	}
 	
 	public static int getBorneMaxJouable() {
