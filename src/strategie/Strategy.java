@@ -17,6 +17,7 @@ public interface Strategy {
 	public TasDeCarte choixPioche();
 	
 	/**
+	 * Choisit la carte à jouer du robot selon différentes stratégies de jeu.
 	 * 
 	 * @param robot qui est en train de jouer
 	 * @param boolean vrai si la carte à choisir est à defausser
