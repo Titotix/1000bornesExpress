@@ -39,6 +39,7 @@ public class Menu {
 	//constructeur
 	private Menu() {
 		
+		
 	}
 	public static Menu getInstance() {
 		if(menu == null) {
@@ -50,7 +51,7 @@ public class Menu {
 	
 	//Creer une nouvelle partie
 	public void nouvellePartie () {
-		this.nbRobot=3; //TODO A VIRER
+		
 		this.creationJoueurs();
 		Talon talon = Talon.getInstance();
 		this.creerCartes();
@@ -61,24 +62,20 @@ public class Menu {
 	
 	public void creationJoueurs() {
 		
-		
 		humain = new LinkedList<Humain>();
-		
 		for(int i = 0; i < this.nbHumain; i++) {
 
 			humain.add(new Humain(this.getNomHumain(i+1), i+1));
 		}
 
 		robot = new LinkedList<Robot>();
-
 		for(int j = 0; j < this.nbRobot; j++) {
 			
 			robot.add ( new Robot ( this.getNomRobot(j+1), j+1+this.getNbHumain(), this.getRandomStrategy() ) );
 		}
 	}
 	
-	
-	
+
 	public Strategy getRandomStrategy() {
 		Random r = new Random();
 		int i = r.nextInt(3);
@@ -228,7 +225,7 @@ public class Menu {
 	
 	//D�finir nombre d'humains
 	public void setNbHumain (int nbHumain){ 
-
+		
 		this.nbHumain = nbHumain;
 	}
 	

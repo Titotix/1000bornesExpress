@@ -76,7 +76,7 @@ public class FenetrePrincipale extends JFrame{
     this.setSize(1366, 768);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLocationRelativeTo(null);
-    
+    this.controleur = controleur;
     nbJoueurs=Menu.getInstance().getNbJoueurTotal();
     
    
