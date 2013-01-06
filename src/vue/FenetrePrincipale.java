@@ -21,7 +21,7 @@ public class FenetrePrincipale extends JFrame{
 	
 	
 	protected int nbJoueurs;
-	
+	protected String nom;
 	
 	//Variables pour le Joueur 1
 	JButton etapeJ1=new JButton("Etape");
@@ -69,8 +69,9 @@ public class FenetrePrincipale extends JFrame{
 	
 	Box b1 = Box.createHorizontalBox();
 	
+	Controleur controleur;
 	
-  public FenetrePrincipale(){
+  public FenetrePrincipale(Controleur controleur){
     this.setTitle("1000 Bornes EXPRESS");
     this.setSize(1366, 768);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +86,10 @@ public class FenetrePrincipale extends JFrame{
     
     JInternalFrame joueur1 = new JInternalFrame(); 
     joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-	joueur1.setTitle("Joueur 1");
+    
+    nom=controleur.getJoueurs().get(0).getNom();
+    
+	joueur1.setTitle(nom);
 	joueur1.setVisible(true);//On la rend visible
 	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
 	
@@ -95,6 +99,9 @@ public class FenetrePrincipale extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
 			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
+			if (controleur.isPosableSurEtape==TRUE){
+				
+			}
 			//TODO
 		}
 	});
@@ -110,6 +117,9 @@ public class FenetrePrincipale extends JFrame{
 			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
 			
 			//TODO
+			if (controleur.isPosableSurAttaque==TRUE){
+				
+			}
 		}
 	});
 	joueur1.add(attaqueJ1);
@@ -121,6 +131,9 @@ public class FenetrePrincipale extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
 			//TODO
+			if (controleur.isPosableLimiteVitesse==TRUE){
+				
+			}
 		}
 	});
 	joueur1.add(limiteJ1);
@@ -132,6 +145,9 @@ public class FenetrePrincipale extends JFrame{
 			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
 			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
 			//TODO
+			if (controleur.isPosableLimiteVitesse==TRUE){
+				
+			}
 		}
 	});
 	joueur1.add(botteJ1);
@@ -146,7 +162,8 @@ public class FenetrePrincipale extends JFrame{
 	/////////
 	JInternalFrame joueur2 = new JInternalFrame(); 
 	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-	joueur2.setTitle("Joueur 2");
+	nom=controleur.getJoueurs().get(1).getNom();
+	joueur2.setTitle(nom);
 	joueur2.setVisible(true);//On la rend visible
 	joueur2.setLayout(new GridLayout(3, 2));
 	
@@ -200,7 +217,8 @@ public class FenetrePrincipale extends JFrame{
         
         JInternalFrame joueur1 = new JInternalFrame(); 
         joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-    	joueur1.setTitle("Joueur 1");
+        nom=controleur.getJoueurs().get(0).getNom();
+    	joueur1.setTitle(nom);
     	joueur1.setVisible(true);//On la rend visible
     	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
     	
@@ -260,7 +278,8 @@ public class FenetrePrincipale extends JFrame{
     	/////////
     	JInternalFrame joueur2 = new JInternalFrame(); 
     	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-    	joueur2.setTitle("Joueur 2");
+    	nom=controleur.getJoueurs().get(1).getNom();
+    	joueur2.setTitle(nom);
     	joueur2.setVisible(true);//On la rend visible
     	joueur2.setLayout(new GridLayout(3, 2));
     	
@@ -309,7 +328,8 @@ public class FenetrePrincipale extends JFrame{
     /////////
 	JInternalFrame joueur3 = new JInternalFrame(); 
 	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-	joueur3.setTitle("Joueur 3");
+	nom=controleur.getJoueurs().get(2).getNom();
+	joueur3.setTitle(nom);
 	joueur3.setVisible(true);//On la rend visible
 	joueur3.setLayout(new GridLayout(3, 2));
 	
@@ -363,7 +383,8 @@ public class FenetrePrincipale extends JFrame{
        
         JInternalFrame joueur1 = new JInternalFrame(); 
         joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-    	joueur1.setTitle("Joueur 1");
+        nom=controleur.getJoueurs().get(0).getNom();
+    	joueur1.setTitle(nom);
     	joueur1.setVisible(true);//On la rend visible
     	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
     	
@@ -423,7 +444,8 @@ public class FenetrePrincipale extends JFrame{
     	/////////
     	JInternalFrame joueur2 = new JInternalFrame(); 
     	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-    	joueur2.setTitle("Joueur 2");
+    	nom=controleur.getJoueurs().get(1).getNom();
+    	joueur2.setTitle(nom);
     	joueur2.setVisible(true);//On la rend visible
     	joueur2.setLayout(new GridLayout(3, 2));
     	
@@ -472,7 +494,8 @@ public class FenetrePrincipale extends JFrame{
     /////////
 	JInternalFrame joueur3 = new JInternalFrame(); 
 	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-	joueur3.setTitle("Joueur 3");
+	nom=controleur.getJoueurs().get(2).getNom();
+	joueur3.setTitle(nom);
 	joueur3.setVisible(true);//On la rend visible
 	joueur3.setLayout(new GridLayout(3, 2));
 	
@@ -521,7 +544,8 @@ public class FenetrePrincipale extends JFrame{
 	///////////
 	JInternalFrame joueur4 = new JInternalFrame(); 
 	joueur4.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
-	joueur4.setTitle("Joueur 4");
+	nom=controleur.getJoueurs().get(3).getNom();
+	joueur4.setTitle(nom);
 	joueur4.setVisible(true);//On la rend visible
 	joueur4.setLayout(new GridLayout(3, 2));
 	
