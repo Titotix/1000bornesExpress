@@ -1,5 +1,7 @@
 package vue;
 
+
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -13,8 +15,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
+import jeu.Menu;
+
 public class FenetrePrincipale extends JFrame{
 	
+	
+	protected int nbJoueurs;
 	
 	
 	//Variables pour le Joueur 1
@@ -60,15 +66,23 @@ public class FenetrePrincipale extends JFrame{
 	JButton talonBouton=new JButton("Piocher");
 	JButton defausseBouton=new JButton("Piocher");
 	JLabel eventLabel = new JLabel("Ici les evenements");
-
+	
+	Box b1 = Box.createHorizontalBox();
+	
+	
   public FenetrePrincipale(){
     this.setTitle("1000 Bornes EXPRESS");
     this.setSize(1366, 768);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLocationRelativeTo(null);
+    
+    nbJoueurs=Menu.getInstance().getNbJoueurTotal();
+    
+   
+    if (nbJoueurs==2){
 
     //On crée un conteneur avec gestion horizontale pour les joueurs
-    Box b1 = Box.createHorizontalBox();
+    
     JInternalFrame joueur1 = new JInternalFrame(); 
     joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	joueur1.setTitle("Joueur 1");
@@ -84,6 +98,7 @@ public class FenetrePrincipale extends JFrame{
 			//TODO
 		}
 	});
+	
 	joueur1.add (etapeJ1);
 	
 	
@@ -176,7 +191,284 @@ public class FenetrePrincipale extends JFrame{
 	joueur2.add(bottePossJ2);
 	
 	b1.add(joueur2);
+    }
 	
+    else if (nbJoueurs==3){
+    	
+    	
+    	 //On crée un conteneur avec gestion horizontale pour les joueurs
+        
+        JInternalFrame joueur1 = new JInternalFrame(); 
+        joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur1.setTitle("Joueur 1");
+    	joueur1.setVisible(true);//On la rend visible
+    	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
+    	
+    		
+    	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+    	etapeJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
+    			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
+    			//TODO
+    		}
+    	});
+    	joueur1.add (etapeJ1);
+    	
+    	
+    	
+    	attaqueJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du premier joueur");
+    			//Quand on attaque un jour, délai de 5 sec , puis apparition des cartes du joueur attaqué pendant 5 sec (il peut sortir une botte), 
+    			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
+    			
+    			//TODO
+    		}
+    	});
+    	joueur1.add(attaqueJ1);
+    	
+    	
+    	
+    	
+    	limiteJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
+    			//TODO
+    		}
+    	});
+    	joueur1.add(limiteJ1);
+    	
+    	
+    	
+    	botteJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
+    			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
+    			//TODO
+    		}
+    	});
+    	joueur1.add(botteJ1);
+    	
+    	
+    	joueur1.add(kmJ1);
+    	joueur1.add(bottePossJ1);
+    	
+    	// On ajoute le joueur a la box horizontale
+    	b1.add(joueur1);
+    	
+    	/////////
+    	JInternalFrame joueur2 = new JInternalFrame(); 
+    	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur2.setTitle("Joueur 2");
+    	joueur2.setVisible(true);//On la rend visible
+    	joueur2.setLayout(new GridLayout(3, 2));
+    	
+    	
+    	etapeJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add (etapeJ2);
+    	
+    	
+    	attaqueJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(attaqueJ2);
+    	
+    	
+    	limiteJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(limiteJ2);
+    	
+    	
+    	botteJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(botteJ2);
+    	
+    	
+    	joueur2.add(kmJ2);
+    	joueur2.add(bottePossJ2);
+    	
+    	b1.add(joueur2);
+    
+    /////////
+	JInternalFrame joueur3 = new JInternalFrame(); 
+	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	joueur3.setTitle("Joueur 3");
+	joueur3.setVisible(true);//On la rend visible
+	joueur3.setLayout(new GridLayout(3, 2));
+	
+	
+	etapeJ3.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du troisième joueur");
+			//TODO
+		}
+	});
+	joueur3.add (etapeJ3);
+	
+	
+	attaqueJ3.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du troisième joueur");
+			//TODO
+		}
+	});
+	joueur3.add(attaqueJ3);
+	
+	
+	limiteJ3.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du troisième joueur");
+			//TODO
+		}
+	});
+	joueur3.add(limiteJ3);
+	
+	
+	botteJ3.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du troisième joueur");
+			//TODO
+		}
+	});
+	joueur3.add(botteJ3);
+	
+	
+	joueur3.add(kmJ3);
+	joueur3.add(bottePossJ3);
+	
+	b1.add(joueur3);
+	
+    }
+    
+    else if (nbJoueurs == 4){
+    	
+    	//On crée un conteneur avec gestion horizontale pour les joueurs
+       
+        JInternalFrame joueur1 = new JInternalFrame(); 
+        joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur1.setTitle("Joueur 1");
+    	joueur1.setVisible(true);//On la rend visible
+    	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
+    	
+    		
+    	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+    	etapeJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
+    			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
+    			//TODO
+    		}
+    	});
+    	joueur1.add (etapeJ1);
+    	
+    	
+    	
+    	attaqueJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du premier joueur");
+    			//Quand on attaque un jour, délai de 5 sec , puis apparition des cartes du joueur attaqué pendant 5 sec (il peut sortir une botte), 
+    			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
+    			
+    			//TODO
+    		}
+    	});
+    	joueur1.add(attaqueJ1);
+    	
+    	
+    	
+    	
+    	limiteJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
+    			//TODO
+    		}
+    	});
+    	joueur1.add(limiteJ1);
+    	
+    	
+    	
+    	botteJ1.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
+    			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
+    			//TODO
+    		}
+    	});
+    	joueur1.add(botteJ1);
+    	
+    	
+    	joueur1.add(kmJ1);
+    	joueur1.add(bottePossJ1);
+    	
+    	// On ajoute le joueur a la box horizontale
+    	b1.add(joueur1);
+    	
+    	/////////
+    	JInternalFrame joueur2 = new JInternalFrame(); 
+    	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur2.setTitle("Joueur 2");
+    	joueur2.setVisible(true);//On la rend visible
+    	joueur2.setLayout(new GridLayout(3, 2));
+    	
+    	
+    	etapeJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add (etapeJ2);
+    	
+    	
+    	attaqueJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(attaqueJ2);
+    	
+    	
+    	limiteJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(limiteJ2);
+    	
+    	
+    	botteJ2.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du deuxième joueur");
+    			//TODO
+    		}
+    	});
+    	joueur2.add(botteJ2);
+    	
+    	
+    	joueur2.add(kmJ2);
+    	joueur2.add(bottePossJ2);
+    	
+    	b1.add(joueur2);
+    
     /////////
 	JInternalFrame joueur3 = new JInternalFrame(); 
 	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
@@ -274,6 +566,8 @@ public class FenetrePrincipale extends JFrame{
 	joueur4.add(bottePossJ4);
 	
 	b1.add(joueur4);
+	
+    }
     
     //Idem pour les cartes en main du joueur qui joue
     
