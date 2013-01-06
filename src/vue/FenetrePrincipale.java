@@ -7,6 +7,9 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -15,9 +18,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-import jeu.Menu;
+import tasDeCartes.Carte;
 
-public class FenetrePrincipale extends JFrame{
+import jeu.Menu;
+import joueurs.Joueur;
+
+public class FenetrePrincipale extends JFrame implements Observer{
 	
 	
 	protected int nbJoueurs;
@@ -56,10 +62,15 @@ public class FenetrePrincipale extends JFrame{
 	JLabel bottePossJ4=new JLabel("Bottes :");
 	
 	//Variables cartes en main
+	JInternalFrame carte1 = new JInternalFrame(); 
 	JButton carte1Joueur=new JButton("Selectionner");
+	JInternalFrame carte2 = new JInternalFrame(); 
 	JButton carte2Joueur=new JButton("Selectionner");
+	JInternalFrame carte3 = new JInternalFrame(); 
 	JButton carte3Joueur=new JButton("Selectionner");
+	JInternalFrame carte4 = new JInternalFrame(); 
 	JButton carte4Joueur=new JButton("Selectionner");
+	JInternalFrame carte5 = new JInternalFrame(); 
 	JButton carte5Joueur=new JButton("Selectionner");
 	
 	//Variables talon/defausse/evenements
@@ -99,9 +110,9 @@ public class FenetrePrincipale extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
 			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
-			if (controleur.isPosableSurEtape==TRUE){
-				
-			}
+			//if (controleur.isPosableSurEtape()==true){
+			//	controleur.jouer(joueurActuel, joueurChoisi, carte);
+			//}
 			//TODO
 		}
 	});
@@ -117,9 +128,9 @@ public class FenetrePrincipale extends JFrame{
 			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
 			
 			//TODO
-			if (controleur.isPosableSurAttaque==TRUE){
+			//if (controleur.isPosableSurAttaque(joueurActuel, adversaire,  carte)==true){
 				
-			}
+			//}
 		}
 	});
 	joueur1.add(attaqueJ1);
@@ -131,9 +142,9 @@ public class FenetrePrincipale extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
 			//TODO
-			if (controleur.isPosableLimiteVitesse==TRUE){
+			//if (controleur.isPosableLimiteVitesse==TRUE){
 				
-			}
+			//}
 		}
 	});
 	joueur1.add(limiteJ1);
@@ -145,9 +156,9 @@ public class FenetrePrincipale extends JFrame{
 			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
 			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
 			//TODO
-			if (controleur.isPosableLimiteVitesse==TRUE){
+			//if (controleur.isPosableLimiteVitesse==TRUE){
 				
-			}
+			//}
 		}
 	});
 	joueur1.add(botteJ1);
@@ -597,7 +608,7 @@ public class FenetrePrincipale extends JFrame{
     
     Box b2 = Box.createHorizontalBox();
     
-    JInternalFrame carte1 = new JInternalFrame(); 
+  
 	carte1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	carte1.setTitle("Carte 1");
 	carte1.setVisible(true);//On la rend visible
@@ -612,7 +623,7 @@ public class FenetrePrincipale extends JFrame{
 	carte1.add(carte1Joueur);
 	b2.add(carte1);
 	
-	JInternalFrame carte2 = new JInternalFrame(); 
+	
 	carte2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	carte2.setTitle("Carte 2");
 	carte2.setVisible(true);//On la rend visible
@@ -627,7 +638,7 @@ public class FenetrePrincipale extends JFrame{
 	carte2.add(carte2Joueur);
 	b2.add(carte2);
 	
-	JInternalFrame carte3 = new JInternalFrame(); 
+	
 	carte3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	carte3.setTitle("Carte 3");
 	carte3.setVisible(true);//On la rend visible
@@ -642,7 +653,7 @@ public class FenetrePrincipale extends JFrame{
 	carte3.add(carte3Joueur);
 	b2.add(carte3);
 	
-	JInternalFrame carte4 = new JInternalFrame(); 
+	
 	carte4.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	carte4.setTitle("Carte 4");
 	carte4.setVisible(true);//On la rend visible
@@ -657,10 +668,10 @@ public class FenetrePrincipale extends JFrame{
 	carte4.add(carte4Joueur);
 	b2.add(carte4);
 	
-	JInternalFrame carte5 = new JInternalFrame(); 
+	
 	carte5.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	carte5.setTitle("Carte 5");
-	carte5.setVisible(true);//On la rend visible
+	carte5.setVisible(false);//On la rend visible
 	
 	
 	carte5Joueur.addActionListener(new ActionListener(){
@@ -724,5 +735,30 @@ public class FenetrePrincipale extends JFrame{
 
     this.getContentPane().add(b4);
     this.setVisible(true);
-  }	
+  }
+
+
+  
+	public void update(Observable arg0, LinkedList<Carte> arg1) {
+  		
+		this.carte1.setTitle(""+arg1.get(0).toString());
+
+		this.carte2.setTitle(""+arg1.get(1).toString());
+		this.carte3.setTitle(""+arg1.get(2).toString());
+  		this.carte4.setTitle(""+arg1.get(3).toString());
+  		if(arg1.size() == 5) {
+  			this.carte5.setVisible(true);
+  			this.carte5.setTitle(""+arg1.get(3).toString());
+  		}
+  		
+	
+	}
+
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}	
 }
