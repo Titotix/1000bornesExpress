@@ -49,10 +49,8 @@ public class Menu {
 	
 	
 	//Creer une nouvelle partie
-	public void nouvellePartie (){
-		
-		this.setNbRobot();
-		this.setNbHumain();
+	public void nouvellePartie () {
+		this.nbRobot=3; //TODO A VIRER
 		this.creationJoueurs();
 		Talon talon = Talon.getInstance();
 		this.creerCartes();
@@ -224,20 +222,14 @@ public class Menu {
 	}
 	
 	//D�finir nombre d'IA
-	public void setNbRobot (){ //TODO a virer
-		Scanner clavier = new Scanner(System.in);
-		System.out.println("Entrez le nombre d'adversaire géré par l'ordinateur que vous voulez créer.");
-		this.nbRobot = clavier.nextInt();
-		
-		
+	public void setNbRobot (int nbRobot){ 
+		this.nbRobot = nbRobot;
 	}
 	
 	//D�finir nombre d'humains
-	public void setNbHumain (){ //TODO A VIRER
+	public void setNbHumain (int nbHumain){ 
 
-		Scanner clavier2 = new Scanner(System.in);
-		System.out.println("Entrez le nombre d'adversaire humain avec qui vous allez jouer, en vous incluant vous même.");
-		this.nbHumain = clavier2.nextInt();
+		this.nbHumain = nbHumain;
 	}
 	
 	public int getNbJoueurTotal() {

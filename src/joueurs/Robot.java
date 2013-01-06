@@ -36,10 +36,9 @@ public class Robot extends Joueur {
 			
 			
 			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
-			
-			
+						
 			PartieDeJeu partie = PartieDeJeu.getInstance();
-			partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que ce soit au joueur suivant de jouer
+			partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
 			System.out.println("augmentation de 1 du joueur suivant"); //TODO A VIRER
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
@@ -52,12 +51,12 @@ public class Robot extends Joueur {
 					adversaire.coupFourre();
 					
 					PartieDeJeu partie = PartieDeJeu.getInstance();
-					partie.setNumeroJoueurActuel(adversaire.getNumPassage()-1); 
+					partie.setNumeroJoueurActuel(adversaire.getNumPassage() - 1); 
 					//Pour que ce soit au joueur qui a fait un coup fourre de jouer
 
 				} else {
 					PartieDeJeu partie = PartieDeJeu.getInstance();
-					partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que ce soit au joueur suivant de jouer
+					partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
 					System.out.println("augmentation de 1 du joueur suivant");
 				
 				}
@@ -65,7 +64,7 @@ public class Robot extends Joueur {
 				carteChoisie.jouer(this, null);
 				
 				PartieDeJeu partie = PartieDeJeu.getInstance();
-				partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que ce soit au joueur suivant de jouer
+				partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
 				System.out.println("augmentation de 1 du joueur suivant");
 			}
 			

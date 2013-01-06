@@ -76,8 +76,11 @@ public class AggressifMeilleurJoueur implements Strategy {
 						return carte;
 						
 						//On cehrche ici une autre cible au cas ou le meilleur joueur ne serait pas attaquable.
-					} else if ( ((Attaque) carte).isJouableContre( this.choixCibleSecondaire(robot,(Attaque)carte) )  ) {
-						carteAJouer =  carte;
+						
+					} else if ( this.choixCibleSecondaire(robot, (Attaque)carte) != null  ) {
+						if(((Attaque) carte).isJouableContre( this.choixCibleSecondaire(robot,(Attaque)carte) )) {
+							carteAJouer =  carte;
+						}
 					}
 				}
 			}
