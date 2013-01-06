@@ -69,13 +69,14 @@ public class FenetrePrincipale extends JFrame{
 	
 	Box b1 = Box.createHorizontalBox();
 	
+	Controleur controleur;
 	
-  public FenetrePrincipale(){
+  public FenetrePrincipale(Controleur controleur){
     this.setTitle("1000 Bornes EXPRESS");
     this.setSize(1366, 768);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLocationRelativeTo(null);
-    
+    this.controleur = controleur;
     nbJoueurs=Menu.getInstance().getNbJoueurTotal();
     
    

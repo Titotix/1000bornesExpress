@@ -3,6 +3,7 @@ import jeu.Menu;
 import jeu.PartieDeJeu;
 import tasDeCartes.Talon;
 import vue.CmdLineInterface;
+import vue.Controleur;
 import vue.FenetrePrincipale;
 import vue.MenuGraphique;
 
@@ -10,16 +11,19 @@ import vue.MenuGraphique;
 public class main {
 
 	public static void main(String[] args) {
-	
-	FenetrePrincipale fenetre = new FenetrePrincipale();
-	MenuGraphique menuGui = new MenuGraphique();
+		
 	Menu menu = Menu.getInstance();
-	CmdLineInterface cmd = new CmdLineInterface();
-	cmd.run();
-	Talon talon = Talon.getInstance();
-	cmd.afficherJeuDesHumains();
-	cmd.afficherJeuDesRobots();
+	MenuGraphique menuGui = new MenuGraphique();
+	menu.nouvellePartie();
 	PartieDeJeu partie = PartieDeJeu.getInstance();
+	Controleur controleur = new Controleur();
+	FenetrePrincipale fenetre = new FenetrePrincipale(controleur);
+	
+	
+	
+	
+	Talon talon = Talon.getInstance();
+	
 	partie.jouerPartie();
 	
 	}

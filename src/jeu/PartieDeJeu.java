@@ -26,8 +26,11 @@ public class PartieDeJeu {
 		joueur = new LinkedList<Joueur>();
 		this.numeroJoueurActuel = 0;
 		//On concatène ici les deux LinkedList (d'Humain et de Robot) dans la LinkedList de Joueur.
+
 		joueur.addAll(menu.getHumain());
+	
 		joueur.addAll(menu.getRobot());
+	
 		
 	}
 	
