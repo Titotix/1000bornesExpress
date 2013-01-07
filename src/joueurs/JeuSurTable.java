@@ -46,7 +46,7 @@ public class JeuSurTable extends Observable {
 	{
 		this.pileEtape.add(carte);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public void ajouterCarteBataille(Attaque carte)
@@ -54,7 +54,7 @@ public class JeuSurTable extends Observable {
 		if(this.pileBataille.isEmpty()) {			
 			this.pileBataille.add(carte);	
 			this.setChanged();
-			this.notifyObservers(this);
+			this.notifyObservers();
 		} 
 	}
 	
@@ -63,7 +63,7 @@ public class JeuSurTable extends Observable {
 		if(this.pileVitesse.isEmpty()) {
 			this.pileVitesse.add(carte);
 			this.setChanged();
-			this.notifyObservers(this);
+			this.notifyObservers();
 		}
 	}
 	
@@ -71,27 +71,27 @@ public class JeuSurTable extends Observable {
 	{
 		this.pileBotte.add(carte);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public void ajouterFeuVertInitial(FeuVert feuVert) {
 		this.pileFeuVertInitial.add(feuVert);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public void retirerCarteVitesse(LimiteVitesse carte)
 	{
 		this.pileVitesse.remove(carte);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public void retirerCarteBataille(Attaque carte)
 	{
 		this.pileBataille.remove(carte);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public int getNbKmParcouruTotal() {	
@@ -120,7 +120,7 @@ public class JeuSurTable extends Observable {
 	public void addNbKmParcouruBotte(int nbKm) {
 		this.nbKmParcouruBotte += nbKm;
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public ArrayList<Attaque> getPileBataille() {

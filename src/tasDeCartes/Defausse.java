@@ -26,7 +26,7 @@ public class Defausse extends TasDeCarte {
 	public Carte piocher(){
 		Carte carte = this.pileCarte.removeFirst();
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 		return carte;
 		
 		
@@ -42,7 +42,7 @@ public class Defausse extends TasDeCarte {
 		this.pileCarte.addFirst(carte1);
 		this.pileCarte.addFirst(carte2);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 		
 	}
 	
@@ -50,7 +50,7 @@ public class Defausse extends TasDeCarte {
 	public void ajouterCarte (Carte carte){
 		this.pileCarte.addFirst(carte);
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 	
 	public boolean isEmpty() {

@@ -46,9 +46,10 @@ public class Robot extends Joueur {
 				carteChoisie.jouer(this, adversaire);
 				
 				//On regarde si le joueur peut faire un coup fourre
-				if(adversaire.canCoupFourre()) {
+				Botte botte = adversaire.canCoupFourre();
+				if(botte != null) {
 					if(adversaire instanceof Robot) {	
-						adversaire.coupFourre();
+						adversaire.coupFourre(botte);
 					}
 					PartieDeJeu partie = PartieDeJeu.getInstance();
 					partie.setNumeroJoueurActuel(adversaire.getNumPassage() - 1); 
@@ -118,17 +119,10 @@ public class Robot extends Joueur {
 	}
 	
 	@Override
-	public void coupFourre() {
-		//On va tout d'abord rechercher la botte à jouer
-		for(Iterator<Carte> it = this.getJeuEnMain().getMain().iterator() ; it.hasNext() ; ) {
-			Carte carte = it.next();
-			if(carte instanceof Botte) {
-				if(((Botte) carte).isJouableCoupFourre(this.getJeuSurTable())) {
-					//Des qu'on trouve la bonne botte, on la joue en tant que coup Fourre.
-					((Botte)carte).coupFourre(this);
-				}
-			}
-		}
+	public void coupFourre(Botte botte) {
+		
+		botte.coupFourre(this);
+		
 		PartieDeJeu partie = PartieDeJeu.getInstance();
 		partie.setNumeroJoueurActuel(this.getNumPassage() - 1); //Pour que le robot rejoue
 

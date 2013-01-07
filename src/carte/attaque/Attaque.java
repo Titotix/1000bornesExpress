@@ -27,6 +27,7 @@ public abstract class Attaque extends Carte {
 	
 	
 	public boolean isJouableContre(Joueur adversaire) {
+		
 		if(this instanceof Crevaison || this instanceof FeuRouge || this instanceof Accident|| this instanceof PanneEssence ) {
 			//Si l'instance est de type Crevaison, FeuROuge, Accident ou PanneEssence
 			

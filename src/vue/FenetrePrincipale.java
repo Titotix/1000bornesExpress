@@ -1,7 +1,6 @@
 package vue;
 
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -20,16 +19,16 @@ import javax.swing.JWindow;
 
 import carte.attaque.Accident;
 import carte.attaque.Attaque;
-import carte.attaque.Crevaison;
-import carte.attaque.FeuRouge;
-import carte.attaque.LimiteVitesse;
-import carte.attaque.PanneEssence;
+
+import carte.attaque.*;
 import carte.bottes.Botte;
 import carte.etape.Etape;
 
 import tasDeCartes.Carte;
 
 import jeu.Menu;
+import joueurs.JeuEnMain;
+import joueurs.JeuSurTable;
 import joueurs.Joueur;
 
 public class FenetrePrincipale extends JFrame implements Observer{
@@ -45,8 +44,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ1=new JButton("Bottes");
 	JLabel kmJ1=new JLabel("Km :");
 	JLabel bottePossJ1=new JLabel("Bottes :");
-	JLabel isAttaqueJ1=new JLabel("Attaqué ?");
-	JLabel isLimiteJ1=new JLabel("Limité ?");
+	JLabel isAttaqueJ1=new JLabel("Attaquï¿½ ?");
+	JLabel isLimiteJ1=new JLabel("Limitï¿½ ?");
 	
 	//Variables Joueur 2
 	JButton etapeJ2=new JButton("Etape");
@@ -55,8 +54,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ2=new JButton("Bottes");
 	JLabel kmJ2=new JLabel("Km :");
 	JLabel bottePossJ2=new JLabel("Bottes :");
-	JLabel isAttaqueJ2=new JLabel("Attaqué ?");
-	JLabel isLimiteJ2=new JLabel("Limité ?");
+	JLabel isAttaqueJ2=new JLabel("Attaquï¿½ ?");
+	JLabel isLimiteJ2=new JLabel("Limitï¿½ ?");
 	
 	//Variables Joueur 3
 	JButton etapeJ3=new JButton("Etape");
@@ -65,8 +64,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ3=new JButton("Bottes");
 	JLabel kmJ3=new JLabel("Km :");
 	JLabel bottePossJ3=new JLabel("Bottes :");
-	JLabel isAttaqueJ3=new JLabel("Attaqué ?");
-	JLabel isLimiteJ3=new JLabel("Limité ?");
+	JLabel isAttaqueJ3=new JLabel("Attaquï¿½ ?");
+	JLabel isLimiteJ3=new JLabel("Limitï¿½ ?");
 	
 	//Variables Joueur 4
 	JButton etapeJ4=new JButton("Etape");
@@ -75,8 +74,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ4=new JButton("Bottes");
 	JLabel kmJ4=new JLabel("Km :");
 	JLabel bottePossJ4=new JLabel("Bottes :");
-	JLabel isAttaqueJ4=new JLabel("Attaqué ?");
-	JLabel isLimiteJ4=new JLabel("Limité ?");
+	JLabel isAttaqueJ4=new JLabel("Attaquï¿½ ?");
+	JLabel isLimiteJ4=new JLabel("Limitï¿½ ?");
 	
 	//Variables cartes en main
 	JInternalFrame carte1 = new JInternalFrame(); 
@@ -777,21 +776,22 @@ public class FenetrePrincipale extends JFrame implements Observer{
   	 
 
   	//Update lors de la pioche/Changement joueur
-	public void update(Observable arg0, LinkedList<Carte> arg1) {
+	public void update(JeuEnMain arg0) {
   		
 		this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
-		this.carte1.setTitle(""+arg1.get(0).toString());
+		this.carte1.setTitle(""+arg0.getMain().get(0).toString());
 
-		this.carte2.setTitle(""+arg1.get(1).toString());
-		this.carte3.setTitle(""+arg1.get(2).toString());
-  		this.carte4.setTitle(""+arg1.get(3).toString());
-  		if(arg1.size() == 5) {
+		this.carte2.setTitle(""+arg0.getMain().get(1).toString());
+		this.carte3.setTitle(""+arg0.getMain().get(2).toString());
+  		this.carte4.setTitle(""+arg0.getMain().get(3).toString());
+  		if(arg0.getMain().size() == 5) {
   			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
-  			this.carte5.setTitle(""+arg1.get(3).toString());
+  			this.carte5.setTitle(""+arg0.getMain().get(4).toString());
   		}
-  		
-	
+  			
 	}
+
+
 	
 	
 	//Update lors de la pose d'une carte (pour le joueur 1) (ou variante Si on clique sur CE bouton)
@@ -862,9 +862,16 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+
+	public void update(Observable o, Object arg0) {
+		System.out.println("UPDATE");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.carte1.setTitle("connard");
+		this.eventLabel.setText("QALUtih");
 	}	
 }

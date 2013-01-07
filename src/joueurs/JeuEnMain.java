@@ -18,14 +18,14 @@ public class JeuEnMain extends Observable{
 	public void ajouterCarte(Carte carte) {
 		this.main.add(carte);
 		this.setChanged();
-		this.notifyObservers(this);		
+		this.notifyObservers();		
 	}
 	
 	//Permet de retirer une carte de la main du joueur.
 	public void retirerCarte (Carte carte){
 		if(this.main.remove(carte)) {
 			this.setChanged();
-			this.notifyObservers(this);
+			this.notifyObservers();
 		} else {
 			//TODO la carte qui a voulu etre retire de la main n'était pas dans la main.
 		}

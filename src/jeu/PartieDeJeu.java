@@ -4,7 +4,7 @@ import java.util.*;
 
 import joueurs.Joueur;
 import vue.*;
-public class PartieDeJeu extends Observable {
+public class PartieDeJeu  extends Observable implements Runnable {
 
 	private LinkedList<Joueur> joueur;
 	
@@ -42,7 +42,7 @@ public class PartieDeJeu extends Observable {
 	}
 	
 	
-	public void jouerPartie() {
+	public void run() {
 		
 		CmdLineInterface cmd = new CmdLineInterface();
 		//Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.
@@ -105,5 +105,7 @@ public class PartieDeJeu extends Observable {
 		this.notifyObservers(this);
 		
 	}
+
+
 
 }

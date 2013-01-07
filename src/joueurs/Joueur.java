@@ -35,7 +35,7 @@ public abstract class Joueur extends Observable {
 	
 	public abstract void jouer();
 
-	public abstract void coupFourre() ;
+	public abstract void coupFourre(Botte botte) ;
 	
 	public boolean isGagnant() {
 		PartieDeJeu partie = PartieDeJeu.getInstance();
@@ -45,16 +45,16 @@ public abstract class Joueur extends Observable {
 		return false;
 	}
 	
-	public boolean canCoupFourre() {
+	public Botte canCoupFourre() {
 		for(Iterator<Carte> it = this.getJeuEnMain().getMain().iterator() ; it.hasNext() ; ) {
 			Carte carte = it.next();
 			if(carte instanceof Botte) {
 				if(((Botte) carte).isJouableCoupFourre(this.getJeuSurTable())) {
-					return true;
+					return (Botte) carte;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	
