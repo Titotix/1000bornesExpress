@@ -19,8 +19,7 @@ public class Humain extends Joueur {
 
 		PartieDeJeu partie = PartieDeJeu.getInstance();
 		partie.setNumeroJoueurActuel(this.getNumPassage() + 1);
-		this.setChanged();
-		this.notifyObservers(partie);
+
 	}
 
 	@Override

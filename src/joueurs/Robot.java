@@ -37,8 +37,7 @@ public class Robot extends Joueur {
 						
 			PartieDeJeu partie = PartieDeJeu.getInstance();
 			partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-			this.setChanged();
-			this.notifyObservers(partie);
+
 			
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
@@ -53,23 +52,20 @@ public class Robot extends Joueur {
 					}
 					PartieDeJeu partie = PartieDeJeu.getInstance();
 					partie.setNumeroJoueurActuel(adversaire.getNumPassage() - 1); 
-					this.setChanged();
-					this.notifyObservers(partie);
+
 					//Pour que ce soit au joueur qui a fait un coup fourre de jouer
 
 				} else {
 					PartieDeJeu partie = PartieDeJeu.getInstance();
 					partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-					this.setChanged();
-					this.notifyObservers(partie);
+
 				}
 			} else {
 				carteChoisie.jouer(this, null);
 				
 				PartieDeJeu partie = PartieDeJeu.getInstance();
 				partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-				this.setChanged();
-				this.notifyObservers(partie);
+
 			}
 			
 		}
@@ -135,9 +131,7 @@ public class Robot extends Joueur {
 		}
 		PartieDeJeu partie = PartieDeJeu.getInstance();
 		partie.setNumeroJoueurActuel(this.getNumPassage() - 1); //Pour que le robot rejoue
-		
-		this.setChanged();
-		this.notifyObservers(partie);
+
 	}
 
 	

@@ -4,7 +4,7 @@ import java.util.*;
 
 import joueurs.Joueur;
 import vue.*;
-public class PartieDeJeu {
+public class PartieDeJeu extends Observable {
 
 	private LinkedList<Joueur> joueur;
 	
@@ -56,7 +56,7 @@ public class PartieDeJeu {
 			joueurActuel.jouer();
 			
 			if(joueurActuel.isGagnant()) {
-				this.termine = true;
+				this.setTermine(true);
 			}
 			
 		}
@@ -78,22 +78,31 @@ public class PartieDeJeu {
 		if(this.numeroJoueurActuel == this.nbRobot + this.nbHumain) {
 			this.numeroJoueurActuel=0;
 		
+		} else if (this.numeroJoueurActuel == -1) {
+			this.numeroJoueurActuel = this.nbRobot + this.nbHumain -1;
 		}
 		
+		this.setChanged();
+		this.notifyObservers(this);		
 	}
 
 	public int getNbKmMax() {
 		return this.nbKmMax;
 	}
+	
 	public void setNbKmMax(int nbKmMax) {
 		//700 bornes a parcourir est la seule variante accepté.
 		if(nbKmMax == 700) {
 			this.nbKmMax = nbKmMax;
 		}
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 
 	public void setTermine(boolean termine) {
 		this.termine = termine;
+		this.setChanged();
+		this.notifyObservers(this);
 		
 	}
 

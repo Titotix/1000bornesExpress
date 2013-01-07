@@ -7,9 +7,15 @@ import jeu.Menu;
 public class MenuGraphique {
 
 	public MenuGraphique() {
-		this.setNbHumain(this.choixNbHumain());
-		this.setNbRobot(this.choixNbRobot());
-			
+		int nbHumain = this.choixNbHumain();
+		int nbRobot = this.choixNbRobot();
+		
+		this.setNbHumain(nbHumain);
+		this.setNbRobot(nbRobot);
+		for(int i=0; i < (nbHumain ) ; i++) {
+			this.setNomHumain(this.choixNomHumain(i+1) , i);
+	
+		}	
 	}
 	
 	public int choixNbHumain() {
@@ -31,6 +37,15 @@ public class MenuGraphique {
 		return 0;
 	}
 	
+	public String choixNomHumain(int numeroJoueur) {
+		try {
+			return JOptionPane.showInputDialog(null, "Entrez le nom du joueur numero "+numeroJoueur) ;
+		} catch(NumberFormatException e) {
+			this.choixNomHumain(numeroJoueur);
+		}
+		return "";
+	}
+	
 	
 	///////////// CONTROLEUR /////////////////
 	public void setNbHumain(int nbHumain) {
@@ -42,7 +57,9 @@ public class MenuGraphique {
 		Menu.getInstance().setNbRobot(nbRobot);
 	}
 	
-	
+	public void setNomHumain(String nom, int numeroJoueur) {
+		Menu.getInstance().getJoueurs().get(numeroJoueur).setNom(nom);
+	}
 	
 	
 }

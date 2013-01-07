@@ -191,17 +191,6 @@ public class Menu {
 		
 	}
 		
-
-	
-	
-	public String getNomHumain(int i) { //TODO a virer
-		String nomJoueur;
-		Scanner clavier = new Scanner(System.in);
-		System.out.println("Veuillez entrer le nom du joueur numero " + i);
-		nomJoueur = clavier.next();
-		return nomJoueur;
-		
-	}
 	/**
 	 * Génére des noms prédéfinis pour les robots
 	 * @param i

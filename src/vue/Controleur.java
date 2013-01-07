@@ -6,6 +6,7 @@ import jeu.Menu;
 
 import joueurs.Joueur;
 import tasDeCartes.Carte;
+import tasDeCartes.Defausse;
 import carte.attaque.*;
 import carte.bottes.*;
 import carte.etape.*;
@@ -33,7 +34,7 @@ public class Controleur {
 			}
 		}
 		
-		return false;//TODO et afficher cette carte ne peut pas etre posée ici
+		return false;//TODO et afficher cette carte ne peut pas etre posï¿½e ici
 	}
 	
 
@@ -90,6 +91,9 @@ public class Controleur {
 		return joueur.getNom();
 	}
 	
+	public String getCarteVisibleDefausse() {
+		return Defausse.getInstance().getPileCarte().getFirst().toString();
+	}
 
 	
 
