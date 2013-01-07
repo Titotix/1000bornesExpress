@@ -17,9 +17,10 @@ public class Humain extends Joueur {
 		
 		
 
-		//laisser ce code, sers à donner le joueur qui jouera après.
 		PartieDeJeu partie = PartieDeJeu.getInstance();
 		partie.setNumeroJoueurActuel(this.getNumPassage() + 1);
+		this.setChanged();
+		this.notifyObservers(partie);
 	}
 
 	@Override

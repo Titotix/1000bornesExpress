@@ -1,5 +1,6 @@
 package carte.bottes;
 import tasDeCartes.Carte;
+import tasDeCartes.Defausse;
 import joueurs.JeuSurTable;
 import joueurs.Joueur;
 import carte.attaque.Attaque;
@@ -29,13 +30,13 @@ public abstract class Botte extends Carte  {
 		 */
 		if(this instanceof Prioritaire) {
 			if(joueur.getJeuSurTable().getPileVitesse().isEmpty() == false) {
-				joueur.getJeuSurTable().getPileVitesse().remove(0);
+				Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileVitesse().remove(0));
 			}
 		}
 		else {
 			if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {
 				if(this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
-					joueur.getJeuSurTable().getPileBataille().remove(0);
+					Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileBataille().remove(0));
 				}
 			}
 		}
@@ -57,18 +58,18 @@ public abstract class Botte extends Carte  {
 		 */
 		if(this instanceof Prioritaire) {
 			if(joueur.getJeuSurTable().getPileVitesse().isEmpty() == false) {
-				joueur.getJeuSurTable().getPileVitesse().remove(0);
+				Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileVitesse().remove(0));
 			}
 			if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {
 				if(this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
-					joueur.getJeuSurTable().getPileBataille().remove(0);
+					Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileBataille().remove(0));
 				}
 			}
 		}
 		else {
 			if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {
 				if(this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
-					joueur.getJeuSurTable().getPileBataille().remove(0);
+					Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileBataille().remove(0));
 				}
 			}
 		}

@@ -32,14 +32,14 @@ public class Robot extends Joueur {
 		CmdLineInterface cmd = new CmdLineInterface();//TODO A VIRER
 		cmd.afficherMainJoueur(this);//TODO A VIRER
 		if(this.choixDefausser()) {
-			System.out.println(this.getNom()+" a decide de defausser "+this.choixCarte(true).toString()); //TODO A VIRER
-			
 			
 			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
 						
 			PartieDeJeu partie = PartieDeJeu.getInstance();
 			partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-			System.out.println("augmentation de 1 du joueur suivant"); //TODO A VIRER
+			this.setChanged();
+			this.notifyObservers(partie);
+			
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
 			if(carteChoisie instanceof Attaque) {
@@ -48,24 +48,28 @@ public class Robot extends Joueur {
 				
 				//On regarde si le joueur peut faire un coup fourre
 				if(adversaire.canCoupFourre()) {
-					adversaire.coupFourre();
-					
+					if(adversaire instanceof Robot) {	
+						adversaire.coupFourre();
+					}
 					PartieDeJeu partie = PartieDeJeu.getInstance();
 					partie.setNumeroJoueurActuel(adversaire.getNumPassage() - 1); 
+					this.setChanged();
+					this.notifyObservers(partie);
 					//Pour que ce soit au joueur qui a fait un coup fourre de jouer
 
 				} else {
 					PartieDeJeu partie = PartieDeJeu.getInstance();
 					partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-					System.out.println("augmentation de 1 du joueur suivant");
-				
+					this.setChanged();
+					this.notifyObservers(partie);
 				}
 			} else {
 				carteChoisie.jouer(this, null);
 				
 				PartieDeJeu partie = PartieDeJeu.getInstance();
 				partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-				System.out.println("augmentation de 1 du joueur suivant");
+				this.setChanged();
+				this.notifyObservers(partie);
 			}
 			
 		}
@@ -130,8 +134,10 @@ public class Robot extends Joueur {
 			}
 		}
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-		partie.setNumeroJoueurActuel(this.getNumPassage()); //Pour que le robot rejoue
+		partie.setNumeroJoueurActuel(this.getNumPassage() - 1); //Pour que le robot rejoue
 		
+		this.setChanged();
+		this.notifyObservers(partie);
 	}
 
 	

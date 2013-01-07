@@ -24,7 +24,11 @@ public class Defausse extends TasDeCarte {
 	
 	//Piocher une carte dans la d�fausse
 	public Carte piocher(){
-		return this.pileCarte.removeFirst();
+		Carte carte = this.pileCarte.removeFirst();
+		this.setChanged();
+		this.notifyObservers(this);
+		return carte;
+		
 		
 	}
 	/**
@@ -37,12 +41,16 @@ public class Defausse extends TasDeCarte {
 	public void ajouter2Carte(Carte carte1, Carte carte2) {
 		this.pileCarte.addFirst(carte1);
 		this.pileCarte.addFirst(carte2);
+		this.setChanged();
+		this.notifyObservers(this);
 		
 	}
 	
 	//Mettre la carte dans la defausse 
 	public void ajouterCarte (Carte carte){
-		this.pileCarte.addFirst(carte);//Pourquoi un addFirst ici ?  un add serait mieux ?
+		this.pileCarte.addFirst(carte);
+		this.setChanged();
+		this.notifyObservers(this);
 	}
 	
 	public boolean isEmpty() {

@@ -1,6 +1,7 @@
 package joueurs;
 
 import java.util.Iterator;
+import java.util.Observable;
 
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
@@ -14,7 +15,7 @@ import jeu.PartieDeJeu;
 import carte.bottes.Botte;
 
 
-public abstract class Joueur {
+public abstract class Joueur extends Observable {
 
 	protected static Joueur[] joueur;
 	protected JeuSurTable jeuSurTable;
