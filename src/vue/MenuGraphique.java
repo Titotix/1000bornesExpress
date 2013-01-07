@@ -40,6 +40,7 @@ public class MenuGraphique {
 	public String choixNomHumain(int numeroJoueur) {
 		try {
 			return JOptionPane.showInputDialog(null, "Entrez le nom du joueur numero "+numeroJoueur) ;
+			
 		} catch(NumberFormatException e) {
 			this.choixNomHumain(numeroJoueur);
 		}
@@ -58,7 +59,7 @@ public class MenuGraphique {
 	}
 	
 	public void setNomHumain(String nom, int numeroJoueur) {
-		Menu.getInstance().getJoueurs().get(numeroJoueur).setNom(nom);
+		Menu.getInstance().setNoms(nom);
 	}
 	
 	

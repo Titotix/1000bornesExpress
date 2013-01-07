@@ -33,11 +33,8 @@ public class CmdLineInterface extends Thread implements Observer {
 		this.afficherMainJoueur(joueur);
 		this.afficherJeuSurTableJoueur(joueur);
 		System.out.println("Bornes parcouru : "+ joueur.getJeuSurTable().getNbKmParcouruTotal() );
-		System.out.println("strat :"+((Robot) joueur).getStrat().toString());
 	
 	}
-	
-	
 	
 
 	public void contextuel() {

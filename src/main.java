@@ -11,13 +11,15 @@ public class main {
 
 	public static void main(String[] args) {
 	
+		
+		new MenuGraphique();
+		Menu.getInstance().nouvellePartie();
+		Menu.getInstance().initObserver();
+		
+		PartieDeJeu partie = PartieDeJeu.getInstance();
 	
-	new MenuGraphique();
-	Menu.getInstance().nouvellePartie();
-	
-	PartieDeJeu partie = PartieDeJeu.getInstance();
-	Thread t = new Thread(partie);
-	t.start();
+		Thread t = new Thread(partie);
+		t.start();
 	
 	}
 }

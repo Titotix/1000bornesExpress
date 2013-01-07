@@ -118,7 +118,7 @@ public class Robot extends Joueur {
 		return this.strat.choixCible(this, carte);
 	}
 	
-	@Override
+
 	public void coupFourre(Botte botte) {
 		
 		botte.coupFourre(this);

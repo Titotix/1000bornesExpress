@@ -10,6 +10,7 @@ import strategie.AggressifMeilleurJoueur;
 import strategie.AggressifTousJoueurs;
 import strategie.Strategy;
 import strategie.Vitesse;
+import tasDeCartes.Defausse;
 import tasDeCartes.Talon;
 import vue.FenetrePrincipale;
 
@@ -37,9 +38,10 @@ public class Menu {
 	private LinkedList<Humain> humain;
 	private LinkedList<Robot> robot;
 	private static Menu menu = null;
+	private LinkedList<String> nomsJoueurs;
 	//constructeur
 	private Menu() {
-		
+		this.nomsJoueurs = new LinkedList<String>();
 		
 	}
 	public static Menu getInstance() {
@@ -66,7 +68,7 @@ public class Menu {
 		humain = new LinkedList<Humain>();
 		for(int i = 0; i < this.nbHumain; i++) {
 
-			humain.add(new Humain(this.getNomHumain(i+1), i+1));
+			humain.add(new Humain(this.getNomHumain(), i+1));
 		}
 
 		robot = new LinkedList<Robot>();
@@ -79,14 +81,18 @@ public class Menu {
 	public void initObserver() {
 		FenetrePrincipale fenetre = FenetrePrincipale.getInstance();
 		for(Iterator<Joueur> it = this.getJoueurs().iterator() ; it.hasNext() ;) {
-			it.next().addObserver(fenetre);
+			Joueur joueur = it.next();
+			joueur.addObserver(fenetre);
+			joueur.getJeuEnMain().addObserver(fenetre);
+			joueur.getJeuSurTable().addObserver(fenetre);
+			
 		}
+		Defausse.getInstance().addObserver(fenetre);
+		PartieDeJeu.getInstance().addObserver(fenetre);
+		
 	}
 
-	private String getNomHumain(int i) {
-		// TODO Auto-generated method stub
-		return "c"; //TODO
-	}
+
 	public Strategy getRandomStrategy() {
 		Random r = new Random();
 		int i = r.nextInt(3);
@@ -255,5 +261,13 @@ public class Menu {
 		joueur.addAll(menu.getHumain());
 		joueur.addAll(menu.getRobot());
 		return joueur;
+	}
+	public void setNoms(String nom) {
+		this.nomsJoueurs.add(nom);
+		
+	}
+	
+	public String getNomHumain() {
+		return this.nomsJoueurs.removeFirst();
 	}
 }
