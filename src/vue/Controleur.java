@@ -33,7 +33,7 @@ public class Controleur {
 			}
 		}
 		
-		return false;
+		return false;//TODO et afficher cette carte ne peut pas etre posée ici
 	}
 	
 

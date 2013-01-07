@@ -18,6 +18,15 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
+import carte.attaque.Accident;
+import carte.attaque.Attaque;
+import carte.attaque.Crevaison;
+import carte.attaque.FeuRouge;
+import carte.attaque.LimiteVitesse;
+import carte.attaque.PanneEssence;
+import carte.bottes.Botte;
+import carte.etape.Etape;
+
 import tasDeCartes.Carte;
 
 import jeu.Menu;
@@ -36,6 +45,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ1=new JButton("Bottes");
 	JLabel kmJ1=new JLabel("Km :");
 	JLabel bottePossJ1=new JLabel("Bottes :");
+	JLabel isAttaqueJ1=new JLabel("Attaqu� ?");
+	JLabel isLimiteJ1=new JLabel("Limit� ?");
 	
 	//Variables Joueur 2
 	JButton etapeJ2=new JButton("Etape");
@@ -44,6 +55,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ2=new JButton("Bottes");
 	JLabel kmJ2=new JLabel("Km :");
 	JLabel bottePossJ2=new JLabel("Bottes :");
+	JLabel isAttaqueJ2=new JLabel("Attaqu� ?");
+	JLabel isLimiteJ2=new JLabel("Limit� ?");
 	
 	//Variables Joueur 3
 	JButton etapeJ3=new JButton("Etape");
@@ -52,6 +65,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ3=new JButton("Bottes");
 	JLabel kmJ3=new JLabel("Km :");
 	JLabel bottePossJ3=new JLabel("Bottes :");
+	JLabel isAttaqueJ3=new JLabel("Attaqu� ?");
+	JLabel isLimiteJ3=new JLabel("Limit� ?");
 	
 	//Variables Joueur 4
 	JButton etapeJ4=new JButton("Etape");
@@ -60,6 +75,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton botteJ4=new JButton("Bottes");
 	JLabel kmJ4=new JLabel("Km :");
 	JLabel bottePossJ4=new JLabel("Bottes :");
+	JLabel isAttaqueJ4=new JLabel("Attaqu� ?");
+	JLabel isLimiteJ4=new JLabel("Limit� ?");
 	
 	//Variables cartes en main
 	JInternalFrame carte1 = new JInternalFrame(); 
@@ -75,7 +92,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	//Variables talon/defausse/evenements
 	JButton talonBouton=new JButton("Piocher");
-	JButton defausseBouton=new JButton("Piocher");
+	JButton defausseBouton=new JButton("Piocher/Defausser");
 	JLabel eventLabel = new JLabel("Ici les evenements");
 	
 	Box b1 = Box.createHorizontalBox();
@@ -102,7 +119,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     
 	joueur1.setTitle(nom);
 	joueur1.setVisible(true);//On la rend visible
-	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
+	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
 	
 		
 	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
@@ -128,8 +145,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
 			
 			//TODO
-			//if (controleur.isPosableSurAttaque(joueurActuel, adversaire,  carte)==true){
-				
+			//if (carte!=null){
+			
+			//	if (controleur.isPosableSurAttaque(joueurActuel, adversaire,  carte)==true){
+				//Appelle methodes controleur-> aboutit a update2 de la vue 
 			//}
 		}
 	});
@@ -153,7 +172,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ1.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
+			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
 			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
 			//TODO
 			//if (controleur.isPosableLimiteVitesse==TRUE){
@@ -166,6 +185,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	joueur1.add(kmJ1);
 	joueur1.add(bottePossJ1);
+	joueur1.add(isAttaqueJ1);
+	joueur1.add(isLimiteJ1);
 	
 	// On ajoute le joueur a la box horizontale
 	b1.add(joueur1);
@@ -176,7 +197,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(1).getNom();
 	joueur2.setTitle(nom);
 	joueur2.setVisible(true);//On la rend visible
-	joueur2.setLayout(new GridLayout(3, 2));
+	joueur2.setLayout(new GridLayout(4, 2));
 	
 	
 	etapeJ2.addActionListener(new ActionListener(){
@@ -208,7 +229,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ2.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du deuxième joueur");
+			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
 			//TODO
 		}
 	});
@@ -217,6 +238,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	joueur2.add(kmJ2);
 	joueur2.add(bottePossJ2);
+	joueur2.add(isAttaqueJ2);
+	joueur2.add(isLimiteJ2);
 	
 	b1.add(joueur2);
     }
@@ -231,7 +254,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
     	joueur1.setVisible(true);//On la rend visible
-    	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
+    	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
     	
     		
     	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
@@ -272,7 +295,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
+    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
     			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
     			//TODO
     		}
@@ -282,6 +305,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	joueur1.add(kmJ1);
     	joueur1.add(bottePossJ1);
+    	joueur1.add(isAttaqueJ1);
+    	joueur1.add(isLimiteJ1);
     	
     	// On ajoute le joueur a la box horizontale
     	b1.add(joueur1);
@@ -292,7 +317,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
     	joueur2.setVisible(true);//On la rend visible
-    	joueur2.setLayout(new GridLayout(3, 2));
+    	joueur2.setLayout(new GridLayout(4, 2));
     	
     	
     	etapeJ2.addActionListener(new ActionListener(){
@@ -324,7 +349,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du deuxième joueur");
+    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
     			//TODO
     		}
     	});
@@ -333,6 +358,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	joueur2.add(kmJ2);
     	joueur2.add(bottePossJ2);
+    	joueur2.add(isAttaqueJ2);
+    	joueur2.add(isLimiteJ2);
     	
     	b1.add(joueur2);
     
@@ -342,7 +369,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
 	joueur3.setVisible(true);//On la rend visible
-	joueur3.setLayout(new GridLayout(3, 2));
+	joueur3.setLayout(new GridLayout(4, 2));
 	
 	
 	etapeJ3.addActionListener(new ActionListener(){
@@ -374,7 +401,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du troisième joueur");
+			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du troisième joueur");
 			//TODO
 		}
 	});
@@ -383,6 +410,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	joueur3.add(kmJ3);
 	joueur3.add(bottePossJ3);
+	joueur3.add(isAttaqueJ3);
+	joueur3.add(isLimiteJ3);
 	
 	b1.add(joueur3);
 	
@@ -397,7 +426,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
     	joueur1.setVisible(true);//On la rend visible
-    	joueur1.setLayout(new GridLayout(3, 2));//Quadrillage pour les tas du joueur
+    	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
     	
     		
     	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
@@ -438,7 +467,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du premier joueur");
+    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
     			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
     			//TODO
     		}
@@ -448,6 +477,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	joueur1.add(kmJ1);
     	joueur1.add(bottePossJ1);
+    	joueur1.add(isAttaqueJ1);
+    	joueur1.add(isLimiteJ1);
     	
     	// On ajoute le joueur a la box horizontale
     	b1.add(joueur1);
@@ -458,7 +489,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
     	joueur2.setVisible(true);//On la rend visible
-    	joueur2.setLayout(new GridLayout(3, 2));
+    	joueur2.setLayout(new GridLayout(4, 2));
     	
     	
     	etapeJ2.addActionListener(new ActionListener(){
@@ -490,7 +521,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du deuxième joueur");
+    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
     			//TODO
     		}
     	});
@@ -499,6 +530,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	joueur2.add(kmJ2);
     	joueur2.add(bottePossJ2);
+    	joueur2.add(isAttaqueJ2);
+    	joueur2.add(isLimiteJ2);
     	
     	b1.add(joueur2);
     
@@ -508,7 +541,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
 	joueur3.setVisible(true);//On la rend visible
-	joueur3.setLayout(new GridLayout(3, 2));
+	joueur3.setLayout(new GridLayout(4, 2));
 	
 	
 	etapeJ3.addActionListener(new ActionListener(){
@@ -540,7 +573,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du troisième joueur");
+			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du troisième joueur");
 			//TODO
 		}
 	});
@@ -549,6 +582,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	joueur3.add(kmJ3);
 	joueur3.add(bottePossJ3);
+	joueur3.add(isAttaqueJ3);
+	joueur3.add(isLimiteJ3);
 	
 	b1.add(joueur3);
 	
@@ -558,12 +593,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(3).getNom();
 	joueur4.setTitle(nom);
 	joueur4.setVisible(true);//On la rend visible
-	joueur4.setLayout(new GridLayout(3, 2));
+	joueur4.setLayout(new GridLayout(4, 2));
 	
 	
 	etapeJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du quatrième joueur");
+			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du quatrieme joueur");
 			//TODO
 		}
 	});
@@ -572,7 +607,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du quatrième joueur");
+			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du quatrieme joueur");
 			//TODO
 		}
 	});
@@ -581,7 +616,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du quatrième joueur");
+			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du quatrieme joueur");
 			//TODO
 		}
 	});
@@ -590,7 +625,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de bottes du quatrième joueur");
+			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du quatrieme joueur");
 			//TODO
 		}
 	});
@@ -599,6 +634,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	joueur4.add(kmJ4);
 	joueur4.add(bottePossJ4);
+	joueur4.add(isAttaqueJ4);
+	joueur4.add(isLimiteJ4);
 	
 	b1.add(joueur4);
 	
@@ -616,8 +653,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte1Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la première carte");
-			//TODO
+			eventLabel.setText("Vous avez choisi la premiere carte");
+			//TODO enregiste la carte dans carte inter 
 		}
 	});
 	carte1.add(carte1Joueur);
@@ -631,7 +668,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte2Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la deuxième carte");
+			eventLabel.setText("Vous avez choisi la deuxieme carte");
 			//TODO
 		}
 	});
@@ -646,7 +683,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte3Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la troisième carte");
+			eventLabel.setText("Vous avez choisi la troisieme carte");
 			//TODO
 		}
 	});
@@ -661,7 +698,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte4Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la quatrième carte");
+			eventLabel.setText("Vous avez choisi la quatrieme carte");
 			//TODO
 		}
 	});
@@ -676,7 +713,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte5Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la cinquième carte");
+			eventLabel.setText("Vous avez choisi la cinquieme carte");
 			//TODO
 		}
 	});
@@ -694,7 +731,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	talonBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez pioché dans le talon");
+			eventLabel.setText("Vous avez pioche dans le talon");
 			//TODO
 		}
 	});
@@ -710,7 +747,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	defausseBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez pioché dans la défausse");
+			eventLabel.setText("Vous avez pioche/pose dans la defausse");
 			//TODO
 		}
 	});
@@ -737,22 +774,91 @@ public class FenetrePrincipale extends JFrame implements Observer{
     this.setVisible(true);
   }
 
+  	 
 
-  
+  	//Update lors de la pioche/Changement joueur
 	public void update(Observable arg0, LinkedList<Carte> arg1) {
   		
+		this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
 		this.carte1.setTitle(""+arg1.get(0).toString());
 
 		this.carte2.setTitle(""+arg1.get(1).toString());
 		this.carte3.setTitle(""+arg1.get(2).toString());
   		this.carte4.setTitle(""+arg1.get(3).toString());
   		if(arg1.size() == 5) {
-  			this.carte5.setVisible(true);
+  			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
   			this.carte5.setTitle(""+arg1.get(3).toString());
   		}
   		
 	
 	}
+	
+	
+	//Update lors de la pose d'une carte (pour le joueur 1) (ou variante Si on clique sur CE bouton)
+	/*public void update(Observable arg0, Carte carte){
+		
+	/*if (on pose dans la defausse){
+	 * if (carte instanceof Attaque){
+			if (carte instanceof Accident){
+				defausse.setTitle("Defausse: Accident");
+			}
+			if (carte instanceof Crevaison){
+				defausse.setTitle("Defausse: Crevaison");
+			}
+			if (carte instanceof FeuRouge){
+				defausse.setTitle("Defausse: Feu rouge");
+			}
+			if (carte instanceof PanneEssence){
+				defausse.setTitle("Defausse: Panne d'essence");
+			}
+			if (carte instanceof LimiteVitesse){
+				defausse.setTitle("Defausse: Limite de vitesse");
+			}
+			
+		}
+		if (carte instanceof Etape){
+			defausse.setTitle("Defausse: Etape");//TODO
+		}
+		if (carte instanceof Botte){
+			defausse.setTitle("Defausse: Botte");
+		}
+	}
+	 *}
+	 *
+		
+	else if{// Si on pose sur un tas de joueur1
+		if (carte instanceof Attaque){
+			if (carte instanceof Accident){
+				isAttaqueJ1.setText("Oui accident");
+			}
+			if (carte instanceof Crevaison){
+				isAttaqueJ1.setText("Oui crevaison");
+			}
+			if (carte instanceof FeuRouge){
+				isAttaqueJ1.setText("Oui feu rouge");
+			}
+			if (carte instanceof PanneEssence){
+				isAttaqueJ1.setText("Oui panne d'essence");
+			}
+			if (carte instanceof LimiteVitesse){
+				isLimiteJ1.setText("Oui");
+			}
+			
+		}
+		if (carte instanceof Etape){
+			kmJ1.setText("");//Mettre la valeur de km parcourus
+		}
+		if (carte instanceof Botte){
+			bottePossJ1.setText("");//Mettre initiales ?
+		}
+		
+		carte=null;//remise a zero
+		//remettre carte5visible a false
+		//fin tour-> joueur suivant (l'autre update)
+		
+		
+	}
+	}*/
 
 
 
