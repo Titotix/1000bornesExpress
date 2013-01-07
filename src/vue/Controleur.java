@@ -1,8 +1,10 @@
 package vue;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import jeu.Menu;
+import jeu.PartieDeJeu;
 
 import joueurs.Joueur;
 import tasDeCartes.Carte;
@@ -104,6 +106,23 @@ public class Controleur {
 		return Defausse.getInstance().getPileCarte().getFirst().toString();
 	}
 
+	public int getNumeroJoueurActuel() {
+		return PartieDeJeu.getInstance().getNumeroJoueurActuel();
+	}
+	
+	public Joueur getJoueurActuel() {
+		
+		Joueur joueurActuel = null;
+		for(Iterator<Joueur> it = this.getJoueurs().iterator() ; it.hasNext() ;) {
+			Joueur i = it.next();
+			if(it.next().getNumPassage() -1 == this.getNumeroJoueurActuel()) {
+				joueurActuel = i;
+			}
+		}
+		
+		return joueurActuel;
+
+	}
 	
 
 }

@@ -85,7 +85,7 @@ public class Menu {
 
 	private String getNomHumain(int i) {
 		// TODO Auto-generated method stub
-		return "c";
+		return "c"; //TODO
 	}
 	public Strategy getRandomStrategy() {
 		Random r = new Random();
