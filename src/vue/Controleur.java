@@ -14,8 +14,17 @@ import carte.parade.*;
 
 public class Controleur {
 	
-	public Controleur(){
+	private static Controleur controleur = null;
+	
+	private Controleur(){
 		
+	}
+	
+	public static Controleur getInstance() {
+		if(controleur == null) {
+			controleur = new Controleur();
+		}
+		return controleur;
 	}
 	
 	/**

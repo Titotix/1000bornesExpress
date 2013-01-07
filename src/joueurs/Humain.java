@@ -1,5 +1,6 @@
 package joueurs;
 
+import carte.bottes.Botte;
 import jeu.PartieDeJeu;
 
 public class Humain extends Joueur {
@@ -23,7 +24,7 @@ public class Humain extends Joueur {
 	}
 
 	@Override
-	public void coupFourre() {
+	public void coupFourre(Botte botte) {
 		// TODO Auto-generated method stub
 		
 	}

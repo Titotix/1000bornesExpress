@@ -11,6 +11,7 @@ import strategie.AggressifTousJoueurs;
 import strategie.Strategy;
 import strategie.Vitesse;
 import tasDeCartes.Talon;
+import vue.FenetrePrincipale;
 
 import carte.attaque.Accident;
 import carte.attaque.Crevaison;
@@ -75,6 +76,12 @@ public class Menu {
 		}
 	}
 	
+	public void initObserver() {
+		FenetrePrincipale fenetre = FenetrePrincipale.getInstance();
+		for(Iterator<Joueur> it = this.getJoueurs().iterator() ; it.hasNext() ;) {
+			it.next().addObserver(fenetre);
+		}
+	}
 
 	private String getNomHumain(int i) {
 		// TODO Auto-generated method stub

@@ -36,6 +36,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	protected int nbJoueurs;
 	protected String nom;
+	private static FenetrePrincipale fenetre = null;
+	private Controleur controleur = Controleur.getInstance();
+	
 	
 	//Variables pour le Joueur 1
 	JButton etapeJ1=new JButton("Etape");
@@ -96,15 +99,22 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	Box b1 = Box.createHorizontalBox();
 	
-	Controleur controleur;
 	
-  public FenetrePrincipale(Controleur controleur){
-    this.setTitle("1000 Bornes EXPRESS");
-    this.setSize(1366, 768);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setLocationRelativeTo(null);
-    this.controleur = controleur;
-    nbJoueurs=Menu.getInstance().getNbJoueurTotal();
+	public static FenetrePrincipale getInstance() {
+		if(fenetre == null) {
+			fenetre = new FenetrePrincipale();
+		}
+		return fenetre;
+	}
+	
+  private FenetrePrincipale(){
+    
+	  this.setTitle("1000 Bornes EXPRESS");
+	  this.setSize(1366, 768);
+	  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  this.setLocationRelativeTo(null);
+
+	  nbJoueurs=Menu.getInstance().getNbJoueurTotal();
     
    
     if (nbJoueurs==2){
@@ -866,7 +876,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	public void update(Observable o, Object arg0) {
 		System.out.println("UPDATE");
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

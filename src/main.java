@@ -14,8 +14,6 @@ public class main {
 	
 	new MenuGraphique();
 	Menu.getInstance().nouvellePartie();
-	Controleur controleur = new Controleur();
-	new FenetrePrincipale(controleur);
 	
 	PartieDeJeu partie = PartieDeJeu.getInstance();
 	Thread t = new Thread(partie);
