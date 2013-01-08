@@ -13,13 +13,13 @@ public class Talon extends TasDeCarte {
 	private LinkedList<Carte> pileCarte; 
 	private static Talon talon = null;
 	
-	//constructeur
+	
 	private Talon () {
 		pileCarte = new LinkedList<Carte>();
 	}
 	
 
-	//singleton
+	
 	
 	public static Talon getInstance() {
 		if(talon == null) {
@@ -40,14 +40,18 @@ public class Talon extends TasDeCarte {
 		return menu.getNbJoueurTotal() * 4; 
 	}
 	
-	//Trier les cartes al�atoirement
+	/**
+	 * Trier les cartes aleatoirement
+	 */
 	public void aleatoirePileCarte(){
 		long seed =System.nanoTime();
 		Collections.shuffle(pileCarte, new Random(seed));
 		
 	}
 	
-	//Distribuer les cartes depuis le talon
+	/**
+	 * Distribuer les cartes depuis le talon
+	 */
 	public void distribuer() {
 		Menu menu = Menu.getInstance();
 		LinkedList<Humain> humain = menu.getHumain();
@@ -84,10 +88,13 @@ public class Talon extends TasDeCarte {
 	public Carte piocher(){
 		try {
 			return this.pileCarte.removeFirst();
-	
-		} catch (NoSuchElementException e) {
-			//Si il n'y a plus de carte dans le talon
+			
+			/**
+			 * Si il n'y a plus de carte dans le talon
 			// on prend toutes les cartes de la defausse et on les place dans le talon.
+			 */
+		} catch (NoSuchElementException e) {
+			
 			Defausse defausse = Defausse.getInstance();
 			this.pileCarte.addAll(defausse.getPileCarte());
 			defausse.getPileCarte().removeAll(defausse.getPileCarte());

@@ -37,73 +37,92 @@ public class Vitesse implements Strategy {
 	 */
 	public Carte choixCarte(Robot robot, boolean aDefausser) {
 		
-		if(aDefausser == true) {
-			//Ici le robot ne peut pas jouer, il doit defausser.
+		/**
+		 * Ici le robot ne peut pas jouer, il doit defausser.
 			//il va chercher une carte qui n'est pas de type Etape à defausser.
+		 */
+		if(aDefausser == true) {
+			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
+				/**
+				 * si une des cartes de la main n'est pas une etape, le robot prefere s'en defausser.
+				 */
 				if(  (!(carte instanceof Etape))  &&  (!(carte instanceof Botte))   ) {
-					//si une des cartes de la main n'est pas une etape, le robot prefere s'en defausser.
+					
 					return carte;
 				}
 			}
-			//si toutes les cartes sont de type Etape, on defausse arbitrairmeent la première carte.
+			/**
+			 * si toutes les cartes sont de type Etape, on defausse arbitrairmeent la première carte.
+			 */
 			return robot.getJeuEnMain().getMain().getFirst(); //amelioration : retourner la moins bonne etape.
 			
-		} else { //le robot peut alors jouer une carte
+			/**
+			 * le robot peut alors jouer une carte
+			 */
+		} else { 
 
 			
 			Etape carteAJouer=null; 
-			//Avec cette variable on va chercher a placer l'etape ac la plus forte valeur.
+			
 		
 			
-			/*1. On tente de placer une carte Etape */
+			/**
+			 * 1. On tente de placer une carte Etape 
+			 * */
 			
 			if(robot.getJeuSurTable().isDemarrer() && robot.getJeuSurTable().getPileBataille().isEmpty()) {
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-					//On teste toutes les cartes du jeu du robot
+					
 					Carte carte = it.next();				
 					if(carte instanceof Etape) {
-					//Si la carte est de type etape					
+									
 						if(carte.isJouable(robot, null)) {
-							//Si la carte etape est jouable on cherche alors la plus forte carte etape.
+							
 							if(carteAJouer == null) {
 								carteAJouer = (Etape) carte;
 								
 							} else if(((Etape) carte).getNbKm() > carteAJouer.getNbKm() )
-							//Si la carte Etape sur laquel on incremente a un nbKm plus grand que celle deja stocker
-							//Alors on remplace la carteAJouer précédemment stocké par la meilleur que nous venons de trouver.
+							
 								carteAJouer = (Etape) carte;
 						}
 						
 					} else if(carte instanceof FeuVert) {
-						//Si le robot n'a pas démarré et que la carte est un feu vert, il decide de la jouer.
+						
 						if(robot.getJeuSurTable().isDemarrer() == false) {
 							return carte;
 						}
 					} 
 				}
-				//A la fin de l'incrementation on retourne carteAJouer si il lui a été attribué une carte.
+				
 				if(carteAJouer != null) {
 					return carteAJouer;
 				}
 			}
 			
-			/* 2. On tente de jouer une carte Attaque */
+			/**
+			 *  2. On tente de jouer une carte Attaque 
+			 *  */
 			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
 				if( (carte instanceof Attaque)) {
-					//Si la carte est de type Attaque
+					
+					/**
+					 * Si la valeur retourne par choixCible n'est pas null alors on peut placer l'attaque sur un joueur.
+					 */
 					if(this.choixCible(robot,(Attaque) carte) != null) {
-						//Si la valeur retourne par choixCible n'est pas null alors on peut placer l'attaque sur un joueur.
+						
 						return carte;
 					}
 				}
 			}
 			
-			/* 3. On tente de jouer une carte parade */
-				//On tente les parades du tas bataille
+			/**
+			 *  3. On tente de jouer une carte parade 
+			 *  */
+				
 			if(robot.getJeuSurTable().getPileBataille().isEmpty() == false) { 
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					Carte carte = it.next();
@@ -115,7 +134,7 @@ public class Vitesse implements Strategy {
 					}
 				}
 			}
-				// On tente la fin de limite de vitesse.
+				
 			if(robot.getJeuSurTable().getPileVitesse().isEmpty() == false) { 
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					Carte carte = it.next();
@@ -129,16 +148,19 @@ public class Vitesse implements Strategy {
 			}
 			
 			
-			/* 4. On tente de jouer toutes les cartes */
-			// Il ne reste a tester que les bottes.
+			/**
+			 *  4. On tente de jouer toutes les cartes
+			 */
+			
 			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-				//Si aucune des boucles précédente n'a mené à la fin de la methode
-				//on cherche toute carte jouable et le robot la jouera.
+				
 				Carte carte = it.next();
+				/**
+				 * Si la valeur retourne par choixCible n'est pas null alors on peut placer l'attaque sur un joueur.
+				 */
 				if(carte.isJouable(robot, null)) { 
-					//null comme valeur a adversaire car les carte Attaque sont obligatoirement
-					// non jouables à cet instant.
+					
 					return carte;
 				}
 			}

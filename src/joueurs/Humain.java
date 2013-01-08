@@ -13,13 +13,13 @@ public class Humain extends Joueur {
 	}
 
 	@Override
-	public synchronized void jouer() { //TODO
-	//TODO
+	public synchronized void jouer() { 
+	
 		
 		try {
 			wait();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -35,7 +35,7 @@ public class Humain extends Joueur {
 		try {
 			this.wait();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

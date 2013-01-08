@@ -33,7 +33,10 @@ public class Robot extends Joueur {
 		cmd.afficherMainJoueur(this);//TODO A VIRER
 		if(this.choixDefausser()) {
 			
-			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
+			/**
+			 * Le robot choisit une carte à défausser.
+			 */
+			this.defausser(this.choixCarte(true)); 
 			
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
@@ -41,7 +44,9 @@ public class Robot extends Joueur {
 				Joueur adversaire = this.choixCible((Attaque) carteChoisie);
 				carteChoisie.jouer(this, adversaire);
 				
-				//On regarde si le joueur peut faire un coup fourre
+				/**
+				 * On regarde si le joueur peut faire un coup fourre
+				 */
 				Botte botte = adversaire.canCoupFourre();
 				if(botte != null) {
 					if(adversaire instanceof Robot) {	
@@ -75,28 +80,43 @@ public class Robot extends Joueur {
 	 * @return boolean
 	 */
 	public boolean choixDefausser(){ 
-
+		
+		/**
+		 * On teste toutes les cartes de la main du joueur
+		 */
 		for(Iterator<Carte> it = this.jeuEnMain.getMain().iterator(); it.hasNext() ; ) {
-			//On teste toutes les cartes de la main du joueur
+			
 			Carte carte = it.next();
 			Menu menu = Menu.getInstance();
 			if(carte instanceof Attaque) {
+				/**
+				 * Pour chaque carte Attaque, on tente de les jouer sur tous les joueurs autre que nous même.
+				 */
 				for(Iterator<Joueur> it1 = menu.getJoueurs().iterator() ; it1.hasNext() ; ) {
-					//Pour chaque carte Attaque, on tente de les jouer sur tous les joueurs autre que nous même.
+					
 					Joueur joueur = it1.next();
+					/**
+					 * Si une des carte Attaque du jeu du Robot est jouable alors il jouera et ne defaussera pas.
+					 */
 					if(carte.isJouable(this, joueur) && joueur != this) {
-						//Si une des carte Attaque du jeu du Robot est jouable alors il jouera et ne defaussera pas.
+						
 						return false;
 					}
 				}
 			} else {
+				/**
+				 * Si une des carte autre que Attaque du jeu du Robot est jouable alors il jouera et ne defaussera pas.
+				 */
 				if(carte.isJouable(this, null)) {
-					//Si une des carte autre que Attaque du jeu du Robot est jouable alors il jouera et ne defaussera pas.
+					
 					return false;
 				}
 			}
 		}
-		//Si ce n'est pas le cas, il defausse et cette methode renvoie alors false.
+		
+		/**
+		 * /Si ce n'est pas le cas, il defausse et cette methode renvoie alors false.
+		 */
 		return true;
 	}
 	

@@ -36,39 +36,58 @@ public class AggressifTousJoueurs implements Strategy {
 	public Carte choixCarte(Robot robot, boolean aDefausser) {
 	
 		if(aDefausser == true) {
-			//Ici le robot ne peut pas jouer, il doit defausser.
-			//il va cherche rune carte qui n'est pas de type Attraque à defausser.
+			/**
+			 * Ici le robot ne peut pas jouer, il doit defausser.
+			 * /il va cherche rune carte qui n'est pas de type Attraque à defausser.
+			 */
+			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
+				/**
+				 * si une des cartes de la main n'est pas une attaque, elle prefere s'en defausser.
+				 */
 				if( !(carte instanceof Attaque)) {
-					//si une des cartes de la main n'est pas une attaque, elle prefere s'en defausser.
+			
 					return carte;
 				}
 			}
-			//si toutes les cartes sont de type Attaque, on defausse arbitrairmeent la première carte.
+			/**
+			 * si toutes les cartes sont de type Attaque, on defausse arbitrairmeent la première carte.
+			 */
 			return robot.getJeuEnMain().getMain().getFirst();
 		} else {
 			
-			/* 1. On tente de jouer un carte Attaque. */
+			/**
+			 *  1. On tente de jouer un carte Attaque. 
+			 *  */
 			
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-					//On teste toutes les cartes du jeu du robot
+					
 					Carte carte = it.next();
 					if( (carte instanceof Attaque)) {
-						//Si la carte est de tyoe Attaque
+						
 						Menu menu = Menu.getInstance();
+						/**
+						 * Alors on teste si cette carte est jouable contre un des joueurs adverses.
+						 */
 						for(Iterator<Joueur> it2 = menu.getJoueurs().iterator() ; it2.hasNext(); ) {
-							//Alors on teste si cette carte est jouable contre un des joueurs adverses.
+							
 							Joueur adversaire = it2.next();
 							if(adversaire != robot) {
+								/**
+								 * Si la carte est jouable on retourne cette carte, c'est la carte choisie par la strategie.
+								 */
 								if(carte.isJouable(robot, adversaire)) {
-									//Si la carte est jouable on retourne cette carte, c'est la carte choisie par la strategie.
+									
 									return carte;
 								}
 							}					
 						}		
+						/**
+						 * Si la carte est un feu vert et que le robot n'a pas démarré, alors il joue le feu vert
+						 */
 					} else if(carte instanceof FeuVert) {
-						//Si la carte est un feu vert et que le robot n'a pas démarré, alors il joue le feu vert
+						
 						if(!robot.getJeuSurTable().isDemarrer()) {
 							return carte;
 						}
@@ -76,37 +95,39 @@ public class AggressifTousJoueurs implements Strategy {
 				}
 				
 
-				/* 2. On tente de jouer une carte Etape */
+				/** 2. On tente de jouer une carte Etape
+				 *  */
 				
 				Carte carteAJouer=null; 
-				//Avec cette variable on va chercher a placer l'etape ac la plus forte valeur.
+				
 				if(robot.getJeuSurTable().isDemarrer() && robot.getJeuSurTable().getPileBataille().isEmpty()) {
 					for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-						//On teste toutes les cartes du jeu du robot
+						
 						Carte carte = it.next();				
 						if(carte instanceof Etape) {
-						//Si la carte est de type etape					
+								
 							if(carte.isJouable(robot, null)) {
-								//Si la carte etape est jouable on cherche alors la plus forte carte etape.
+								
 								if(carteAJouer == null) {
 									carteAJouer = (Etape) carte;
 									
 								} else if(((Etape) carte).getNbKm() > ((Etape) carteAJouer).getNbKm() )
-								//Si la carte Etape sur laquel on incremente a un nbKm plus grand que celle deja stocker
-								//Alors on remplace la carteAJouer précédemment stocké par la meilleur que nous venons de trouver.
+								
 									carteAJouer = carte;
 							}
 						}
 					}
 					
-					//A la fin de l'incrementation on retourne carteAJouer si il lui a été attribué une carte.
+					
 					if(carteAJouer != null) {
 						return carteAJouer;
 					}
 				}
 				
-				/* 3. On tente de jouer une carte parade */
-					//On tente les parades du tas bataille
+				/**
+				 *  3. On tente de jouer une carte parade
+				 *   */
+					
 				if(robot.getJeuSurTable().getPileBataille().isEmpty() == false) { 
 					for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 						Carte carte = it.next();
@@ -118,7 +139,7 @@ public class AggressifTousJoueurs implements Strategy {
 						}
 					}
 				}
-					// On tente la fin de limite de vitesse.
+					
 				if(robot.getJeuSurTable().getPileVitesse().isEmpty() == false) { 
 					for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 						Carte carte = it.next();
@@ -131,11 +152,14 @@ public class AggressifTousJoueurs implements Strategy {
 					}
 				}
 				
-				/* 4. On tente de jouer n'importer quelle carte */
-				// Il ne reste cependant que les bottes qui sont jouable à ce niveau de l'algo
+				/**
+				 *  4. On tente de jouer n'importer quelle carte 
+				 *  */
+				/**
+				 * Il ne reste cependant que les bottes qui sont jouable à ce niveau de l'algo
+				 */
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-					//Si aucune des boucles précédente n'a mené à la fin de la methode
-					//on cherche toute carte jouable et le robot la jouera.
+					
 					Carte carte = it.next();
 					if(carte.isJouable(robot, null)) { //null comme valeur a adversaire car
 						//les carte Attaque sont obligatoirement non jouables à ce niveau la de l'algo
@@ -176,8 +200,11 @@ public class AggressifTousJoueurs implements Strategy {
 		
 			Joueur adversaire = it2.next();
 			if(adversaire != robot) {
+				/**
+				 * Si la carte est jouable on retourne l'adversaire sur lequel elle est jouable.
+				 */
 				if(carte.isJouable(robot, adversaire)) {
-					//Si la carte est jouable on retourne l'adversaire sur lequel elle est jouable.
+					
 					return adversaire;
 				}
 			}					

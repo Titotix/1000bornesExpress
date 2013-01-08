@@ -12,7 +12,7 @@ public class LimiteVitesse extends Attaque {
 
 	public LimiteVitesse() {
 	
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public String toString() {
@@ -31,7 +31,7 @@ public class LimiteVitesse extends Attaque {
 		
 		adversaire.getJeuSurTable().ajouterCarteVitesse(this);		
 		joueur.getJeuEnMain().retirerCarte(this);
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() );
 
 		
 	}

@@ -38,7 +38,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private Controleur controleur = Controleur.getInstance();
 	
 	
-	//Variables pour le Joueur 1
+	/**
+	 * Variables pour le premier joueur
+	 */
 	private JButton etapeJ1=new JButton("Etape");
 	private JButton attaqueJ1=new JButton("Pile Bataille");
 	private JButton limiteJ1=new JButton("Limite de vitesse");
@@ -48,7 +50,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel isAttaqueJ1=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ1=new JLabel("Pile Limite : vide");
 	
-	//Variables Joueur 2
+	
+	/**
+	 *  Variables pour le deuxieme joueur
+	 */
 	private JButton etapeJ2=new JButton("Etape");
 	private JButton attaqueJ2=new JButton("Pile Bataille");
 	private JButton limiteJ2=new JButton("Limite de vitesse");
@@ -58,7 +63,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel isAttaqueJ2=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ2=new JLabel("Pile Limite : vide");
 	
-	//Variables Joueur 3
+	/**
+	 *  Variables pour le troisieme joueur
+	 */
 	private JButton etapeJ3=new JButton("Etape");
 	private JButton attaqueJ3=new JButton("Pile Bataille");
 	private JButton limiteJ3=new JButton("Limite de vitesse");
@@ -68,7 +75,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel isAttaqueJ3=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ3=new JLabel("Pile Limite : vide");
 	
-	//Variables Joueur 4
+	/**
+	 * Variables pour le 4e joueur
+	 */
 	private JButton etapeJ4=new JButton("Etape");
 	private JButton attaqueJ4=new JButton("Pile Bataille");
 	private JButton limiteJ4=new JButton("Limite de vitesse");
@@ -78,7 +87,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel isAttaqueJ4=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ4=new JLabel("Pile Limite : vide");
 	
-	//Variables cartes en main
+	/**
+	 * variables pour les cartes en main
+	 */
 	private JInternalFrame carte1 = new JInternalFrame(); 
 	private JButton carte1Joueur=new JButton("Selectionner");
 	private JInternalFrame carte2 = new JInternalFrame(); 
@@ -90,7 +101,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JInternalFrame carte5 = new JInternalFrame(); 
 	private JButton carte5Joueur=new JButton("Selectionner");
 	
-	//Variables talon/defausse/evenements
+	/**
+	 * Variables talon/defausse/evenements
+	 */
 	private JButton talonBouton=new JButton("Piocher");
 	private JButton defausseBouton=new JButton("Piocher/Defausser");
 	private JLabel eventLabel = new JLabel("Ici les evenements");
@@ -98,7 +111,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JInternalFrame talon = new JInternalFrame(); 
 	private JInternalFrame defausse = new JInternalFrame(); 
     
-	
+	/**
+	 * On crée un conteneur avec gestion horizontale pour les joueurs
+	 */
 	Box b1 = Box.createHorizontalBox();
 	
 	
@@ -121,19 +136,29 @@ public class FenetrePrincipale extends JFrame implements Observer{
    
     if (nbJoueurs==2){
 
-    //On crée un conteneur avec gestion horizontale pour les joueurs
+    /**
+     * On crée une fenetre pour le premier joueur (idem pour chaque joueur)
+     */
     
     JInternalFrame joueur1 = new JInternalFrame(); 
-    joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    joueur1.setSize(30, 20);
     
     nom=controleur.getJoueurs().get(0).getNom();
     
 	joueur1.setTitle(nom);
-	joueur1.setVisible(true);//On la rend visible
-	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
+	/**
+	 * On la rend visible
+	 */
+	joueur1.setVisible(true);
+	/**
+	 * Quadrillage pour les tas du joueur
+	 */
+	joueur1.setLayout(new GridLayout(4, 2));
 	
 		
-	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+	/**
+	 * On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+	 */
 	etapeJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
 			//TODO
@@ -247,15 +272,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur1.add(isAttaqueJ1);
 	joueur1.add(isLimiteJ1);
 	
-	// On ajoute le joueur a la box horizontale
+	/**
+	 * On ajoute le joueur a la box horizontale
+	 */
 	b1.add(joueur1);
 	
 	/////////
 	JInternalFrame joueur2 = new JInternalFrame(); 
-	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	joueur2.setSize(30, 20);
 	nom=controleur.getJoueurs().get(1).getNom();
 	joueur2.setTitle(nom);
-	joueur2.setVisible(true);//On la rend visible
+	joueur2.setVisible(true);
 	joueur2.setLayout(new GridLayout(4, 2));
 	
 	
@@ -373,17 +400,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
     else if (nbJoueurs==3){
     	
     	
-    	 //On crée un conteneur avec gestion horizontale pour les joueurs
+    	 
         
         JInternalFrame joueur1 = new JInternalFrame(); 
-        joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+        joueur1.setSize(30, 20);
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
-    	joueur1.setVisible(true);//On la rend visible
-    	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
+    	joueur1.setVisible(true);
+    	joueur1.setLayout(new GridLayout(4, 2));
     	
     		
-    	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+    	
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			if (carteSelectionnee!=null){
@@ -495,15 +522,15 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur1.add(isAttaqueJ1);
     	joueur1.add(isLimiteJ1);
     	
-    	// On ajoute le joueur a la box horizontale
+    	
     	b1.add(joueur1);
     	
     	/////////
     	JInternalFrame joueur2 = new JInternalFrame(); 
-    	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur2.setSize(30, 20);
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
-    	joueur2.setVisible(true);//On la rend visible
+    	joueur2.setVisible(true);
     	joueur2.setLayout(new GridLayout(4, 2));
     	
     	
@@ -618,10 +645,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
     
     /////////
 	JInternalFrame joueur3 = new JInternalFrame(); 
-	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	joueur3.setSize(30, 20);
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
-	joueur3.setVisible(true);//On la rend visible
+	joueur3.setVisible(true);
 	joueur3.setLayout(new GridLayout(4, 2));
 	
 	
@@ -736,17 +763,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
     
     else if (nbJoueurs == 4){
     	
-    	//On crée un conteneur avec gestion horizontale pour les joueurs
+    	
        
         JInternalFrame joueur1 = new JInternalFrame(); 
-        joueur1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+        joueur1.setSize(30, 20);
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
-    	joueur1.setVisible(true);//On la rend visible
-    	joueur1.setLayout(new GridLayout(4, 2));//Quadrillage pour les tas du joueur
+    	joueur1.setVisible(true);
+    	joueur1.setLayout(new GridLayout(4, 2));
     	
     		
-    	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
+    	
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			if (carteSelectionnee!=null){
@@ -856,15 +883,15 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur1.add(isAttaqueJ1);
     	joueur1.add(isLimiteJ1);
     	
-    	// On ajoute le joueur a la box horizontale
+    	
     	b1.add(joueur1);
     	
     	/////////
     	JInternalFrame joueur2 = new JInternalFrame(); 
-    	joueur2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    	joueur2.setSize(30, 20);
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
-    	joueur2.setVisible(true);//On la rend visible
+    	joueur2.setVisible(true);
     	joueur2.setLayout(new GridLayout(4, 2));
     	
     	
@@ -977,10 +1004,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
     
     /////////
 	JInternalFrame joueur3 = new JInternalFrame(); 
-	joueur3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	joueur3.setSize(30, 20);
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
-	joueur3.setVisible(true);//On la rend visible
+	joueur3.setVisible(true);
 	joueur3.setLayout(new GridLayout(4, 2));
 	
 	
@@ -1092,10 +1119,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	///////////
 	JInternalFrame joueur4 = new JInternalFrame(); 
-	joueur4.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	joueur4.setSize(30, 20);
 	nom=controleur.getJoueurs().get(3).getNom();
 	joueur4.setTitle(nom);
-	joueur4.setVisible(true);//On la rend visible
+	joueur4.setVisible(true);
 	joueur4.setLayout(new GridLayout(4, 2));
 	
 	
@@ -1209,14 +1236,16 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
     }
     
-    //Idem pour les cartes en main du joueur qui joue
+    /**
+     * Idem pour les cartes en main du joueur qui joue
+     */
     
     Box b2 = Box.createHorizontalBox();
     
   
-	carte1.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	carte1.setSize(30, 20);
 	carte1.setTitle("Carte 1");
-	carte1.setVisible(true);//On la rend visible
+	carte1.setVisible(true);
 	
 	
 	carte1Joueur.addActionListener(new ActionListener(){
@@ -1241,9 +1270,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b2.add(carte1);
 	
 	
-	carte2.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	carte2.setSize(30, 20);
 	carte2.setTitle("Carte 2");
-	carte2.setVisible(true);//On la rend visible
+	carte2.setVisible(true);
 	
 	
 	carte2Joueur.addActionListener(new ActionListener(){
@@ -1267,9 +1296,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b2.add(carte2);
 	
 	
-	carte3.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	carte3.setSize(30, 20);
 	carte3.setTitle("Carte 3");
-	carte3.setVisible(true);//On la rend visible
+	carte3.setVisible(true);
 
 	
 	carte3Joueur.addActionListener(new ActionListener(){
@@ -1292,9 +1321,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b2.add(carte3);
 	
 	
-	carte4.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	carte4.setSize(30, 20);
 	carte4.setTitle("Carte 4");
-	carte4.setVisible(true);//On la rend visible
+	carte4.setVisible(true);
 	
 	
 	carte4Joueur.addActionListener(new ActionListener(){
@@ -1317,9 +1346,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b2.add(carte4);
 	
 	
-	carte5.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	carte5.setSize(30, 20);
 	carte5.setTitle("Carte 5");
-	carte5.setVisible(false);//On la rend visible
+	carte5.setVisible(false);
 	
 	
 	carte5Joueur.addActionListener(new ActionListener(){
@@ -1337,12 +1366,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte5.add(carte5Joueur);
 	b2.add(carte5);
 	
-    //Idem
+    /**
+     * Idem pour les talon, defausse, et boite d'evenements
+     */
     Box b3 = Box.createHorizontalBox();
     
-    talon.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+    talon.setSize(30, 20);
 	talon.setTitle("Talon");
-	talon.setVisible(true);//On la rend visible
+	talon.setVisible(true);
 	
 	
 	talonBouton.addActionListener(new ActionListener(){
@@ -1364,9 +1395,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b3.add(talon);
 	
 	///////
-	defausse.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	defausse.setSize(30, 20);
 	defausse.setTitle("Defausse");
-	defausse.setVisible(true);//On la rend visible
+	defausse.setVisible(true);
 	
 	
 	defausseBouton.addActionListener(new ActionListener(){
@@ -1401,14 +1432,16 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	//////
 	JInternalFrame evenement = new JInternalFrame(); 
 	eventLabel.setForeground(Color.BLUE);
-	evenement.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
+	evenement.setSize(30, 20);
 	evenement.setTitle("Evenements");
-	evenement.setVisible(true);//On la rend visible
+	evenement.setVisible(true);
 	evenement.add(eventLabel);
 	b3.add(evenement);
     
     
-    //On crée un conteneur avec gestion verticale
+    /**
+     * On crée un conteneur avec gestion verticale pour empiler les autres box
+     */
     Box b4 = Box.createVerticalBox();
     b4.add(b1);
     b4.add(b2);
@@ -1449,8 +1482,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			
 				}
 			}
-			
-			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
+			/**
+			 * On cache la 5e carte qui est vide a ce moment
+			 */
+			this.carte5.setVisible(false);
 			Joueur joueurActuel = controleur.getJoueurActuel();
 			this.carte1.setTitle(""+joueurActuel.getJeuEnMain().getMain().get(0).toString());
 
@@ -1475,14 +1510,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ1.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			//TODO ajouter bottes avec ton html damien
+	  		
 			}
   			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
 	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ2.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  		//TODO ajouter bottes avec ton html damien
+	  		
 	  			
   			}
   			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 3) {	
@@ -1490,14 +1525,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			//TODO ajouter bottes avec ton html damien
+	  			
   			}
 	  		if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
 	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ4.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  		//TODO ajouter bottes avec ton html damien
+	  		
 	  		}
   			
   		} else if(arg0 instanceof Humain && arg1 == "coupFourree") {

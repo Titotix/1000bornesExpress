@@ -10,7 +10,7 @@ public class PanneEssence extends Attaque {
 
 	public PanneEssence() {
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public String toString() {
@@ -28,7 +28,7 @@ public class PanneEssence extends Attaque {
 		
 		adversaire.getJeuSurTable().ajouterCarteBataille(this);		
 		joueur.getJeuEnMain().retirerCarte(this);
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 
 		
 	}

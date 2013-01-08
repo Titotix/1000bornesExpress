@@ -37,45 +37,68 @@ public class AggressifMeilleurJoueur implements Strategy {
 	 */
 	public Carte choixCarte(Robot robot, boolean aDefausser) {
 		
+		/**
+		 * Ici le robot ne peut pas jouer, il doit defausser.
+		 * il va cherche rune carte qui n'est pas de type Attraque à defausser.
+		 */
 		if(aDefausser == true) {
-			//Ici le robot ne peut pas jouer, il doit defausser.
-			//il va cherche rune carte qui n'est pas de type Attraque à defausser.
+			
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 				Carte carte = it.next();
+				/**
+				 * si une des cartes de la main n'est pas une attaque, elle prefere s'en defausser.
+				 */
 				if( !(carte instanceof Attaque) && !(carte instanceof Botte)) {
-					//si une des cartes de la main n'est pas une attaque, elle prefere s'en defausser.
+					
 					return carte;
 				}
 			}
-			//si toutes les cartes sont de type Attaque, on defausse arbitrairmeent la première carte.
+			/**
+			 * si toutes les cartes sont de type Attaque, on defausse arbitrairmeent la première carte.
+			 */
 			return robot.getJeuEnMain().getMain().getFirst();
 			
 		} else {
 			
 			
-			/* 1. On tente de jouer une carte Attaque contre le meilleur joueur */
+			/**
+			 *  1. On tente de jouer une carte Attaque contre le meilleur joueur 
+			 *  */
 			
 			Carte carteAJouer=null;
+			/**
+			 * //On teste toutes les cartes du jeu du robot
+			 */
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-				//On teste toutes les cartes du jeu du robot				
+								
 				Carte carte = it.next();
 				
-				/* 0. Avant toute carte, le robot va peferer jouer un feu vert si il n'a pas demarrer */
+				/**
+				 *  0. Avant toute carte, le robot va peferer jouer un feu vert si il n'a pas demarrer 
+				 *  */
 				
+				/**
+				 * Si la carte est un feu vert et que le robot n'a pas démarré, alors il joue le feu vert
+				 */
 				if(carte instanceof FeuVert) {
-					//Si la carte est un feu vert et que le robot n'a pas démarré, alors il joue le feu vert
+					
 					if(robot.getJeuSurTable().isDemarrer() == false) {
 						return carte;
 					}
 				}
 				
 				if( (carte instanceof Attaque)) {
-					//Si la carte est de type Attaque					
+								
+					/**
+					 * Si la carte Attaque est jouable contre le meilleur joueur, on retourne cette carte.
+					 */
 					if(((Attaque) carte).isJouableContre(this.meilleurJoueur(robot))) {
-						//Si la carte Attaque est jouable contre le meilleur joueur, on retourne cette carte.
+						
 						return carte;
 						
-						//On cehrche ici une autre cible au cas ou le meilleur joueur ne serait pas attaquable.
+						/**
+						 * On cehrche ici une autre cible au cas ou le meilleur joueur ne serait pas attaquable.
+						 */
 						
 					} else if ( this.choixCibleSecondaire(robot, (Attaque)carte) != null  ) {
 						if(((Attaque) carte).isJouableContre( this.choixCibleSecondaire(robot,(Attaque)carte) )) {
@@ -84,43 +107,65 @@ public class AggressifMeilleurJoueur implements Strategy {
 					}
 				}
 			}
-			//Si le robot n'a pas reussi a attaquer le meilleur jouer, alors il attaque n'importe quel autre joueur attaquable.
+			/**
+			 * Si le robot n'a pas reussi a attaquer le meilleur jouer, alors il attaque n'importe quel autre joueur attaquable.
+			 */
 			if(carteAJouer != null) {
 				return carteAJouer;
 			}
 			
 			
-			/* 2. On tente de jouer une carte Etape */
+			/** 2. On tente de jouer une carte Etape 
+			 * */
 			
 			carteAJouer=null; 
-			//Avec cette variable on va chercher a placer l'etape ac la plus forte valeur.
+			/**
+			 * Avec ce test on va chercher a placer l'etape ac la plus forte valeur.
+			 */
 			if(robot.getJeuSurTable().isDemarrer() && robot.getJeuSurTable().getPileBataille().isEmpty()) {
+				
+				/**
+				 * On teste toutes les cartes du jeu du robot
+				 */
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-					//On teste toutes les cartes du jeu du robot
+					
 					Carte carte = it.next();				
 					if(carte instanceof Etape) {
-					//Si la carte est de type etape					
+									
+						/**
+						 * Si la carte etape est jouable on cherche alors la plus forte carte etape.
+						 */
 						if(carte.isJouable(robot, null)) {
-							//Si la carte etape est jouable on cherche alors la plus forte carte etape.
+							
 							if(carteAJouer == null) {
 								carteAJouer = (Etape) carte;
 								
-							} else if(((Etape) carte).getNbKm() > ((Etape) carteAJouer).getNbKm() )
-							//Si la carte Etape sur laquel on incremente a un nbKm plus grand que celle deja stocker
+								
+								/**
+								 * Si la carte Etape sur laquel on incremente a un nbKm plus grand que celle deja stocker
 							//Alors on remplace la carteAJouer précédemment stocké par la meilleur que nous venons de trouver.
+								 */
+							} else if(((Etape) carte).getNbKm() > ((Etape) carteAJouer).getNbKm() )
+							
 								carteAJouer = carte;
 						}
 					}
 				}
 				
-				//A la fin de l'incrementation on retourne carteAJouer si il lui a été attribué une carte.
+				/**
+				 * A la fin de l'incrementation on retourne carteAJouer si il lui a été attribué une carte.
+				 */
 				if(carteAJouer != null) {
 					return carteAJouer;
 				}
 			}
 			
-			/* 3. On tente de jouer une carte parade */
-				//On tente les parades du tas bataille
+			/**
+			 *  3. On tente de jouer une carte parade
+			 *   */
+				/**
+				 * On tente les parades du tas bataille
+				 */
 			if(robot.getJeuSurTable().getPileBataille().isEmpty() == false) { 
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					Carte carte = it.next();
@@ -132,7 +177,9 @@ public class AggressifMeilleurJoueur implements Strategy {
 					}
 				}
 			}
-				// On tente la fin de limite de vitesse.
+				/**
+				 *  On tente la fin de limite de vitesse.
+				 */
 			if(robot.getJeuSurTable().getPileVitesse().isEmpty() == false) { 
 				for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
 					Carte carte = it.next();
@@ -145,9 +192,12 @@ public class AggressifMeilleurJoueur implements Strategy {
 				}
 			}
 			
+			/**
+			 * Si aucune des boucles précédente n'a mené à la fin de la methode
+				//on cherche toute carte jouable et le robot la jouera
+			 */
 			for(Iterator<Carte> it = robot.getJeuEnMain().getMain().iterator() ; it.hasNext(); ) {
-				//Si aucune des boucles précédente n'a mené à la fin de la methode
-				//on cherche toute carte jouable et le robot la jouera.
+				
 				Carte carte = it.next();
 				if(carte.isJouable(robot, null)) { //null comme valeur a adversaire car les carte Attaque sont obligatoirement
 					// non jouables.

@@ -9,8 +9,14 @@ public class PartieDeJeu  extends Observable {
 	private boolean termine;
 	private int nbRobot;
 	private int nbHumain;
-	private int numeroJoueurActuel; // numero du joueur a qui c'est le tour.
-	private static PartieDeJeu partie = null; //singelton
+	/**
+	 *  numero du joueur dont c'est le tour.
+	 */
+	private int numeroJoueurActuel; 
+	/**
+	 * singelton
+	 */
+	private static PartieDeJeu partie = null;
 	private LinkedList<Joueur> joueurs;
 	private int nbKmMax;
 
@@ -42,7 +48,7 @@ public class PartieDeJeu  extends Observable {
 				
 				wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
@@ -54,8 +60,10 @@ public class PartieDeJeu  extends Observable {
 	public void jouerPartie() {
 		this.initPartie();
 		CmdLineInterface cmd = new CmdLineInterface();
-		//Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.
-		//On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
+		/**
+		 * Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.
+		 * On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
+		 */
 		Joueur joueurActuel = null;
 		while(this.termine==false) {
 			this.setChanged();
@@ -76,7 +84,7 @@ public class PartieDeJeu  extends Observable {
 	}
 	
 	public void victoire(Joueur gagnant) {
-		System.out.println("victoire de "+gagnant.getNom()); //TODO
+		System.out.println("victoire de "+gagnant.getNom()); 
 	}
 	
 	public int getNumeroJoueurActuel() {
@@ -103,7 +111,9 @@ public class PartieDeJeu  extends Observable {
 	}
 	
 	public void setNbKmMax(int nbKmMax) {
-		//700 bornes a parcourir est la seule variante accepté.
+		/**
+		 * 700 bornes a parcourir est la seule variante accepté.
+		 */
 		if(nbKmMax == 700) {
 			this.nbKmMax = nbKmMax;
 		}

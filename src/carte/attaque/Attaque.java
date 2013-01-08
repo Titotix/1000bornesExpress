@@ -10,7 +10,7 @@ import joueurs.Joueur;
 public abstract class Attaque extends Carte {
 	
 	
-	//constructeur
+	
 	public Attaque (){
 		
 		
@@ -28,17 +28,27 @@ public abstract class Attaque extends Carte {
 	
 	public boolean isJouableContre(Joueur adversaire) {
 		
+		/**
+		 * Si l'instance est de type Crevaison, FeuROuge, Accident ou PanneEssence
+		 */
 		if(this instanceof Crevaison || this instanceof FeuRouge || this instanceof Accident|| this instanceof PanneEssence ) {
-			//Si l'instance est de type Crevaison, FeuROuge, Accident ou PanneEssence
 			
+			/**
+			 * Si la pile de bataille de l'adversaire visé est vide et que cet adversaire a déjà démarrer
+			 */
 			if(adversaire.getJeuSurTable().getPileBataille().isEmpty() && adversaire.getJeuSurTable().isDemarrer()) {		
-			//Si la pile de bataille de l'adversaire visé est vide et que cet adversaire a déjà démarrer
-				
+			
+				/**
+				 * On regarde alors si la pile botte ne contient pas la botte adequate pour bloquer l'attaque.	
+				 */
 				if( adversaire.getJeuSurTable().getPileBotte().isEmpty() == false) {
-				//On regarde alors si la pile botte ne contient pas la botte adequate pour bloquer l'attaque.	
+				
 					for(Iterator<Botte> it = adversaire.getJeuSurTable().getPileBotte().iterator() ; it.hasNext() ;) {	
+						/**
+						 * si c'est le cas, on retourne faux, la carte attaque n'est pas jouable contre cette adversaire.
+						 */
 						if(this.isCompatible(it.next())) {
-							//si c'est le cas, on retourne faux, la carte attaque n'est pas jouable contre cette adversaire.
+							
 							return false;
 						}
 					}
@@ -46,8 +56,11 @@ public abstract class Attaque extends Carte {
 					return true;
 				}
 			}
+			/**
+			 * Si c'est une limite de vitesse il suffit que la pile de vitesse soit vide pour que la limite de vitesse soit jouable.
+			 */
 		} else if(this instanceof LimiteVitesse) {
-			//Si c'est une limite de vitesse il suffit que la pile de vitesse soit vide pour que la limite de vitesse soit jouable.
+			
 			if(adversaire.getJeuSurTable().getPileVitesse().isEmpty()) {		
 				return true;
 			}

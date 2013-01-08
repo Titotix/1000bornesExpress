@@ -39,8 +39,11 @@ public class Controleur {
 			if(carte.isJouable(joueurActuel, adversaire )) {
 				return true;
 			}
+			/**
+			 * Si la carte est une parade et que l'humain s'est choisi lui même.
+			 */
 		} else if (carte instanceof Parade && joueurActuel == adversaire && !(carte instanceof FinLimiteVitesse) ) {
-			//Si la carte est une parade et que l'humain s'est choisi lui même.
+			
 			if (carte.isJouable(joueurActuel, null)) {
 				return true;
 			}
@@ -66,8 +69,11 @@ public class Controleur {
 			if(carte.isJouable(joueurActuel, joueurChoisi )) {
 				return true;
 			}
+			/**
+			 * Si la carte est une parade et que l'humain s'est choisi lui même.
+			 */
 		} else if (carte instanceof FinLimiteVitesse && joueurActuel == joueurChoisi) {
-			//Si la carte est une parade et que l'humain s'est choisi lui même.
+			
 			if (carte.isJouable(joueurActuel, null)) {
 				return true;
 			}

@@ -18,6 +18,6 @@ public abstract class Carte {
 	 * @return boolean
 	 */
 	public abstract boolean isJouable(Joueur joueurDontCestLeTour, Joueur adversaire);
-	//Fonctionne pour tous type de carte
+	
 
 }

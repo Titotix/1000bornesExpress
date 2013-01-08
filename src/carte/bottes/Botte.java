@@ -14,19 +14,24 @@ public abstract class Botte extends Carte  {
 	
 	public abstract boolean isJouableCoupFourre(JeuSurTable notreJeu);
 
-	//constructeur
+	
 	public Botte() {
 	
 	}
 	
 	public void jouer(Joueur joueur, Joueur inutile) { 
+		/**
+		 * ajouter la carte au jeu sur table du joueur
+		 */
 		joueur.getJeuSurTable().ajouterCarteBotte(this);
-		//ajouter la carte au jeu sur table du joueur
 		
+		/**
+		 * jouer une botte augmente de 100 le nb de Km parcouru
+		 */
 		joueur.getJeuSurTable().addNbKmParcouruBotte(100);
-		//jouer une botte augmente de 100 le nb de Km parcouru
 		
-		/*
+		
+		/**
 		 * Si la botte posé est le contre d'une attaque du jeu du joueur, elle sera retiré.
 		 */
 		if(this instanceof Prioritaire) {
@@ -44,9 +49,11 @@ public abstract class Botte extends Carte  {
 		
 		
 		joueur.getJeuEnMain().retirerCarte(this);
-		//retirer la botte de la main du joueur
 		
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); // pour que le joueur rejoue.
+		/**
+		 * pour que le joueur rejoue.
+		 */
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); 
 	}
 	
 	public abstract boolean isCompatible(Attaque carte);
@@ -54,9 +61,9 @@ public abstract class Botte extends Carte  {
 	
 	public void coupFourre(Joueur joueur) {
 		joueur.getJeuSurTable().ajouterCarteBotte(this);
-		//ajouter la carte au jeu sur table du joueur
 		
-		/*
+		
+		/**
 		 * Si la botte posé est le contre d'une attaque du jeu du joueur, elle sera retiré.
 		 */
 		if(this instanceof Prioritaire) {
@@ -78,16 +85,20 @@ public abstract class Botte extends Carte  {
 		}
 		
 		joueur.getJeuSurTable().addNbKmParcouruBotte( 300);
-		//un coup fourree augmente de 300 le nb de Km parcouru
+		
 		
 		joueur.getJeuEnMain().retirerCarte(this);
-		//retirer la botte de la main du joueur
-	
-		joueur.piocherTalon();
-		//Fais piocher le joueur dans le talon pour compenser l'utilisation de sa botte
-		//Le joueur a donc toujours 4 cartes dans sa main.
 		
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); // pour que le joueur prenne la main..
+		/**
+		 * Fais piocher le joueur dans le talon pour compenser l'utilisation de sa botte
+		 * Le joueur a donc toujours 4 cartes dans sa main.
+		 */
+		joueur.piocherTalon();
+		
+		/**
+		 * pour que le joueur prenne la main..
+		 */
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); 
 
 		
 	}

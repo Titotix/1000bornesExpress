@@ -26,7 +26,10 @@ public class Accident extends Attaque {
 	public void jouer(Joueur joueur, Joueur adversaire) {
 		adversaire.getJeuSurTable().ajouterCarteBataille(this);		
 		joueur.getJeuEnMain().retirerCarte(this);
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+		/**
+		 * Pour que le joueur suivant joue
+		 */
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 		
 	}
 }

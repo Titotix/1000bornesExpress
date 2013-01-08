@@ -10,7 +10,7 @@ public class RoueSecours extends Parade {
 
 	public RoueSecours() {
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public String toString() {
@@ -25,9 +25,9 @@ public class RoueSecours extends Parade {
 	
 	@Override
 	public void jouer(Joueur joueur, Joueur inutile) {
-		joueur.getJeuEnMain().retirerCarte(this); // on retire la carte de la main
+		joueur.getJeuEnMain().retirerCarte(this); 
 		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 
 		
 	}

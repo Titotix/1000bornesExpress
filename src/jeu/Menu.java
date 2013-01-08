@@ -39,7 +39,7 @@ public class Menu implements Runnable {
 	private LinkedList<Robot> robot;
 	private static Menu menu = null;
 	private LinkedList<String> nomsJoueurs;
-	//constructeur
+	
 	private Menu() {
 		this.nomsJoueurs = new LinkedList<String>();
 		
@@ -52,7 +52,9 @@ public class Menu implements Runnable {
 	}
 	
 	
-	//Creer une nouvelle partie
+	/**
+	 * Creer une nouvelle partie
+	 */
 	public void run () {
 
 		this.creationJoueurs();
@@ -118,9 +120,11 @@ public class Menu implements Runnable {
 	public void creerCartes() {
 		int i;
 		Talon talon = Talon.getInstance();
-		//Les attaques
+		/**
+		 * Les attaques
+		 */
 		for (i=1;i<3;i++){
-			Crevaison crevaison=new Crevaison();// Fonctionne avec le i comme ca ? TODO
+			Crevaison crevaison=new Crevaison();
 			talon.getPileCarte().add(crevaison);			
 			}
 			
@@ -144,8 +148,9 @@ public class Menu implements Runnable {
 			talon.getPileCarte().add(feuRouge);		
 			}
 		
-		//Les parades
-		
+		/**
+		 * Les parades		
+		 */
 		for (i=11;i<15;i++){
 			RoueSecours roueDeSecours=new RoueSecours();
 			talon.getPileCarte().add(roueDeSecours);			
@@ -171,7 +176,9 @@ public class Menu implements Runnable {
 			talon.getPileCarte().add(feuVert);			
 			}
 		
-		//Les bottes
+		/**
+		 * /Les bottes
+		 */
 		Increvable increvable=new Increvable();
 		talon.getPileCarte().add(increvable);
 		
@@ -184,7 +191,9 @@ public class Menu implements Runnable {
 		CiterneEssence citerne=new CiterneEssence();
 		talon.getPileCarte().add(citerne);
 		
-		//Les �tapes
+		/**
+		 * Les étapes
+		 */
 		for (i=36;i<42;i++){
 			Etape etape=new Etape(25);
 			talon.getPileCarte().add(etape);		
@@ -229,12 +238,12 @@ public class Menu implements Runnable {
 		
 	}
 	
-	//Définir nombre d'IA
+	
 	public void setNbRobot (int nbRobot){ 
 		this.nbRobot = nbRobot;
 	}
 	
-	//Définir nombre d'humains
+	
 	public void setNbHumain (int nbHumain){ 
 		
 		this.nbHumain = nbHumain;

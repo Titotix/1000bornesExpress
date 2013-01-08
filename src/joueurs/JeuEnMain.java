@@ -14,14 +14,20 @@ public class JeuEnMain extends Observable{
 		this.main = new LinkedList<Carte>();
 	}
 	
-	//Permet d'ajouter une carte apres la pioche
+	/**
+	 * Permet d'ajouter une carte apres la pioche
+	 * @param carte
+	 */
 	public void ajouterCarte(Carte carte) {
 		this.main.add(carte);
 		this.setChanged();
 		this.notifyObservers();		
 	}
 	
-	//Permet de retirer une carte de la main du joueur.
+	/**
+	 * Permet de retirer une carte de la main du joueur.
+	 * @param carte
+	 */
 	public void retirerCarte (Carte carte){
 		if(this.main.remove(carte)) {
 			this.setChanged();

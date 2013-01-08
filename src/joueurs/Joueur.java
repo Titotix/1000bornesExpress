@@ -24,7 +24,7 @@ public abstract class Joueur extends Observable {
 	protected String nom;
 
 	
-	//constructeur
+	
 	public Joueur (String nomJoueur, int numPassage){
 		this.nom=nomJoueur;
 		this.numPassage=numPassage;
@@ -82,9 +82,9 @@ public abstract class Joueur extends Observable {
 	
 	public void defausser(Carte carte) {
 		Defausse defausse = Defausse.getInstance();
-		this.jeuEnMain.retirerCarte(carte);  //va retirer la carte de la main du joueur
-		defausse.ajouterCarte(carte);  //ajoute la carte défausser à la défausse
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(this.getNumPassage() ); // pour que le joueur suivant joue.
+		this.jeuEnMain.retirerCarte(carte);  
+		defausse.ajouterCarte(carte);  
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(this.getNumPassage() ); 
 
 	}
 	

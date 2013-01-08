@@ -8,12 +8,12 @@ public class Defausse extends TasDeCarte {
 	private LinkedList<Carte> pileCarte;
 	private static Defausse defausse = null;
 	
-	//constructeur
+	
 	public Defausse (){
 		pileCarte = new LinkedList<Carte>();
 	}
 	
-	//singleton
+	
 	public static Defausse getInstance() {
 		if(defausse == null) {
 			defausse = new Defausse();
@@ -22,7 +22,10 @@ public class Defausse extends TasDeCarte {
 	}
 	
 	
-	//Piocher une carte dans la d�fausse
+	/**
+	 * Piocher une carte dans la d�fausse
+	 * @return carte
+	 */
 	public Carte piocher(){
 		Carte carte = this.pileCarte.removeFirst();
 		this.setChanged();
@@ -45,7 +48,10 @@ public class Defausse extends TasDeCarte {
 		
 	}
 	
-	//Mettre la carte dans la defausse 
+	/**
+	 * Mettre la carte dans la defausse 
+	 * @param carte
+	 */
 	public void ajouterCarte (Carte carte){
 		this.pileCarte.addFirst(carte);
 		this.setChanged();
