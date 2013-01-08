@@ -30,7 +30,7 @@ import carte.parade.FinLimiteVitesse;
 import carte.parade.Reparation;
 import carte.parade.RoueSecours;
 
-public class Menu {
+public class Menu implements Runnable {
 	
 
 	private int nbRobot, nbHumain;
@@ -53,14 +53,14 @@ public class Menu {
 	
 	
 	//Creer une nouvelle partie
-	public void nouvellePartie () {
-		
+	public void run () {
 		this.creationJoueurs();
 		Talon talon = Talon.getInstance();
 		this.creerCartes();
 		talon.aleatoirePileCarte();
 	
 		talon.distribuer();
+		this.initObserver();
 	}
 	
 	public void creationJoueurs() {

@@ -17,86 +17,87 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-import carte.attaque.Accident;
-import carte.attaque.Attaque;
-
 import carte.attaque.*;
-import carte.bottes.Botte;
-import carte.etape.Etape;
+import carte.bottes.*;
+import carte.etape.*;
 
 import tasDeCartes.Carte;
+import tasDeCartes.Defausse;
 
 import jeu.Menu;
 import joueurs.JeuEnMain;
-import joueurs.JeuSurTable;
-import joueurs.Joueur;
+import joueurs.*;
 
 public class FenetrePrincipale extends JFrame implements Observer{
 	
 	
-	protected int nbJoueurs;
-	protected String nom;
-	Carte carteSelectionnee;
+	private int nbJoueurs;
+	private String nom;
+	private Carte carteSelectionnee;
 	private static FenetrePrincipale fenetre = null;
 	private Controleur controleur = Controleur.getInstance();
 	
 	
 	//Variables pour le Joueur 1
-	JButton etapeJ1=new JButton("Etape");
-	JButton attaqueJ1=new JButton("Attaque");
-	JButton limiteJ1=new JButton("Limite de vitesse");
-	JButton botteJ1=new JButton("Bottes");
-	JLabel kmJ1=new JLabel("Bornes:");
-	JLabel bottePossJ1=new JLabel("Bottes :");
-	JLabel isAttaqueJ1=new JLabel("Pile Bataille");
-	JLabel isLimiteJ1=new JLabel("Pile Limite");
+	private JButton etapeJ1=new JButton("Etape");
+	private JButton attaqueJ1=new JButton("Attaque");
+	private JButton limiteJ1=new JButton("Limite de vitesse");
+	private JButton botteJ1=new JButton("Bottes");
+	private JLabel kmJ1=new JLabel("Bornes:");
+	private JLabel bottePossJ1=new JLabel("Bottes :");
+	private JLabel isAttaqueJ1=new JLabel("Pile Bataille");
+	private JLabel isLimiteJ1=new JLabel("Pile Limite");
 	
 	//Variables Joueur 2
-	JButton etapeJ2=new JButton("Etape");
-	JButton attaqueJ2=new JButton("Attaque");
-	JButton limiteJ2=new JButton("Limite de vitesse");
-	JButton botteJ2=new JButton("Bottes");
-	JLabel kmJ2=new JLabel("Bornes:");
-	JLabel bottePossJ2=new JLabel("Bottes :");
-	JLabel isAttaqueJ2=new JLabel("Pile Bataille");
-	JLabel isLimiteJ2=new JLabel("Pile Limite");
+	private JButton etapeJ2=new JButton("Etape");
+	private JButton attaqueJ2=new JButton("Attaque");
+	private JButton limiteJ2=new JButton("Limite de vitesse");
+	private JButton botteJ2=new JButton("Bottes");
+	private JLabel kmJ2=new JLabel("Bornes:");
+	private JLabel bottePossJ2=new JLabel("Bottes :");
+	private JLabel isAttaqueJ2=new JLabel("Pile Bataille");
+	private JLabel isLimiteJ2=new JLabel("Pile Limite");
 	
 	//Variables Joueur 3
-	JButton etapeJ3=new JButton("Etape");
-	JButton attaqueJ3=new JButton("Attaque");
-	JButton limiteJ3=new JButton("Limite de vitesse");
-	JButton botteJ3=new JButton("Bottes");
-	JLabel kmJ3=new JLabel("Bornes:");
-	JLabel bottePossJ3=new JLabel("Bottes :");
-	JLabel isAttaqueJ3=new JLabel("Pile Bataille");
-	JLabel isLimiteJ3=new JLabel("Pile Limite");
+	private JButton etapeJ3=new JButton("Etape");
+	private JButton attaqueJ3=new JButton("Attaque");
+	private JButton limiteJ3=new JButton("Limite de vitesse");
+	private JButton botteJ3=new JButton("Bottes");
+	private JLabel kmJ3=new JLabel("Bornes:");
+	private JLabel bottePossJ3=new JLabel("Bottes :");
+	private JLabel isAttaqueJ3=new JLabel("Pile Bataille");
+	private JLabel isLimiteJ3=new JLabel("Pile Limite");
 	
 	//Variables Joueur 4
-	JButton etapeJ4=new JButton("Etape");
-	JButton attaqueJ4=new JButton("Attaque");
-	JButton limiteJ4=new JButton("Limite de vitesse");
-	JButton botteJ4=new JButton("Bottes");
-	JLabel kmJ4=new JLabel("Bornes:");
-	JLabel bottePossJ4=new JLabel("Bottes :");
-	JLabel isAttaqueJ4=new JLabel("Pile Bataille");
-	JLabel isLimiteJ4=new JLabel("Pile Limite");
+	private JButton etapeJ4=new JButton("Etape");
+	private JButton attaqueJ4=new JButton("Attaque");
+	private JButton limiteJ4=new JButton("Limite de vitesse");
+	private JButton botteJ4=new JButton("Bottes");
+	private JLabel kmJ4=new JLabel("Bornes:");
+	private JLabel bottePossJ4=new JLabel("Bottes :");
+	private JLabel isAttaqueJ4=new JLabel("Pile Bataille");
+	private JLabel isLimiteJ4=new JLabel("Pile Limite");
 	
 	//Variables cartes en main
-	JInternalFrame carte1 = new JInternalFrame(); 
-	JButton carte1Joueur=new JButton("Selectionner");
-	JInternalFrame carte2 = new JInternalFrame(); 
-	JButton carte2Joueur=new JButton("Selectionner");
-	JInternalFrame carte3 = new JInternalFrame(); 
-	JButton carte3Joueur=new JButton("Selectionner");
-	JInternalFrame carte4 = new JInternalFrame(); 
-	JButton carte4Joueur=new JButton("Selectionner");
-	JInternalFrame carte5 = new JInternalFrame(); 
-	JButton carte5Joueur=new JButton("Selectionner");
+	private JInternalFrame carte1 = new JInternalFrame(); 
+	private JButton carte1Joueur=new JButton("Selectionner");
+	private JInternalFrame carte2 = new JInternalFrame(); 
+	private JButton carte2Joueur=new JButton("Selectionner");
+	private JInternalFrame carte3 = new JInternalFrame(); 
+	private JButton carte3Joueur=new JButton("Selectionner");
+	private JInternalFrame carte4 = new JInternalFrame(); 
+	private JButton carte4Joueur=new JButton("Selectionner");
+	private JInternalFrame carte5 = new JInternalFrame(); 
+	private JButton carte5Joueur=new JButton("Selectionner");
 	
 	//Variables talon/defausse/evenements
-	JButton talonBouton=new JButton("Piocher");
-	JButton defausseBouton=new JButton("Piocher/Defausser");
-	JLabel eventLabel = new JLabel("Ici les evenements");
+	private JButton talonBouton=new JButton("Piocher");
+	private JButton defausseBouton=new JButton("Piocher/Defausser");
+	private JLabel eventLabel = new JLabel("Ici les evenements");
+	
+	private JInternalFrame talon = new JInternalFrame(); 
+	private JInternalFrame defausse = new JInternalFrame(); 
+    
 	
 	Box b1 = Box.createHorizontalBox();
 	
@@ -1134,9 +1135,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte5Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez choisi la cinquieme carte");
-			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(4);
-					}
+			if(controleur.getJoueurActuel() instanceof Humain) {
+				eventLabel.setText("Vous avez choisi la cinquieme carte");
+				carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(4);
+		
+			}
+		}
 	});
 	carte5.add(carte5Joueur);
 	b2.add(carte5);
@@ -1144,7 +1148,6 @@ public class FenetrePrincipale extends JFrame implements Observer{
     //Idem
     Box b3 = Box.createHorizontalBox();
     
-    JInternalFrame talon = new JInternalFrame(); 
     talon.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	talon.setTitle("Talon");
 	talon.setVisible(true);//On la rend visible
@@ -1160,7 +1163,6 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	b3.add(talon);
 	
 	///////
-	JInternalFrame defausse = new JInternalFrame(); 
 	defausse.setSize(30, 20);//On lui donne une taille pour qu'on puisse la voir
 	defausse.setTitle("Defausse");
 	defausse.setVisible(true);//On la rend visible
@@ -1285,9 +1287,15 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 
 
-	public void update(Observable o, Object arg0) {
+	public void update(Defausse o, Object arg0) {
 		
+		this.defausse.setTitle(""+this.controleur.getCarteVisibleDefausse().toString());
 		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 		
 	}	
 }

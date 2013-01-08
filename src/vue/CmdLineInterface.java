@@ -20,10 +20,7 @@ public class CmdLineInterface extends Thread implements Observer {
 		this.defausse = Defausse.getInstance();
 		this.menu = Menu.getInstance();
 	}
-	public void run() { //TODO
-		this.contextuel();
 	
-	}
 	
 	public void update(Observable o, Object arg) {
 	}
@@ -37,17 +34,6 @@ public class CmdLineInterface extends Thread implements Observer {
 	}
 	
 
-	public void contextuel() {
-		Menu menu = Menu.getInstance();
-		//int choix;
-		//System.out.println("Entrer le numero correspondant a ce que vous souhaitez");
-		//System.out.println("\n 1. Nouvelle partie");
-		//Scanner a = new Scanner(System.in);
-		//choix = a.nextInt();
-		//switch(choix) {
-		/*case 1:*/ menu.nouvellePartie();
-		//break;
-	}
 	
 	
 	public void choixVariante() {

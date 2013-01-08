@@ -4,7 +4,7 @@ import java.util.*;
 
 import joueurs.Joueur;
 import vue.*;
-public class PartieDeJeu  extends Observable implements Runnable {
+public class PartieDeJeu  extends Observable {
 	
 	private boolean termine;
 	private int nbRobot;
@@ -40,7 +40,7 @@ public class PartieDeJeu  extends Observable implements Runnable {
 	}
 	
 	
-	public void run() {
+	public void jouerPartie() {
 		
 		CmdLineInterface cmd = new CmdLineInterface();
 		//Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.

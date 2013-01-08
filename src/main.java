@@ -13,13 +13,12 @@ public class main {
 	
 		
 		new MenuGraphique();
-		Menu.getInstance().nouvellePartie();
-		Menu.getInstance().initObserver();
-		
+		Menu menu = Menu.getInstance();
+		//Thread t = new Thread(menu);
+		//t.start();
+		menu.run();
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-	
-		Thread t = new Thread(partie);
-		t.start();
+		partie.jouerPartie();
 	
 	}
 }
