@@ -16,6 +16,7 @@ public class PartieDeJeu  extends Observable {
 
 
 	private PartieDeJeu() {
+		
 		this.nbKmMax = 1000;
 		this.termine=false;
 		Menu menu = Menu.getInstance();
@@ -24,24 +25,34 @@ public class PartieDeJeu  extends Observable {
 		this.joueurs = new LinkedList<Joueur>();
 		this.numeroJoueurActuel = 0;
 		//On concatène ici les deux LinkedList (d'Humain et de Robot) dans la LinkedList de Joueur.
-
-		this.joueurs.addAll(menu.getHumain());
-	
-		this.joueurs.addAll(menu.getRobot());
-	
 		
 	}
 	
-	public static PartieDeJeu getInstance() {
+	public synchronized static PartieDeJeu getInstance() {
+		
 		if(partie == null) {
 			partie = new PartieDeJeu();
 		}
 		return partie;
 	}
 	
+	public void initPartie() {
+		synchronized(this) {
+			try {
+				
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		this.joueurs.addAll(Menu.getInstance().getHumain());
+		
+		this.joueurs.addAll(Menu.getInstance().getRobot());
+	}
 	
 	public void jouerPartie() {
-		
+		this.initPartie();
 		CmdLineInterface cmd = new CmdLineInterface();
 		//Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.
 		//On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
@@ -54,7 +65,7 @@ public class PartieDeJeu  extends Observable {
 			joueurActuel.jouer();
 			
 			if(joueurActuel.isGagnant()) {
-				this.setTermine(true);
+				this.setTermine(true, joueurActuel);
 			}
 			
 		}
@@ -81,7 +92,7 @@ public class PartieDeJeu  extends Observable {
 		}
 		
 		this.setChanged();
-		this.notifyObservers(this);		
+		this.notifyObservers();		
 	}
 
 	public int getNbKmMax() {
@@ -94,14 +105,19 @@ public class PartieDeJeu  extends Observable {
 			this.nbKmMax = nbKmMax;
 		}
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers();
 	}
 
-	public void setTermine(boolean termine) {
+	public void setTermine(boolean termine, Joueur gagnant) {
 		this.termine = termine;
 		this.setChanged();
-		this.notifyObservers(this);
+		this.notifyObservers(gagnant);
 		
+	}
+
+	public boolean isTerminee() {
+		
+		return this.termine;
 	}
 
 

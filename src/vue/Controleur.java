@@ -76,12 +76,22 @@ public class Controleur {
 	}
 	
 
+	public boolean isDefausseEmpty() {
+		return Defausse.getInstance().isEmpty();
+	}
 
 	public boolean isPosableSurBotte(Joueur joueurActuel, Joueur joueurChoisi, Carte carte) {
 		if(carte instanceof Botte && joueurActuel == joueurChoisi) {
 			if(carte.isJouable(joueurActuel, null)) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	public boolean hasPioche(Joueur joueur) {
+		if(joueur.getJeuEnMain().getMain().size() == 5) {
+			return true;
 		}
 		return false;
 	}
@@ -115,13 +125,18 @@ public class Controleur {
 		Joueur joueurActuel = null;
 		for(Iterator<Joueur> it = this.getJoueurs().iterator() ; it.hasNext() ;) {
 			Joueur i = it.next();
-			if(it.next().getNumPassage() -1 == this.getNumeroJoueurActuel()) {
+			if(i.getNumPassage() -1 == this.getNumeroJoueurActuel()) {
 				joueurActuel = i;
 			}
 		}
 		
 		return joueurActuel;
 
+	}
+
+	public boolean isPartieFinie() {
+		
+		return PartieDeJeu.getInstance().isTerminee();
 	}
 	
 

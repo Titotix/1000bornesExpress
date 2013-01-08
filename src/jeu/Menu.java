@@ -54,13 +54,18 @@ public class Menu implements Runnable {
 	
 	//Creer une nouvelle partie
 	public void run () {
+
 		this.creationJoueurs();
 		Talon talon = Talon.getInstance();
 		this.creerCartes();
 		talon.aleatoirePileCarte();
-	
+		
 		talon.distribuer();
 		this.initObserver();
+		synchronized(PartieDeJeu.getInstance()) {
+			PartieDeJeu.getInstance().notify();
+		}
+		
 	}
 	
 	public void creationJoueurs() {

@@ -13,11 +13,12 @@ public class main {
 	
 		
 		new MenuGraphique();
-		Menu menu = Menu.getInstance();
-		//Thread t = new Thread(menu);
-		//t.start();
-		menu.run();
 		PartieDeJeu partie = PartieDeJeu.getInstance();
+		
+		Menu menu = Menu.getInstance();
+		Thread t = new Thread(menu, "menu");
+		t.start();
+		
 		partie.jouerPartie();
 	
 	}

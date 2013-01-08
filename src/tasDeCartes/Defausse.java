@@ -29,7 +29,6 @@ public class Defausse extends TasDeCarte {
 		this.notifyObservers();
 		return carte;
 		
-		
 	}
 	/**
 	 * 
