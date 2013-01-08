@@ -163,6 +163,14 @@ public class Controleur {
 			return "vide";
 		}
 	}
+	
+	public String getCarteBotte(JeuSurTable jeu) {
+		if(jeu.getPileBotte().isEmpty() == false) {
+			return jeu.getPileBotte().toString();
+		} else {
+			return "vide";
+		}
+	}
 
 	public int getKm(JeuSurTable arg0) {
 		

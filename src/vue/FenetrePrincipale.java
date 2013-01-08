@@ -1378,7 +1378,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 						if(controleur.isDefausseEmpty() == false) {
 							Joueur joueurActuel = controleur.getJoueurActuel();
 							joueurActuel.piocherDefausse();
-							eventLabel.setText("Vous avez pioché dans le talon.");
+							eventLabel.setText("Vous avez pioché dans le talon.");//TODO texte ok ?
 						} else {
 							eventLabel.setText("La défausse est vide.");							
 						}
@@ -1437,7 +1437,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			}
 			
 	  		if(((JeuEnMain) arg0).getMain().size() == 5) {
-	  			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
+	  			this.carte5.setVisible(true);
 	  			this.carte5.setTitle(""+((JeuEnMain) arg0).getMain().get(4).toString());
 	  		}
 		
@@ -1458,7 +1458,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			this.carte3.setTitle(""+ joueurActuel.getJeuEnMain().getMain().get(2).toString());
 	  		this.carte4.setTitle(""+joueurActuel.getJeuEnMain().getMain().get(3).toString());
 	  		if(joueurActuel.getJeuEnMain().getMain().size() == 5) {
-	  			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
+	  			this.carte5.setVisible(true);
 	  			this.carte5.setTitle(""+joueurActuel.getJeuEnMain().getMain().get(4).toString());
 
 	  		}
@@ -1474,12 +1474,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isAttaqueJ1.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0 )) ;
 	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ1.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  			//TODO ajouter bottes avec ton html damien
 			}
   			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
 	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  			this.bottePossJ2.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  		//TODO ajouter bottes avec ton html damien
 	  			
   			}
@@ -1487,13 +1489,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isAttaqueJ3.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
-
+	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  			//TODO ajouter bottes avec ton html damien
   			}
 	  		if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
 	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  			this.bottePossJ4.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  		//TODO ajouter bottes avec ton html damien
 	  		}
   			
