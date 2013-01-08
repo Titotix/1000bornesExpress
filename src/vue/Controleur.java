@@ -49,7 +49,7 @@ public class Controleur {
 			}
 		}
 		
-		return false;//TODO et afficher cette carte ne peut pas etre pos�e ici
+		return false;
 	}
 	
 
@@ -186,6 +186,11 @@ public class Controleur {
 	public void jouerCoupFourre(Joueur joueur, Botte botte) {
 		botte.coupFourre(joueur);
 		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1);
+		
+	}
+
+	public void nextJoueur() {
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(this.getJoueurActuel().getNumPassage() - 1);
 		
 	}
 	

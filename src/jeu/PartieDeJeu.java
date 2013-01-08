@@ -59,7 +59,6 @@ public class PartieDeJeu  extends Observable {
 	
 	public void jouerPartie() {
 		this.initPartie();
-		CmdLineInterface cmd = new CmdLineInterface();
 		/**
 		 * Tant que la partie n'est pas terminée, le joueur[numeroJoueurActuel] joue.
 		 * On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
@@ -68,10 +67,7 @@ public class PartieDeJeu  extends Observable {
 		while(this.termine==false) {
 			this.setChanged();
 			this.notifyObservers("debut");
-			
-			System.out.println("\njeu de "+this.joueurs.get(this.numeroJoueurActuel).getNom());
-			cmd.afficherJoueur(this.joueurs.get(this.numeroJoueurActuel));
-			
+					
 			joueurActuel = this.joueurs.get(this.numeroJoueurActuel);
 			joueurActuel.jouer();
 			
@@ -80,12 +76,10 @@ public class PartieDeJeu  extends Observable {
 			}
 			
 		}
-		this.victoire(joueurActuel);
+		
 	}
 	
-	public void victoire(Joueur gagnant) {
-		System.out.println("victoire de "+gagnant.getNom()); 
-	}
+
 	
 	public int getNumeroJoueurActuel() {
 		return this.numeroJoueurActuel;

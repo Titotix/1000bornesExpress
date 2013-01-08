@@ -23,8 +23,6 @@ public class Humain extends Joueur {
 			e.printStackTrace();
 		}
 
-		PartieDeJeu partie = PartieDeJeu.getInstance();
-		partie.setNumeroJoueurActuel(this.getNumPassage());
 
 	}
 

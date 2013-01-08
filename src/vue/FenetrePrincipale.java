@@ -161,7 +161,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	 */
 	etapeJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
-			//TODO
+			
 			if (carteSelectionnee != null){
 				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)){
 					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
@@ -1409,7 +1409,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 						if(controleur.isDefausseEmpty() == false) {
 							Joueur joueurActuel = controleur.getJoueurActuel();
 							joueurActuel.piocherDefausse();
-							eventLabel.setText("Vous avez pioché dans le talon.");//TODO texte ok ?
+							eventLabel.setText("Vous avez pioché dans la défausse.");
 						} else {
 							eventLabel.setText("La défausse est vide.");							
 						}
@@ -1417,8 +1417,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 						Joueur joueurActuel = controleur.getJoueurActuel();
 						joueurActuel.defausser(carteSelectionnee);
 						carteSelectionnee = null;
-						synchronized (controleur.getJoueurActuel()) {
-							controleur.getJoueurActuel().notify(); 
+						
+						controleur.nextJoueur();
+						synchronized (joueurActuel) {
+							joueurActuel.notify(); 
 						}
 						
 					}

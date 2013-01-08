@@ -15,7 +15,6 @@ import strategie.Strategy;
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
 import tasDeCartes.TasDeCarte;
-import vue.CmdLineInterface;
 
 public class Robot extends Joueur {
 	
@@ -29,8 +28,7 @@ public class Robot extends Joueur {
 
 	public void jouer() {
 		this.piocher(this.choixPioche());
-		CmdLineInterface cmd = new CmdLineInterface();//TODO A VIRER
-		cmd.afficherMainJoueur(this);//TODO A VIRER
+
 		if(this.choixDefausser()) {
 			
 			/**

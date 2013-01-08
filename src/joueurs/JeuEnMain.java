@@ -32,9 +32,7 @@ public class JeuEnMain extends Observable{
 		if(this.main.remove(carte)) {
 			this.setChanged();
 			this.notifyObservers();
-		} else {
-			//TODO la carte qui a voulu etre retire de la main n'était pas dans la main.
-		}
+		} 
 			
 	}
 
