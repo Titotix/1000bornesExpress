@@ -36,6 +36,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	protected int nbJoueurs;
 	protected String nom;
+	Carte carteSelectionnee;
 	private static FenetrePrincipale fenetre = null;
 	private Controleur controleur = Controleur.getInstance();
 	
@@ -45,40 +46,40 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JButton attaqueJ1=new JButton("Attaque");
 	JButton limiteJ1=new JButton("Limite de vitesse");
 	JButton botteJ1=new JButton("Bottes");
-	JLabel kmJ1=new JLabel("Km :");
+	JLabel kmJ1=new JLabel("Bornes:");
 	JLabel bottePossJ1=new JLabel("Bottes :");
-	JLabel isAttaqueJ1=new JLabel("Attaqu� ?");
-	JLabel isLimiteJ1=new JLabel("Limit� ?");
+	JLabel isAttaqueJ1=new JLabel("Pile Bataille");
+	JLabel isLimiteJ1=new JLabel("Pile Limite");
 	
 	//Variables Joueur 2
 	JButton etapeJ2=new JButton("Etape");
 	JButton attaqueJ2=new JButton("Attaque");
 	JButton limiteJ2=new JButton("Limite de vitesse");
 	JButton botteJ2=new JButton("Bottes");
-	JLabel kmJ2=new JLabel("Km :");
+	JLabel kmJ2=new JLabel("Bornes:");
 	JLabel bottePossJ2=new JLabel("Bottes :");
-	JLabel isAttaqueJ2=new JLabel("Attaqu� ?");
-	JLabel isLimiteJ2=new JLabel("Limit� ?");
+	JLabel isAttaqueJ2=new JLabel("Pile Bataille");
+	JLabel isLimiteJ2=new JLabel("Pile Limite");
 	
 	//Variables Joueur 3
 	JButton etapeJ3=new JButton("Etape");
 	JButton attaqueJ3=new JButton("Attaque");
 	JButton limiteJ3=new JButton("Limite de vitesse");
 	JButton botteJ3=new JButton("Bottes");
-	JLabel kmJ3=new JLabel("Km :");
+	JLabel kmJ3=new JLabel("Bornes:");
 	JLabel bottePossJ3=new JLabel("Bottes :");
-	JLabel isAttaqueJ3=new JLabel("Attaqu� ?");
-	JLabel isLimiteJ3=new JLabel("Limit� ?");
+	JLabel isAttaqueJ3=new JLabel("Pile Bataille");
+	JLabel isLimiteJ3=new JLabel("Pile Limite");
 	
 	//Variables Joueur 4
 	JButton etapeJ4=new JButton("Etape");
 	JButton attaqueJ4=new JButton("Attaque");
 	JButton limiteJ4=new JButton("Limite de vitesse");
 	JButton botteJ4=new JButton("Bottes");
-	JLabel kmJ4=new JLabel("Km :");
+	JLabel kmJ4=new JLabel("Bornes:");
 	JLabel bottePossJ4=new JLabel("Bottes :");
-	JLabel isAttaqueJ4=new JLabel("Attaqu� ?");
-	JLabel isLimiteJ4=new JLabel("Limit� ?");
+	JLabel isAttaqueJ4=new JLabel("Pile Bataille");
+	JLabel isLimiteJ4=new JLabel("Pile Limite");
 	
 	//Variables cartes en main
 	JInternalFrame carte1 = new JInternalFrame(); 
@@ -134,14 +135,24 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
 	etapeJ1.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
-			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
-			//if (controleur.isPosableSurEtape()==true){
-			//	controleur.jouer(joueurActuel, joueurChoisi, carte);
-			//}
+			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du premier joueur");
 			//TODO
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
+	
 	
 	joueur1.add (etapeJ1);
 	
@@ -149,16 +160,23 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ1.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du premier joueur");
-			//Quand on attaque un jour, délai de 5 sec , puis apparition des cartes du joueur attaqué pendant 5 sec (il peut sortir une botte), 
-			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
+			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du premier joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
 			
-			//TODO
-			//if (carte!=null){
+			}
+			carteSelectionnee=null;
 			
-			//	if (controleur.isPosableSurAttaque(joueurActuel, adversaire,  carte)==true){
-				//Appelle methodes controleur-> aboutit a update2 de la vue 
-			//}
+			
+			
 		}
 	});
 	joueur1.add(attaqueJ1);
@@ -168,11 +186,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ1.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
-			//TODO
-			//if (controleur.isPosableLimiteVitesse==TRUE){
-				
-			//}
+			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du premier joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur1.add(limiteJ1);
@@ -182,11 +209,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ1.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
-			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
-			//TODO
-			//if (controleur.isPosableLimiteVitesse==TRUE){
-				
-			//}
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur1.add(botteJ1);
@@ -211,8 +246,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ2.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du deuxième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du deuxieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur2.add (etapeJ2);
@@ -220,8 +267,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ2.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du deuxième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du deuxieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur2.add(attaqueJ2);
@@ -229,8 +288,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ2.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du deuxième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du deuxieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur2.add(limiteJ2);
@@ -238,8 +309,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ2.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du deuxieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur2.add(botteJ2);
@@ -269,9 +352,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
     	etapeJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
-    			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add (etapeJ1);
@@ -280,11 +374,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du premier joueur");
-    			//Quand on attaque un jour, délai de 5 sec , puis apparition des cartes du joueur attaqué pendant 5 sec (il peut sortir une botte), 
-    			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
     			
-    			//TODO
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add(attaqueJ1);
@@ -294,9 +397,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
-    			//TODO
-    		}
+    			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;    		}
     	});
     	joueur1.add(limiteJ1);
     	
@@ -304,9 +418,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
-    			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add(botteJ1);
@@ -331,8 +456,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add (etapeJ2);
@@ -340,8 +477,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(attaqueJ2);
@@ -349,8 +498,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(limiteJ2);
@@ -358,8 +519,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(botteJ2);
@@ -383,8 +556,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add (etapeJ3);
@@ -392,8 +577,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(attaqueJ3);
@@ -401,8 +598,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(limiteJ3);
@@ -410,8 +619,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(botteJ3);
@@ -441,9 +662,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	//On implémente l'action d'appuyer sur CE bouton (on doit le faire pour chaque bouton)
     	etapeJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du premier joueur");
-    			kmJ1.setText("Km : ");//Afficher la valeur de l'int de km parcourus TODO
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add (etapeJ1);
@@ -452,11 +684,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du premier joueur");
-    			//Quand on attaque un jour, délai de 5 sec , puis apparition des cartes du joueur attaqué pendant 5 sec (il peut sortir une botte), 
-    			//puis si aucune botte sortie, c'est au tour du joueur suivant l'attaquant. (->Coup fourré)
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
     			
-    			//TODO
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add(attaqueJ1);
@@ -466,8 +707,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du premier joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add(limiteJ1);
@@ -476,9 +729,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
-    			//Afficher les initiales des bottes que le joueur possede : IC/RS/PR/CI avec un bottePossJ1.setText("...");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du premier joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur1.add(botteJ1);
@@ -503,8 +767,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add (etapeJ2);
@@ -512,8 +788,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(attaqueJ2);
@@ -521,8 +809,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(limiteJ2);
@@ -530,8 +830,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent event){
-    			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du deuxième joueur");
-    			//TODO
+    			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du deuxieme joueur");
+    			if (carteSelectionnee!=null){
+    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
+    					}
+    				else{
+    					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+    					}
+    			}
+    			else {
+    				eventLabel.setText("Il faut selectionner une carte");
+    			
+    			}
+    			carteSelectionnee=null;
     		}
     	});
     	joueur2.add(botteJ2);
@@ -555,8 +867,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'étape du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add (etapeJ3);
@@ -564,8 +888,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas d'attaque du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(attaqueJ3);
@@ -573,8 +909,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de limite de vitesse du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(limiteJ3);
@@ -582,8 +930,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du troisième joueur");
-			//TODO
+			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du troisieme joueur");
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur3.add(botteJ3);
@@ -608,7 +968,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez pose la carte sur le tas d'etape du quatrieme joueur");
-			//TODO
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur4.add (etapeJ4);
@@ -617,7 +989,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	attaqueJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez pose la carte sur le tas d'attaque du quatrieme joueur");
-			//TODO
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur4.add(attaqueJ4);
@@ -626,7 +1010,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	limiteJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez pose la carte sur le tas de limite de vitesse du quatrieme joueur");
-			//TODO
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur4.add(limiteJ4);
@@ -635,7 +1031,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ4.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du quatrieme joueur");
-			//TODO
+			if (carteSelectionnee!=null){
+				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
+					}
+				else{
+					eventLabel.setText("La carte ne se pose pas la, re-selectionnez une carte");
+					}
+			}
+			else {
+				eventLabel.setText("Il faut selectionner une carte");
+			
+			}
+			carteSelectionnee=null;
 		}
 	});
 	joueur4.add(botteJ4);
@@ -663,7 +1071,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte1Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez choisi la premiere carte");
-			//TODO enregiste la carte dans carte inter 
+			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(0);
+			
 		}
 	});
 	carte1.add(carte1Joueur);
@@ -678,7 +1087,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte2Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez choisi la deuxieme carte");
-			//TODO
+			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(1);
+			
 		}
 	});
 	carte2.add(carte2Joueur);
@@ -693,7 +1103,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte3Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez choisi la troisieme carte");
-			//TODO
+			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(2);
+			
 		}
 	});
 	carte3.add(carte3Joueur);
@@ -708,7 +1119,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte4Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez choisi la quatrieme carte");
-			//TODO
+			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(3);
+			
 		}
 	});
 	carte4.add(carte4Joueur);
@@ -723,8 +1135,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	carte5Joueur.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 			eventLabel.setText("Vous avez choisi la cinquieme carte");
-			//TODO
-		}
+			carteSelectionnee=controleur.getMain(controleur.getJoueurActuel()).get(4);
+					}
 	});
 	carte5.add(carte5Joueur);
 	b2.add(carte5);
@@ -874,14 +1286,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 
 	public void update(Observable o, Object arg0) {
-		System.out.println("UPDATE");
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.carte1.setTitle("connard");
-		this.eventLabel.setText("QALUtih");
+		
+		
+		
 	}	
 }
