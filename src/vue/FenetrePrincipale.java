@@ -49,6 +49,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel bottePossJ1=new JLabel("Bottes :");
 	private JLabel isAttaqueJ1=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ1=new JLabel("Pile Limite : vide");
+	private JLabel feuVertInitJ1=new JLabel("Feu vert initial : vide");
+	
 	
 	
 	/**
@@ -62,6 +64,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel bottePossJ2=new JLabel("Bottes :");
 	private JLabel isAttaqueJ2=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ2=new JLabel("Pile Limite : vide");
+	private JLabel feuVertInitJ2=new JLabel("Feu vert initial :vide");
 	
 	/**
 	 *  Variables pour le troisieme joueur
@@ -74,6 +77,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel bottePossJ3=new JLabel("Bottes :");
 	private JLabel isAttaqueJ3=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ3=new JLabel("Pile Limite : vide");
+	private JLabel feuVertInitJ3=new JLabel("Feu vert initial :vide");
 	
 	/**
 	 * Variables pour le 4e joueur
@@ -86,6 +90,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JLabel bottePossJ4=new JLabel("Bottes :");
 	private JLabel isAttaqueJ4=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ4=new JLabel("Pile Limite : vide");
+	private JLabel feuVertInitJ4=new JLabel("Feu vert initial :vide");
 	
 	/**
 	 * variables pour les cartes en main
@@ -153,7 +158,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	/**
 	 * Quadrillage pour les tas du joueur
 	 */
-	joueur1.setLayout(new GridLayout(4, 2));
+	joueur1.setLayout(new GridLayout(5, 2));
 	
 		
 	/**
@@ -271,6 +276,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur1.add(bottePossJ1);
 	joueur1.add(isAttaqueJ1);
 	joueur1.add(isLimiteJ1);
+	joueur1.add(feuVertInitJ1);
+	this.feuVertInitJ1.setHorizontalAlignment(JLabel.CENTER);
 	
 	/**
 	 * On ajoute le joueur a la box horizontale
@@ -283,7 +290,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(1).getNom();
 	joueur2.setTitle(nom);
 	joueur2.setVisible(true);
-	joueur2.setLayout(new GridLayout(4, 2));
+	joueur2.setLayout(new GridLayout(5, 2));
 	
 	
 	etapeJ2.addActionListener(new ActionListener(){
@@ -393,6 +400,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur2.add(bottePossJ2);
 	joueur2.add(isAttaqueJ2);
 	joueur2.add(isLimiteJ2);
+	joueur2.add(feuVertInitJ2);
+	this.feuVertInitJ2.setHorizontalAlignment(JLabel.CENTER);
 	
 	b1.add(joueur2);
     }
@@ -407,7 +416,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
     	joueur1.setVisible(true);
-    	joueur1.setLayout(new GridLayout(4, 2));
+    	joueur1.setLayout(new GridLayout(5, 2));
     	
     		
     	
@@ -521,6 +530,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur1.add(bottePossJ1);
     	joueur1.add(isAttaqueJ1);
     	joueur1.add(isLimiteJ1);
+    	joueur1.add(feuVertInitJ1);
+    	this.feuVertInitJ1.setHorizontalAlignment(JLabel.CENTER);
     	
     	
     	b1.add(joueur1);
@@ -531,7 +542,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
     	joueur2.setVisible(true);
-    	joueur2.setLayout(new GridLayout(4, 2));
+    	joueur2.setLayout(new GridLayout(5, 2));
     	
     	
     	etapeJ2.addActionListener(new ActionListener(){
@@ -640,6 +651,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur2.add(bottePossJ2);
     	joueur2.add(isAttaqueJ2);
     	joueur2.add(isLimiteJ2);
+    	joueur2.add(feuVertInitJ2);
+    	this.feuVertInitJ2.setHorizontalAlignment(JLabel.CENTER);
     	
     	b1.add(joueur2);
     
@@ -649,7 +662,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
 	joueur3.setVisible(true);
-	joueur3.setLayout(new GridLayout(4, 2));
+	joueur3.setLayout(new GridLayout(5, 2));
 	
 	
 	etapeJ3.addActionListener(new ActionListener(){
@@ -756,6 +769,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur3.add(bottePossJ3);
 	joueur3.add(isAttaqueJ3);
 	joueur3.add(isLimiteJ3);
+	joueur3.add(feuVertInitJ3);
+	this.feuVertInitJ3.setHorizontalAlignment(JLabel.CENTER);
 	
 	b1.add(joueur3);
 	
@@ -770,7 +785,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
         nom=controleur.getJoueurs().get(0).getNom();
     	joueur1.setTitle(nom);
     	joueur1.setVisible(true);
-    	joueur1.setLayout(new GridLayout(4, 2));
+    	joueur1.setLayout(new GridLayout(5, 2));
     	
     		
     	
@@ -882,6 +897,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur1.add(bottePossJ1);
     	joueur1.add(isAttaqueJ1);
     	joueur1.add(isLimiteJ1);
+    	joueur1.add(feuVertInitJ1);
+    	this.feuVertInitJ1.setHorizontalAlignment(JLabel.CENTER);
     	
     	
     	b1.add(joueur1);
@@ -892,7 +909,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	nom=controleur.getJoueurs().get(1).getNom();
     	joueur2.setTitle(nom);
     	joueur2.setVisible(true);
-    	joueur2.setLayout(new GridLayout(4, 2));
+    	joueur2.setLayout(new GridLayout(5, 2));
     	
     	
     	etapeJ2.addActionListener(new ActionListener(){
@@ -999,6 +1016,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	joueur2.add(bottePossJ2);
     	joueur2.add(isAttaqueJ2);
     	joueur2.add(isLimiteJ2);
+    	joueur2.add(feuVertInitJ2);
+    	this.feuVertInitJ2.setHorizontalAlignment(JLabel.CENTER);
     	
     	b1.add(joueur2);
     
@@ -1008,7 +1027,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(2).getNom();
 	joueur3.setTitle(nom);
 	joueur3.setVisible(true);
-	joueur3.setLayout(new GridLayout(4, 2));
+	joueur3.setLayout(new GridLayout(5, 2));
 	
 	
 	etapeJ3.addActionListener(new ActionListener(){
@@ -1114,6 +1133,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur3.add(bottePossJ3);
 	joueur3.add(isAttaqueJ3);
 	joueur3.add(isLimiteJ3);
+	joueur3.add(feuVertInitJ3);
+	this.feuVertInitJ3.setHorizontalAlignment(JLabel.CENTER);
 	
 	b1.add(joueur3);
 	
@@ -1123,7 +1144,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	nom=controleur.getJoueurs().get(3).getNom();
 	joueur4.setTitle(nom);
 	joueur4.setVisible(true);
-	joueur4.setLayout(new GridLayout(4, 2));
+	joueur4.setLayout(new GridLayout(5, 2));
 	
 	
 	etapeJ4.addActionListener(new ActionListener(){
@@ -1231,6 +1252,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	joueur4.add(bottePossJ4);
 	joueur4.add(isAttaqueJ4);
 	joueur4.add(isLimiteJ4);
+	joueur4.add(feuVertInitJ4);
+	this.feuVertInitJ4.setHorizontalAlignment(JLabel.CENTER);
 	
 	b1.add(joueur4);
 	
@@ -1512,6 +1535,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ1.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
+	  			this.feuVertInitJ1.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
 	  		
 			}
   			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
@@ -1519,6 +1543,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ2.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
+	  			this.feuVertInitJ2.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
 	  		
 	  			
   			}
@@ -1527,6 +1552,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
+	  			this.feuVertInitJ3.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
 	  			
   			}
 	  		if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
@@ -1534,6 +1560,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ4.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
+	  			this.feuVertInitJ4.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
 	  		
 	  		}
   			

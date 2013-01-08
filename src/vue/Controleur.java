@@ -177,6 +177,14 @@ public class Controleur {
 			return "vide";
 		}
 	}
+	
+	public String getEtatFeuVertInitial(JeuSurTable jeu){
+		if(jeu.getPileFeuVertInitial().isEmpty()==false){
+			return jeu.getPileFeuVertInitial().get(0).toString();
+		} else{
+			return "vide";
+		}
+	}
 
 	public int getKm(JeuSurTable arg0) {
 		

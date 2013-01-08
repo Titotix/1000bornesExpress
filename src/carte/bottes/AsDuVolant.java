@@ -26,7 +26,7 @@ public class AsDuVolant extends Botte {
 	}
 	
 	public String toString() {
-		return "AsDuVolant";
+		return "AsDuVolant<br>";
 	}
 
 }
