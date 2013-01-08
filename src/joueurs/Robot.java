@@ -34,10 +34,6 @@ public class Robot extends Joueur {
 		if(this.choixDefausser()) {
 			
 			this.defausser(this.choixCarte(true)); //Le robot choisit une carte à défausser.
-						
-			PartieDeJeu partie = PartieDeJeu.getInstance();
-			partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-
 			
 		} else {
 			Carte carteChoisie = this.choixCarte(false);
@@ -51,21 +47,16 @@ public class Robot extends Joueur {
 					if(adversaire instanceof Robot) {	
 						adversaire.coupFourre(botte);
 					}
-					PartieDeJeu partie = PartieDeJeu.getInstance();
-					partie.setNumeroJoueurActuel(adversaire.getNumPassage() - 1); 
+					
 
 					//Pour que ce soit au joueur qui a fait un coup fourre de jouer
 
-				} else {
-					PartieDeJeu partie = PartieDeJeu.getInstance();
-					partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
-
+				
 				}
 			} else {
 				carteChoisie.jouer(this, null);
 				
-				PartieDeJeu partie = PartieDeJeu.getInstance();
-				partie.setNumeroJoueurActuel(this.getNumPassage() ); //Pour que ce soit au joueur suivant de jouer
+				
 
 			}
 			
@@ -122,9 +113,6 @@ public class Robot extends Joueur {
 	public void coupFourre(Botte botte) {
 		
 		botte.coupFourre(this);
-		
-		PartieDeJeu partie = PartieDeJeu.getInstance();
-		partie.setNumeroJoueurActuel(this.getNumPassage() - 1); //Pour que le robot rejoue
 
 	}
 

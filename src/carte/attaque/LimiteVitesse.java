@@ -1,5 +1,6 @@
 package carte.attaque;
 
+import jeu.PartieDeJeu;
 import joueurs.Joueur;
 import carte.bottes.Botte;
 import carte.bottes.Prioritaire;
@@ -30,6 +31,8 @@ public class LimiteVitesse extends Attaque {
 		
 		adversaire.getJeuSurTable().ajouterCarteVitesse(this);		
 		joueur.getJeuEnMain().retirerCarte(this);
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+
 		
 	}
 	

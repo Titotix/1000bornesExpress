@@ -168,6 +168,12 @@ public class Controleur {
 		
 		return arg0.getNbKmParcouruTotal();
 	}
+
+	public void jouerCoupFourre(Joueur joueur, Botte botte) {
+		botte.coupFourre(joueur);
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1);
+		
+	}
 	
 
 }

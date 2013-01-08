@@ -64,18 +64,5 @@ public abstract class Attaque extends Carte {
 	 */
 
 	public abstract void jouer(Joueur joueur, Joueur adversaire);
-	/*	public void jouer(Joueur joueur, Joueur adversaire){
-		if(this instanceof LimiteVitesse) {
-			System.out.println("C'est une limite vitesse :"+this.toString());
-			adversaire.getJeuSurTable().ajouterCarteVitesse((LimiteVitesse) this);
-		} else {
-			System.out.println("c'est pas une limite vieteesse :"+this.toString());
-			adversaire.getJeuSurTable().ajouterCarteBataille(this);
-		}
-		
-		joueur.getJeuEnMain().retirerCarte(this);
-		
-	}
-*/	
 	
 }

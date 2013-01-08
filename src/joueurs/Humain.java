@@ -29,8 +29,15 @@ public class Humain extends Joueur {
 	}
 
 	@Override
-	public void coupFourre(Botte botte) {
-		// TODO Auto-generated method stub
+	public synchronized void coupFourre(Botte botte) {
+		this.setChanged();
+		this.notifyObservers("coupFourree");
+		try {
+			this.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

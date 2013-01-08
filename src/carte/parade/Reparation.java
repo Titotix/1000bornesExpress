@@ -1,5 +1,6 @@
 package carte.parade;
 
+import jeu.PartieDeJeu;
 import joueurs.Joueur;
 import tasDeCartes.Defausse;
 import carte.attaque.Accident;
@@ -26,6 +27,8 @@ public class Reparation extends Parade {
 	public void jouer(Joueur joueur, Joueur inutile) {
 		joueur.getJeuEnMain().retirerCarte(this); // on retire la carte de la main
 		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+
 		
 	}
 

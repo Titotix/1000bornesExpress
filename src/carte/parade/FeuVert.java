@@ -1,5 +1,6 @@
 package carte.parade;
 
+import jeu.PartieDeJeu;
 import joueurs.Joueur;
 import tasDeCartes.Defausse;
 import carte.attaque.Attaque;
@@ -34,6 +35,9 @@ public class FeuVert extends Parade {
 		} else {
 			Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
 		}
+		
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+
 	}
 
 }

@@ -166,7 +166,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
 					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
 					if(botte != null) {
-						joueurChoisi.coupFourre(botte);
+						if(joueurChoisi instanceof Robot) {
+							joueurChoisi.coupFourre(botte);
+						}
 					}
 					synchronized (controleur.getJoueurActuel()) {
 						controleur.getJoueurActuel().notify(); 
@@ -1495,6 +1497,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  		//TODO ajouter bottes avec ton html damien
 	  		}
   			
-  		} 		
+  		} else if(arg0 instanceof Humain && arg1 == "coupFourree") {
+  			Integer choix = JOptionPane.showConfirmDialog(null, ((Joueur) arg0).getNom()+", vous pouvez jouer un coup fourrée, souhaitez vous le jouer ?");
+  			if(choix ==0) {
+  				controleur.jouerCoupFourre((Joueur) arg0, ((Joueur) arg0).canCoupFourre());
+  			}
+  		}
 	}
 }

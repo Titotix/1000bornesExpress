@@ -84,6 +84,8 @@ public abstract class Joueur extends Observable {
 		Defausse defausse = Defausse.getInstance();
 		this.jeuEnMain.retirerCarte(carte);  //va retirer la carte de la main du joueur
 		defausse.ajouterCarte(carte);  //ajoute la carte défausser à la défausse
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(this.getNumPassage() ); // pour que le joueur suivant joue.
+
 	}
 	
 	

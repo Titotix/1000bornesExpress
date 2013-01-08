@@ -40,7 +40,8 @@ public class Etape extends Carte {
 	public void jouer(Joueur joueur, Joueur inutile) {
 		joueur.getJeuSurTable().ajouterCarteEtape(this);
 		joueur.getJeuEnMain().retirerCarte(this);
-		
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); // pour que le joueur suivant joue.
+
 	}
 	
 	public boolean isJouable(Joueur joueur, Joueur inutile) {

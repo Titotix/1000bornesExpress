@@ -1,4 +1,5 @@
 package carte.bottes;
+import jeu.PartieDeJeu;
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
 import joueurs.JeuSurTable;
@@ -44,6 +45,8 @@ public abstract class Botte extends Carte  {
 		
 		joueur.getJeuEnMain().retirerCarte(this);
 		//retirer la botte de la main du joueur
+		
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); // pour que le joueur rejoue.
 	}
 	
 	public abstract boolean isCompatible(Attaque carte);
@@ -84,6 +87,7 @@ public abstract class Botte extends Carte  {
 		//Fais piocher le joueur dans le talon pour compenser l'utilisation de sa botte
 		//Le joueur a donc toujours 4 cartes dans sa main.
 		
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1); // pour que le joueur prenne la main..
 
 		
 	}
