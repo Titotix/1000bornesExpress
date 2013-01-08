@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import jeu.Menu;
 import jeu.PartieDeJeu;
 
+import joueurs.JeuSurTable;
 import joueurs.Joueur;
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
@@ -145,6 +146,27 @@ public class Controleur {
 	public boolean isPartieFinie() {
 		
 		return PartieDeJeu.getInstance().isTerminee();
+	}
+
+	public String getCarteBataille(JeuSurTable jeu) {
+		if(jeu.getPileBataille().isEmpty() == false) {
+			return jeu.getPileBataille().get(0).toString();
+		} else {
+			return "vide";
+		}
+	}
+	
+	public String getCarteLimiteVitesse(JeuSurTable jeu) {
+		if(jeu.getPileVitesse().isEmpty() == false) {
+			return jeu.getPileVitesse().get(0).toString();
+		} else {
+			return "vide";
+		}
+	}
+
+	public int getKm(JeuSurTable arg0) {
+		
+		return arg0.getNbKmParcouruTotal();
 	}
 	
 

@@ -43,40 +43,40 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JButton attaqueJ1=new JButton("Pile Bataille");
 	private JButton limiteJ1=new JButton("Limite de vitesse");
 	private JButton botteJ1=new JButton("Bottes");
-	private JLabel kmJ1=new JLabel("Bornes:");
+	private JLabel kmJ1=new JLabel("Bornes : 0");
 	private JLabel bottePossJ1=new JLabel("Bottes :");
-	private JLabel isAttaqueJ1=new JLabel("Pile Bataille");
-	private JLabel isLimiteJ1=new JLabel("Pile Limite");
+	private JLabel isAttaqueJ1=new JLabel("Pile Bataille : vide");
+	private JLabel isLimiteJ1=new JLabel("Pile Limite : vide");
 	
 	//Variables Joueur 2
 	private JButton etapeJ2=new JButton("Etape");
 	private JButton attaqueJ2=new JButton("Pile Bataille");
 	private JButton limiteJ2=new JButton("Limite de vitesse");
 	private JButton botteJ2=new JButton("Bottes");
-	private JLabel kmJ2=new JLabel("Bornes:");
+	private JLabel kmJ2=new JLabel("Bornes : 0");
 	private JLabel bottePossJ2=new JLabel("Bottes :");
-	private JLabel isAttaqueJ2=new JLabel("Pile Bataille");
-	private JLabel isLimiteJ2=new JLabel("Pile Limite");
+	private JLabel isAttaqueJ2=new JLabel("Pile Bataille : vide");
+	private JLabel isLimiteJ2=new JLabel("Pile Limite : vide");
 	
 	//Variables Joueur 3
 	private JButton etapeJ3=new JButton("Etape");
 	private JButton attaqueJ3=new JButton("Pile Bataille");
 	private JButton limiteJ3=new JButton("Limite de vitesse");
 	private JButton botteJ3=new JButton("Bottes");
-	private JLabel kmJ3=new JLabel("Bornes:");
+	private JLabel kmJ3=new JLabel("Bornes : 0");
 	private JLabel bottePossJ3=new JLabel("Bottes :");
-	private JLabel isAttaqueJ3=new JLabel("Pile Bataille");
-	private JLabel isLimiteJ3=new JLabel("Pile Limite");
+	private JLabel isAttaqueJ3=new JLabel("Pile Bataille : vide");
+	private JLabel isLimiteJ3=new JLabel("Pile Limite : vide");
 	
 	//Variables Joueur 4
 	private JButton etapeJ4=new JButton("Etape");
 	private JButton attaqueJ4=new JButton("Pile Bataille");
 	private JButton limiteJ4=new JButton("Limite de vitesse");
 	private JButton botteJ4=new JButton("Bottes");
-	private JLabel kmJ4=new JLabel("Bornes:");
+	private JLabel kmJ4=new JLabel("Bornes : 0");
 	private JLabel bottePossJ4=new JLabel("Bottes :");
-	private JLabel isAttaqueJ4=new JLabel("Pile Bataille");
-	private JLabel isLimiteJ4=new JLabel("Pile Limite");
+	private JLabel isAttaqueJ4=new JLabel("Pile Bataille : vide");
+	private JLabel isLimiteJ4=new JLabel("Pile Limite : vide");
 	
 	//Variables cartes en main
 	private JInternalFrame carte1 = new JInternalFrame(); 
@@ -1429,7 +1429,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 			this.carte2.setTitle(""+((JeuEnMain) arg0).getMain().get(1).toString());
 			this.carte3.setTitle(""+((JeuEnMain) arg0).getMain().get(2).toString());
-	  		this.carte4.setTitle(""+((JeuEnMain) arg0).getMain().get(3).toString());
+			
+			if(((JeuEnMain) arg0).getMain().size() >= 4) {
+				this.carte4.setTitle(""+((JeuEnMain) arg0).getMain().get(3).toString());
+			}
+			
 	  		if(((JeuEnMain) arg0).getMain().size() == 5) {
 	  			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
 	  			this.carte5.setTitle(""+((JeuEnMain) arg0).getMain().get(4).toString());
@@ -1457,19 +1461,40 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 	  		}
 	  		
-	  		
-		} else if(arg0 instanceof Joueur) {
-			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
-			
-			this.carte1.setTitle(""+((Joueur) arg0).getJeuEnMain().getMain().get(0).toString());
-			this.carte2.setTitle(""+ ((Joueur) arg0).getJeuEnMain().getMain().get(1).toString());
-			this.carte3.setTitle(""+ ((Joueur) arg0).getJeuEnMain().getMain().get(2).toString());
-	  		this.carte4.setTitle(""+((Joueur) arg0).getJeuEnMain().getMain().get(3).toString());
-	  		if(((Humain) arg0).getJeuEnMain().getMain().size() == 5) {
-	  			this.carte5.setVisible(true);//TODO il faut le remettre a false a chaque fin de tour des joueurs.
-	  			this.carte5.setTitle(""+((Joueur) arg0).getJeuEnMain().getMain().get(4).toString());
+	  		if (controleur.getJoueurActuel() instanceof Humain && arg1 == "debut") {
+	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
 	  		}
-		}
-	}
+	  		
+	  		
+		} else if(arg0 instanceof JeuSurTable) {
+			
+			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 1) {	
+	  			this.isAttaqueJ1.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0 )) ;
+	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
+	  			this.kmJ1.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  			//TODO ajouter bottes avec ton html damien
+			}
+  			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
+	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
+	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
+	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  		//TODO ajouter bottes avec ton html damien
+	  			
+  			}
+  			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 3) {	
+	  			this.isAttaqueJ3.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
+	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
+	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 
+	  			//TODO ajouter bottes avec ton html damien
+  			}
+	  		if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
+	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
+	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
+	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
+	  		//TODO ajouter bottes avec ton html damien
+	  		}
+  			
+  		} 		
+	}
 }

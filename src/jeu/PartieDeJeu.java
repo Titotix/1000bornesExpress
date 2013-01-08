@@ -59,7 +59,7 @@ public class PartieDeJeu  extends Observable {
 		Joueur joueurActuel = null;
 		while(this.termine==false) {
 			this.setChanged();
-			this.notifyObservers();
+			this.notifyObservers("debut");
 			
 			System.out.println("\njeu de "+this.joueurs.get(this.numeroJoueurActuel).getNom());
 			cmd.afficherJoueur(this.joueurs.get(this.numeroJoueurActuel));

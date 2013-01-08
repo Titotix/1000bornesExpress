@@ -22,16 +22,17 @@ public class JeuSurTable extends Observable {
 	private ArrayList<Botte> pileBotte;
 	private ArrayList<Etape> pileEtape;
 	private ArrayList<FeuVert> pileFeuVertInitial;
-	
+	private Joueur joueur=null; 
 
-	public JeuSurTable() {
+
+	public JeuSurTable(Joueur joueur) {
 		
 		this.pileBataille=new ArrayList<Attaque>();
 		this.pileVitesse=new ArrayList<LimiteVitesse>();
 		this.pileBotte=new ArrayList<Botte>();
 		this.pileEtape=new ArrayList<Etape>();
 		this.pileFeuVertInitial = new ArrayList<FeuVert>();
-
+		this.joueur = joueur;
 		this.nbKmParcouruBotte=0;
 
 	}
@@ -144,5 +145,8 @@ public class JeuSurTable extends Observable {
 		return " pileBataille "+this.getPileBataille().toString() +"\n"+" pileBotte "+this.getPileBotte().toString() +"\n"+ "pileEtape "+this.getPileEtape().toString() + "\n"+" pileVitesse "+this.getPileVitesse().toString() +"\n"+ " pileFeuVertInitial "+this.getPileFeuVertInitial().toString();
 	}
 
-	
+	public Joueur getJoueur() {
+		return joueur;
+	}
+
 }
