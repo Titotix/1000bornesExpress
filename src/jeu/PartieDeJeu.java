@@ -5,15 +5,13 @@ import java.util.*;
 import joueurs.Joueur;
 import vue.*;
 public class PartieDeJeu  extends Observable implements Runnable {
-
-	private LinkedList<Joueur> joueur;
 	
 	private boolean termine;
 	private int nbRobot;
 	private int nbHumain;
 	private int numeroJoueurActuel; // numero du joueur a qui c'est le tour.
 	private static PartieDeJeu partie = null; //singelton
-
+	private LinkedList<Joueur> joueurs;
 	private int nbKmMax;
 
 
@@ -23,13 +21,13 @@ public class PartieDeJeu  extends Observable implements Runnable {
 		Menu menu = Menu.getInstance();
 		this.nbRobot = menu.getNbRobot();
 		this.nbHumain = menu.getNbHumain();
-		joueur = new LinkedList<Joueur>();
+		this.joueurs = new LinkedList<Joueur>();
 		this.numeroJoueurActuel = 0;
 		//On concatène ici les deux LinkedList (d'Humain et de Robot) dans la LinkedList de Joueur.
 
-		joueur.addAll(menu.getHumain());
+		this.joueurs.addAll(menu.getHumain());
 	
-		joueur.addAll(menu.getRobot());
+		this.joueurs.addAll(menu.getRobot());
 	
 		
 	}
@@ -49,10 +47,10 @@ public class PartieDeJeu  extends Observable implements Runnable {
 		//On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
 		Joueur joueurActuel = null;
 		while(this.termine==false) {
-			System.out.println("\njeu de "+joueur.get(this.numeroJoueurActuel).getNom());
-			cmd.afficherJoueur(joueur.get(this.numeroJoueurActuel));
+			System.out.println("\njeu de "+this.joueurs.get(this.numeroJoueurActuel).getNom());
+			cmd.afficherJoueur(this.joueurs.get(this.numeroJoueurActuel));
 			
-			joueurActuel = joueur.get(this.numeroJoueurActuel);
+			joueurActuel = this.joueurs.get(this.numeroJoueurActuel);
 			joueurActuel.jouer();
 			
 			if(joueurActuel.isGagnant()) {

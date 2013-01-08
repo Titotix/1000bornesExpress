@@ -224,12 +224,12 @@ public class Menu {
 		
 	}
 	
-	//D�finir nombre d'IA
+	//Définir nombre d'IA
 	public void setNbRobot (int nbRobot){ 
 		this.nbRobot = nbRobot;
 	}
 	
-	//D�finir nombre d'humains
+	//Définir nombre d'humains
 	public void setNbHumain (int nbHumain){ 
 		
 		this.nbHumain = nbHumain;
