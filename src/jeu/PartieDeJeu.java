@@ -58,6 +58,9 @@ public class PartieDeJeu  extends Observable {
 		//On incremente numeroJoueurActuel jusqu'au nombre total de joueur, alors on le reinitialise alors a 0.		
 		Joueur joueurActuel = null;
 		while(this.termine==false) {
+			this.setChanged();
+			this.notifyObservers();
+			
 			System.out.println("\njeu de "+this.joueurs.get(this.numeroJoueurActuel).getNom());
 			cmd.afficherJoueur(this.joueurs.get(this.numeroJoueurActuel));
 			

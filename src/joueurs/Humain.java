@@ -24,7 +24,7 @@ public class Humain extends Joueur {
 		}
 
 		PartieDeJeu partie = PartieDeJeu.getInstance();
-		partie.setNumeroJoueurActuel(this.getNumPassage() + 1);
+		partie.setNumeroJoueurActuel(this.getNumPassage());
 
 	}
 

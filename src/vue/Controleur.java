@@ -100,6 +100,10 @@ public class Controleur {
 		carte.jouer(joueurActuel, joueurChoisi);
 	}
 	
+	public Botte canCoupFourre(Joueur joueurActuel, Joueur joueurChoisi) {
+		return joueurChoisi.canCoupFourre();
+	}
+	
 	public LinkedList<Carte> getMain(Joueur joueur) {
 		return joueur.getJeuEnMain().getMain();
 	}
@@ -113,7 +117,11 @@ public class Controleur {
 	}
 	
 	public String getCarteVisibleDefausse() {
-		return Defausse.getInstance().getPileCarte().getFirst().toString();
+		if(Defausse.getInstance().getPileCarte().isEmpty() == false) {
+			return Defausse.getInstance().getPileCarte().getFirst().toString();
+		} else {
+			return "Aucune carte dans la défausse.";
+		}
 	}
 
 	public int getNumeroJoueurActuel() {
