@@ -74,6 +74,7 @@ public abstract class Attaque extends Carte {
 						return false;
 					}
 				}
+				return true;
 			} else {
 				return true;
 			}
