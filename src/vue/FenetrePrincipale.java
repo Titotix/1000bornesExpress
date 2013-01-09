@@ -1712,9 +1712,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
   			if(choix ==0) {
   				controleur.jouerCoupFourre((Joueur) arg0, ((Joueur) arg0).canCoupFourre());
   			}
-  			synchronized(arg0) {
-  				arg0.notify();
-  			}
+  			
   		}
 	}
 }

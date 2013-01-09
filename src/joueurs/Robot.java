@@ -54,9 +54,9 @@ public class Robot extends Joueur {
 				 */
 				Botte botte = adversaire.canCoupFourre();
 				if(botte != null) {
-					if(adversaire instanceof Robot) {	
-						adversaire.coupFourre(botte);
-					}
+					
+					adversaire.coupFourre(botte);
+					
 				
 				}
 			} else {

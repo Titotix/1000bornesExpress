@@ -33,15 +33,10 @@ public class Humain extends Joueur {
 	 * @param botte
 	 */
 	@Override
-	public synchronized void coupFourre(Botte botte) {
+	public  void coupFourre(Botte botte) {
 		this.setChanged();
 		this.notifyObservers("coupFourree");
-		try {
-			this.wait();
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-		}
+		
 		
 	}
 
