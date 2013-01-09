@@ -30,6 +30,12 @@ import carte.parade.FinLimiteVitesse;
 import carte.parade.Reparation;
 import carte.parade.RoueSecours;
 
+
+/**
+ * Cette classe va instancier l'ensemble des objets nécessaires à une partie de carte, ainsi que l'instance de FenetrePrincipale lié à la partie de jeu.
+ * 
+ *
+ */
 public class Menu implements Runnable {
 	
 
@@ -100,6 +106,10 @@ public class Menu implements Runnable {
 	}
 
 
+	/**
+	 * Permet d'obtenir aléatoirement une des trois stratégies de robots possible.
+	 * @return Strategy Une stratégies choisie aleatoirement.
+	 */
 	public Strategy getRandomStrategy() {
 		Random r = new Random();
 		int i = r.nextInt(3);
@@ -113,8 +123,8 @@ public class Menu implements Runnable {
 	}
 	
 	/**
-	 * Permet la creation des cartes grace aux constructeurs des types
-	 * @param 
+	 * Permet la creation de l'ensemble des cartes du jeu.
+	 * 
 	 * 
 	 */
 	public void creerCartes() {
