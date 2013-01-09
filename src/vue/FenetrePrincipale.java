@@ -169,12 +169,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
+			Joueur joueurChoisi = controleur.getJoueurs().get(0);
 
 			if (carteSelectionnee != null){
 				
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
-
+					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -204,6 +205,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 				
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
 					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
+					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
+
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						if(joueurChoisi instanceof Robot) {
@@ -239,6 +242,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -248,7 +252,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 					}
 				}
 				else{
-					eventLabel.setText("Vous ne pouvez pas jouer cette carte ici, re-selectionnez une carte");}
+					eventLabel.setText("Vous ne pouvez pas jouer cette carte ici, re-selectionnez une carte");
+					}
 			}
 			else {
 				eventLabel.setText("Il faut selectionner une carte");
@@ -264,10 +269,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ1.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
+			Joueur joueurChoisi = controleur.getJoueurs().get(0);
 
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -309,10 +316,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
+			Joueur joueurChoisi = controleur.getJoueurs().get(0);
 
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -340,6 +349,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 					
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
 					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
+					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
+
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -370,6 +381,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
+
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -395,10 +408,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
+			Joueur joueurChoisi = controleur.getJoueurs().get(0);
 
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
+
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -444,10 +460,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
+
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -476,6 +494,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
+    					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
+
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -508,6 +528,8 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
 					if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 						controleur.jouer(joueurActuel, joueurChoisi, carteSelectionnee);
+						eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
+
 						Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -533,10 +555,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	botteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
+
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -577,10 +601,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	etapeJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
+
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -608,6 +634,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
+    					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -638,6 +665,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -663,10 +691,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	botteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -706,10 +735,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -737,6 +767,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
 					feuVertInitJ3.setText("Feu vert initial: Feu Vert");
+					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -766,6 +797,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -790,10 +822,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -838,10 +871,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -869,6 +903,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
+    					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
     					if(botte != null) {
@@ -901,6 +936,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -926,10 +962,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	botteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -969,10 +1006,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	etapeJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
-
+    			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -999,6 +1037,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
     					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
@@ -1030,6 +1069,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi , carteSelectionnee)){
     					controleur.jouer(joueurActuel, joueurChoisi , carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -1054,9 +1094,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	botteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurActuel = controleur.getJoueurActuel();
+    			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
     					synchronized (joueurActuel) {
     						joueurActuel.notify(); 
     					}
@@ -1095,10 +1137,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
 					
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
@@ -1127,6 +1170,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel, joueurChoisi, carteSelectionnee);
 					feuVertInitJ3.setText("Feu vert initial: Feu Vert");
+					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
 					if(botte != null) {
@@ -1157,6 +1201,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -1181,10 +1226,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -1223,10 +1269,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	etapeJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(3);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile etape de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -1253,6 +1300,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile attaque de "+joueurChoisi);
 					feuVertInitJ4.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
@@ -1284,7 +1332,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-					
+					eventLabel.setText("Vous avez jouer sur la pile limite de "+joueurChoisi);
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -1309,10 +1357,11 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	botteJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurActuel = controleur.getJoueurActuel();
-
+			Joueur joueurChoisi = controleur.getJoueurs().get(3);
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee);
+					eventLabel.setText("Vous avez jouer sur la pile botte de "+joueurChoisi);
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -1566,7 +1615,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 		if(arg0 instanceof Defausse) {
 			this.defausse.setTitle("Defausse : "+this.controleur.getCarteVisibleDefausse());
 			
-		} else if (arg0 instanceof JeuEnMain) {
+		} else if (arg0 instanceof JeuEnMain && ((JeuEnMain) arg0).getJoueur() instanceof Humain) {
 			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
 			this.carte1.setTitle(""+((JeuEnMain) arg0).getMain().get(0).toString());
 
@@ -1585,10 +1634,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
 		} else if (arg0 instanceof PartieDeJeu) {
 			
 			if(arg1 instanceof Joueur) {
-				if(controleur.isPartieFinie()) {
-					JOptionPane.showMessageDialog(null, "Victoire de "+((Joueur) arg1).getNom());
+				JOptionPane.showMessageDialog(null, "Victoire de "+((Joueur) arg1).getNom());
 			
-				}
+				
 			}
 			/**
 			 * On cache la 5e carte qui est vide a ce moment

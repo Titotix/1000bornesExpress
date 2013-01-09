@@ -9,9 +9,11 @@ public class JeuEnMain extends Observable{
 
 
 	private LinkedList<Carte> main;
+	private Joueur joueur;
 	
-	public JeuEnMain(){
+	public JeuEnMain(Joueur joueur){
 		this.main = new LinkedList<Carte>();
+		this.joueur = joueur;
 	}
 	
 	/**
@@ -42,6 +44,10 @@ public class JeuEnMain extends Observable{
 	
 	public String toString() {
 		return main.toString();
+	}
+
+	public Joueur getJoueur() {
+		return this.joueur;
 	}
 	
 	

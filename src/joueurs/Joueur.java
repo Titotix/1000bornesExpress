@@ -29,7 +29,7 @@ public abstract class Joueur extends Observable {
 		this.nom=nomJoueur;
 		this.numPassage=numPassage;
 
-		this.jeuEnMain = new JeuEnMain();
+		this.jeuEnMain = new JeuEnMain(this);
 		this.jeuSurTable = new JeuSurTable(this);
 	}
 	

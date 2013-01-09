@@ -149,10 +149,6 @@ public class Controleur {
 
 	}
 
-	public boolean isPartieFinie() {
-		
-		return PartieDeJeu.getInstance().isTerminee();
-	}
 
 	public String getCarteBataille(JeuSurTable jeu) {
 		if(jeu.getPileBataille().isEmpty() == false) {
