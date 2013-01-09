@@ -10,7 +10,7 @@ import vue.MenuGraphique;
 
 /**
  * Main pour l'execution du programme
- * @author Damien
+ * 
  *
  */
 public class main {

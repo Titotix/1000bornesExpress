@@ -13,6 +13,7 @@ import strategie.Vitesse;
 import tasDeCartes.Defausse;
 import tasDeCartes.Talon;
 import vue.FenetrePrincipale;
+import vue.MenuGraphique;
 
 import carte.attaque.Accident;
 import carte.attaque.Crevaison;
@@ -57,6 +58,19 @@ public class Menu implements Runnable {
 		return menu;
 	}
 	
+	public static void main(String[] args) {
+		
+		
+		new MenuGraphique();
+		PartieDeJeu partie = PartieDeJeu.getInstance();
+		
+		Menu menu = Menu.getInstance();
+		Thread t = new Thread(menu, "menu");
+		t.start();
+		
+		partie.jouerPartie(); 
+	
+	}
 	
 	/**
 	 * Creer une nouvelle partie

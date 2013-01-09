@@ -1645,12 +1645,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 						
 			}
 			
-	  		
+			this.carte5.setVisible(false);
+			this.carte1.setTitle("");
+
+			this.carte2.setTitle("");
+			this.carte3.setTitle("");
+	  		this.carte4.setTitle("");
+	  	
 	  		
 	  		if(controleur.getJoueurActuel() instanceof Humain && arg1 =="debut") {
 	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
 	  			
 	  		}
+	  		
+	  		
 	  		
 	  		/**
 			 * On rend visible les cartes du joueur a qui c'est le tour une fois qu'il a clqiuer sur la JoptionPane.
