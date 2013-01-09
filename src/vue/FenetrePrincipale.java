@@ -819,7 +819,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-    					
+    					feuVertInitJ1.setText("Feu vert initial: Feu Vert");//TODO
     					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -941,7 +941,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-    					
+    					feuVertInitJ2.setText("Feu vert initial: Feu Vert");//TODO
     					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -1058,7 +1058,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee);
-					
+					feuVertInitJ3.setText("Feu vert initial: Feu Vert");//TODO
 					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -1176,6 +1176,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+					feuVertInitJ4.setText("Feu vert initial: Feu Vert");//TODO
 					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
