@@ -70,7 +70,7 @@ public class MenuGraphique {
 	}
 	
 	
-	///////////// CONTROLEUR /////////////////
+	///////////// CONTROLEUR //////////////////
 	public void setNbHumain(int nbHumain) {
 		Menu.getInstance().setNbHumain(nbHumain);
 	

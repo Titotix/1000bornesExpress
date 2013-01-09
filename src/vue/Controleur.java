@@ -158,6 +158,7 @@ public class Controleur {
 		if(jeu.getPileBataille().isEmpty() == false) {
 			return jeu.getPileBataille().get(0).toString();
 		} else {
+			
 			return "vide";
 		}
 	}
@@ -166,6 +167,7 @@ public class Controleur {
 		if(jeu.getPileVitesse().isEmpty() == false) {
 			return jeu.getPileVitesse().get(0).toString();
 		} else {
+
 			return "vide";
 		}
 	}
@@ -174,6 +176,16 @@ public class Controleur {
 		if(jeu.getPileBotte().isEmpty() == false) {
 			return jeu.getPileBotte().toString();
 		} else {
+
+			return "vide";
+		}
+	}
+	
+	public String getEtatFeuVertInitial(JeuSurTable jeu){
+		if(jeu.getPileFeuVertInitial().isEmpty()==false){
+			return "Feu vert";
+		} else{
+
 			return "vide";
 		}
 	}

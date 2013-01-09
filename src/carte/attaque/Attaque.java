@@ -40,26 +40,27 @@ public abstract class Attaque extends Carte {
 			/**
 			 * Si la pile de bataille de l'adversaire visé est vide et que cet adversaire a déjà démarrer
 			 */
-			if(adversaire.getJeuSurTable().getPileBataille().isEmpty() && adversaire.getJeuSurTable().isDemarrer()) {		
-			
-				/**
-				 * On regarde alors si la pile botte ne contient pas la botte adequate pour bloquer l'attaque.	
-				 */
-				if( adversaire.getJeuSurTable().getPileBotte().isEmpty() == false) {
-				
-					for(Iterator<Botte> it = adversaire.getJeuSurTable().getPileBotte().iterator() ; it.hasNext() ;) {	
-						/**
-						 * si c'est le cas, on retourne faux, la carte attaque n'est pas jouable contre cette adversaire.
-						 */
-						if(this.isCompatible(it.next())) {
-							
-							return false;
-						}
-					}
-				} else {
-					return true;
-				}
+			if(adversaire.getJeuSurTable().getPileBataille().isEmpty() == false  || adversaire.getJeuSurTable().isDemarrer() == false) {		
+				return false;
 			}
+			/**
+			 * On regarde alors si la pile botte ne contient pas la botte adequate pour bloquer l'attaque.	
+			 */
+			if( adversaire.getJeuSurTable().getPileBotte().isEmpty() == false) {
+			
+				for(Iterator<Botte> it = adversaire.getJeuSurTable().getPileBotte().iterator() ; it.hasNext() ;) {	
+					/**
+					 * si c'est le cas, on retourne faux, la carte attaque n'est pas jouable contre cette adversaire.
+					 */
+					if(this.isCompatible(it.next())) {
+						
+						return false;
+					}
+				}
+			} else {
+				return true;
+			}
+		
 			/**
 			 * Si c'est une limite de vitesse il suffit que la pile de vitesse soit vide pour que la limite de vitesse soit jouable.
 			 */
