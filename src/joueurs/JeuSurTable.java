@@ -39,7 +39,7 @@ public class JeuSurTable extends Observable {
 	
 	
 	/** 
-	 * @param Carte
+	 * @param carte
 	 * 
 	 */
 	
@@ -102,7 +102,7 @@ public class JeuSurTable extends Observable {
 
 	/**
 	 * Pour savoir si ce jeu sur table a posé ou non un feu vert initiateur.
-	 * @return
+	 * 
 	 */
 	public boolean isDemarrer() {
 		return !(this.pileFeuVertInitial.isEmpty());

@@ -257,7 +257,7 @@ public class AggressifMeilleurJoueur implements Strategy {
 	 * Si un des joueur de la partie est attaquable avec la carte Attaque mise en parametre, alors cette methode
 	 * renverra forcement un joueur.
 	 *
-	 * @param Attaque
+	 * @param carte
 	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
 	 */
 	public Joueur choixCible(Robot robot, Attaque carte) {

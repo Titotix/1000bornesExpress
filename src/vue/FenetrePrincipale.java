@@ -203,6 +203,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 				if (controleur.isPosableSurAttaque(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
 				
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						if(joueurChoisi instanceof Robot) {
@@ -338,7 +339,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-					
+					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -474,7 +475,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-    					
+    					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -606,6 +607,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
@@ -734,7 +736,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-					
+					feuVertInitJ3.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
@@ -866,7 +868,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
     			if (carteSelectionnee!=null){
     				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-    					
+    					feuVertInitJ1.setText("Feu vert initial: Feu Vert");
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
     					if(botte != null) {
@@ -997,7 +999,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
     				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
     					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
-    					
+    					feuVertInitJ2.setText("Feu vert initial: Feu Vert");
     					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
     					if(botte != null) {
@@ -1097,6 +1099,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 			if (carteSelectionnee!=null){
 				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					
 					synchronized (joueurActuel) {
 						joueurActuel.notify(); 
 					}
@@ -1123,7 +1126,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel, joueurChoisi, carteSelectionnee);
-					
+					feuVertInitJ3.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
 					if(botte != null) {
@@ -1250,6 +1253,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
 					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					feuVertInitJ4.setText("Feu vert initial: Feu Vert");
 					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 
 					if(botte != null) {

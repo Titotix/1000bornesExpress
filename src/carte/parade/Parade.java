@@ -5,7 +5,12 @@ import tasDeCartes.Defausse;
 import joueurs.Joueur;
 import carte.attaque.Attaque;
 
-
+/**
+ * Represente les cartes Parade
+ * On y verifie dans quelles conditions la carte est jouable, 
+ * @author Damien
+ *
+ */
 public abstract class Parade extends Carte {
 	
 	
@@ -16,7 +21,11 @@ public abstract class Parade extends Carte {
 	public abstract void jouer(Joueur joueur, Joueur inutile);
 	
 	public abstract boolean isCompatible(Attaque attaque);
-	
+	/**
+	 * Indique dans quelles circonstances la carte est jouable
+	 * @param joueur 
+	 * @param inutile
+	 */
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
 		
 		/**

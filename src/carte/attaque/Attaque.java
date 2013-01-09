@@ -6,7 +6,14 @@ import carte.bottes.Botte;
 import tasDeCartes.Carte;
 import joueurs.Joueur;
 
-
+/**
+ * 
+ * Regroupe tous les types d'attaque
+ * On y trouve la verification que la carte selectionnée est bien jouable
+ * 
+ * @author Damien
+ *
+ */
 public abstract class Attaque extends Carte {
 	
 	
@@ -22,6 +29,12 @@ public abstract class Attaque extends Carte {
 	 */
 	public abstract boolean isCompatible(Botte botte);
 	
+	/**
+	 * Permet de savoir si le joueur peut jouer contre cet adversaire
+	 * @param joueurActuel
+	 * @param adversaire
+	 * 
+	 */
 	public boolean isJouable(Joueur joueurActuel, Joueur adversaire) { 
 		if(adversaire == null) {
 			return false;
@@ -29,7 +42,11 @@ public abstract class Attaque extends Carte {
 		return this.isJouableContre(adversaire);
 	}
 	
-	
+	/**
+	 * Permet de savoir si la carte peut etre posee sur le tas
+	 * @param adversaire
+	 * 
+	 */
 	public boolean isJouableContre(Joueur adversaire) {
 		
 		/**

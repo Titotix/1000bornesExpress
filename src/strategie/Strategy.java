@@ -19,8 +19,9 @@ public interface Strategy {
 	/**
 	 * Choisit la carte à jouer du robot selon différentes stratégies de jeu.
 	 * 
-	 * @param robot qui est en train de jouer
-	 * @param boolean vrai si la carte à choisir est à defausser
+	 * @param robotActuel
+	 * 
+	 * @param defausser 
 	 * faux si la carte à choisir n'est pas à défausser
 	 * 
 	 * @return carte choisie dans la main du robot.
@@ -31,8 +32,8 @@ public interface Strategy {
 	 * Va choisir la cible d'une carte Attaque.
 	 * Le choix s'effectue selon la stratégie du robot.
 	 * 
-	 * @param robot qui est en train de jouer
-	 * @param carte Attaque que le robot veut jouer
+	 * @param robotActuel 
+	 * @param carte 
 	 * @return cible de la carte Attaque que le robot à choisit.
 	 */
 	public Joueur choixCible(Robot robotActuel, Attaque carte);

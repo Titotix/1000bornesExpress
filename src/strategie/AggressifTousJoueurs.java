@@ -190,7 +190,7 @@ public class AggressifTousJoueurs implements Strategy {
 
 	/**
 	 * Teste pour tous les joueurs adverses si la carte attaque est jouable
-	 * @param Attaque
+	 * @param carte
 	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
 	 */
 	public Joueur choixCible(Robot robot, Attaque carte) {

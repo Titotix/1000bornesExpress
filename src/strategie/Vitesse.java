@@ -190,7 +190,7 @@ public class Vitesse implements Strategy {
 
 	/**
 	 * Teste pour tous le sjoueurs adverses si la carte attaque est jouable
-	 * @param Attaque
+	 * @param carte
 	 * @param robot (celui qui est en train de jouer)
 	 * @return Joueur (null si aucun joueur ne peut recevoir l'attaque)
 	 */
