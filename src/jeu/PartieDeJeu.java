@@ -42,7 +42,7 @@ public class PartieDeJeu  extends Observable {
 	}
 	/**
 	 * Singleton
-	 * @return
+	 * 
 	 */
 	public synchronized static PartieDeJeu getInstance() {
 		
@@ -102,7 +102,7 @@ public class PartieDeJeu  extends Observable {
 	
 	/**
 	 * Recupere le numero du joueur actuel
-	 * @return
+	 *
 	 */
 	
 	public int getNumeroJoueurActuel() {
@@ -160,7 +160,7 @@ public class PartieDeJeu  extends Observable {
 	
 	/**
 	 * Recupere le booleen termine
-	 * @return
+	 *
 	 */
 	public boolean isTerminee() {
 		

@@ -2,6 +2,7 @@ package strategie;
 
 import java.util.Iterator;
 
+
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
 import tasDeCartes.Talon;
@@ -18,6 +19,11 @@ import carte.attaque.Attaque;
 import carte.etape.Etape;
 import carte.parade.FeuVert;
 import carte.parade.*;
+/**
+ * Permet a l'IA d'opter pour une strategie de vitesse, pose les cartes etapes 
+ * @author Damien
+ *
+ */
 public class Vitesse implements Strategy {
 
 	/**

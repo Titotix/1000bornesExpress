@@ -6,7 +6,11 @@ import jeu.Menu;
 
 import joueurs.Humain;
 import joueurs.Robot;
-
+/**
+ * Represente le talon dans lequel on peut piocher
+ * @author Damien
+ *
+ */
 public class Talon extends TasDeCarte {
 	
 	private final int nombreCarteInitial = 66;
@@ -75,7 +79,10 @@ public class Talon extends TasDeCarte {
 		
 		
 	}
-	
+	/**
+	 * Permet de savoir si la pile est vide
+	 * @return boolean
+	 */
 	public boolean isEmpty() {
 		return this.pileCarte.isEmpty();
 	}

@@ -29,7 +29,11 @@ import jeu.Menu;
 import jeu.PartieDeJeu;
 import joueurs.*;
 import jeu.*;
-
+/**
+ * Correspond a la fenetre de jeu : interface graphique
+ * @author Damien
+ *
+ */
 public class FenetrePrincipale extends JFrame implements Observer{
 	
 	
@@ -1560,14 +1564,16 @@ public class FenetrePrincipale extends JFrame implements Observer{
   
 	  
 }
-
+  	/**
+  	 * Methode update permettant a la vue de se mettre a jour a differents moment, et notamment de changer les noms des cartes 
+  	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Defausse) {
 			this.defausse.setTitle("Defausse : "+this.controleur.getCarteVisibleDefausse());
 			
 		} else if (arg0 instanceof JeuEnMain) {
-			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
+			this.carte5.setVisible(false);
 			this.carte1.setTitle(""+((JeuEnMain) arg0).getMain().get(0).toString());
 
 			this.carte2.setTitle(""+((JeuEnMain) arg0).getMain().get(1).toString());

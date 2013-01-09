@@ -20,7 +20,11 @@ import carte.parade.FeuVert;
 import carte.parade.FinLimiteVitesse;
 import carte.parade.Parade;
 import carte.bottes.*;
-
+/**
+ * Strategie qui permet a l'IA d'attaquer le meilleur des joueurs, soit celui qui a le plus avancé
+ * @author Damien
+ *
+ */
 public class AggressifMeilleurJoueur implements Strategy {
 
 	/**

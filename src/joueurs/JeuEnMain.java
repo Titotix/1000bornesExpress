@@ -4,7 +4,11 @@ import java.util.*;
 
 import tasDeCartes.Carte;
 
-
+/**
+ * Représente le jeu en main de chacun des joueurs
+ * @author Damien
+ *
+ */
 public class JeuEnMain extends Observable{
 
 
@@ -35,7 +39,10 @@ public class JeuEnMain extends Observable{
 		} 
 			
 	}
-
+	/**
+	 * Recupere la main du joueur
+	 * 
+	 */
 	public LinkedList<Carte> getMain() {
 		return this.main;
 	}

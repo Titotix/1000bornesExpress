@@ -15,7 +15,11 @@ import strategie.Strategy;
 import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
 import tasDeCartes.TasDeCarte;
-
+/**
+ * Represente les parametres d'un joueur IA
+ * @author Damien
+ *
+ */
 public class Robot extends Joueur {
 	
 	public Robot(String nomJoueur, int numPassage, Strategy stratInitiale) {
@@ -25,7 +29,10 @@ public class Robot extends Joueur {
 	}
 
 	private Strategy strat;
-
+	
+	/**
+	 * Action de jouer un tour pour une IA
+	 */
 	public void jouer() {
 		this.piocher(this.choixPioche());
 
@@ -112,23 +119,37 @@ public class Robot extends Joueur {
 		return true;
 	}
 	
+	/**
+	 * Retourne la carte choisie 
+	 * @param defausser
+	 * 
+	 */
 	public Carte choixCarte(boolean defausser) {
 		return this.strat.choixCarte(this, defausser);		
 	}
 
-	
+	/**
+	 * Determine la cible
+	 * @param carte
+	 *
+	 */
 	public Joueur choixCible(Attaque carte) {
 		return this.strat.choixCible(this, carte);
 	}
 	
-
+	/**
+	 * Action de coup fourre de l'IA
+	 */
 	public void coupFourre(Botte botte) {
 		
 		botte.coupFourre(this);
 
 	}
 
-	
+	/**
+	 * Permet a l'IA de choisir dans quel tas piocher
+	 *
+	 */
 	public TasDeCarte choixPioche() {
 		return this.strat.choixPioche();
 	}

@@ -5,7 +5,11 @@ import tasDeCartes.TasDeCarte;
 import joueurs.Joueur;
 import joueurs.Robot;
 import carte.attaque.Attaque;
-
+/**
+ * Classe contenant les elements necessaires aux strategies de l'IA
+ * @author Damien
+ *
+ */
 
 public interface Strategy {
 

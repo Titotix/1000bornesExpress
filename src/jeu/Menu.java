@@ -75,7 +75,9 @@ public class Menu implements Runnable {
 		}
 		
 	}
-	
+	/**
+	 * Creer les joueurs
+	 */
 	public void creationJoueurs() {
 		
 		humain = new LinkedList<Humain>();
@@ -90,7 +92,9 @@ public class Menu implements Runnable {
 			robot.add ( new Robot ( this.getNomRobot(j+1), j+1+this.getNbHumain(), this.getRandomStrategy() ) );
 		}
 	}
-	
+	/**
+	 * Initialise les joueurs en Observer de la fenetre
+	 */
 	public void initObserver() {
 		FenetrePrincipale fenetre = FenetrePrincipale.getInstance();
 		for(Iterator<Joueur> it = this.getJoueurs().iterator() ; it.hasNext() ;) {
@@ -279,13 +283,20 @@ public class Menu implements Runnable {
 		return this.robot;
 	}
 	
-
+	/**
+	 * Recupere les joueurs dans une liste
+	 * 
+	 */
 	public LinkedList<Joueur> getJoueurs() {
 		LinkedList<Joueur> joueur = new LinkedList<Joueur>();
 		joueur.addAll(menu.getHumain());
 		joueur.addAll(menu.getRobot());
 		return joueur;
 	}
+	/**
+	 * Donne le nom aux joueurs
+	 * @param nom
+	 */
 	public void setNoms(String nom) {
 		this.nomsJoueurs.add(nom);
 		
