@@ -29,7 +29,11 @@ import jeu.Menu;
 import jeu.PartieDeJeu;
 import joueurs.*;
 import jeu.*;
-
+/**
+ * Correspond a la fenetre de jeu : interface graphique
+ * @author Damien
+ *
+ */
 public class FenetrePrincipale extends JFrame implements Observer{
 	
 	
@@ -1573,7 +1577,6 @@ public class FenetrePrincipale extends JFrame implements Observer{
 						joueurActuel.defausser(carteSelectionnee);
 						carteSelectionnee = null;
 						
-						controleur.nextJoueur();
 						synchronized (joueurActuel) {
 							joueurActuel.notify(); 
 						}
@@ -1609,14 +1612,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
   
 	  
 }
-
+  	/**
+  	 * Methode update permettant a la vue de se mettre a jour par rapport au modèle.
+  	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Defausse) {
 			this.defausse.setTitle("Defausse : "+this.controleur.getCarteVisibleDefausse());
 			
+
 		} else if (arg0 instanceof JeuEnMain && ((JeuEnMain) arg0).getJoueur() instanceof Humain) {
 			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
+
 			this.carte1.setTitle(""+((JeuEnMain) arg0).getMain().get(0).toString());
 
 			this.carte2.setTitle(""+((JeuEnMain) arg0).getMain().get(1).toString());
@@ -1633,13 +1640,20 @@ public class FenetrePrincipale extends JFrame implements Observer{
 		
 		} else if (arg0 instanceof PartieDeJeu) {
 			
-			if(arg1 instanceof Joueur) {
-				JOptionPane.showMessageDialog(null, "Victoire de "+((Joueur) arg1).getNom());
-			
-				
+			if(controleur.isPartieFinie()) {
+				JOptionPane.showMessageDialog(null, "Victoire de "+ controleur.getGagnant().getNom());
+						
 			}
-			/**
-			 * On cache la 5e carte qui est vide a ce moment
+			
+	  		
+	  		
+	  		if(controleur.getJoueurActuel() instanceof Humain && arg1 =="debut") {
+	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
+	  			
+	  		}
+	  		
+	  		/**
+			 * On rend visible les cartes du joueur a qui c'est le tour une fois qu'il a clqiuer sur la JoptionPane.
 			 */
 			this.carte5.setVisible(false);
 			Joueur joueurActuel = controleur.getJoueurActuel();
@@ -1654,46 +1668,36 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 	  		}
 	  		
-	  		
-	  		if(controleur.getJoueurActuel() instanceof Humain && arg1 =="debut") {
-	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
-  		}
-	  		
 		} else if(arg0 instanceof JeuSurTable) {
-			
-			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 1) {	
-	  			this.isAttaqueJ1.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0 )) ;
-	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
-	  			this.kmJ1.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
-	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			this.feuVertInitJ1.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
+					
+	  			this.isAttaqueJ1.setText("Pile Bataille : "+controleur.getCarteBataille( controleur.getJ1().getJeuSurTable() )) ;
+	  			this.isLimiteJ1.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( controleur.getJ1().getJeuSurTable()));
+	  			this.kmJ1.setText("Bornes : "+controleur.getKm(controleur.getJ1().getJeuSurTable()));
+	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte(controleur.getJ1().getJeuSurTable())+"</html>");
+	  			this.feuVertInitJ1.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial(controleur.getJ1().getJeuSurTable()));
 	  		
-			}
-			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
-	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
-	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
-	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
-	  			this.bottePossJ2.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			this.feuVertInitJ2.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
+		
+	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( controleur.getJ2().getJeuSurTable()));
+	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( controleur.getJ2().getJeuSurTable()));
+	  			this.kmJ2.setText("Bornes : "+controleur.getKm(controleur.getJ2().getJeuSurTable()));
+	  			this.bottePossJ2.setText("<html>Bottes :<br>"+controleur.getCarteBotte(controleur.getJ2().getJeuSurTable())+"</html>");
+	  			this.feuVertInitJ2.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial(controleur.getJ2().getJeuSurTable()));
 	  		
-	  			
-  			}
-			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 3) {	
-	  			this.isAttaqueJ3.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
-	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
-	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
-	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			this.feuVertInitJ3.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
-	  			
-  			}
-			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
-	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
-	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
-	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
-	  			this.bottePossJ4.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
-	  			this.feuVertInitJ4.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial((JeuSurTable)arg0));
-	  		
+	  		if(this.nbJoueurs > 2) {
+	  			this.isAttaqueJ3.setText("Pile Bataille : "+controleur.getCarteBataille(controleur.getJ3().getJeuSurTable()));
+	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse(controleur.getJ3().getJeuSurTable()));
+	  			this.kmJ3.setText("Bornes : "+controleur.getKm(controleur.getJ3().getJeuSurTable()));
+	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte(controleur.getJ3().getJeuSurTable())+"</html>");
+	  			this.feuVertInitJ3.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial(controleur.getJ3().getJeuSurTable()));
 	  		}
+	  		if(this.nbJoueurs > 3) {
+	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( controleur.getJ4().getJeuSurTable()));
+	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse(  controleur.getJ4().getJeuSurTable()));
+	  			this.kmJ4.setText("Bornes : "+controleur.getKm( controleur.getJ4().getJeuSurTable()));
+	  			this.bottePossJ4.setText("<html>Bottes :<br>"+controleur.getCarteBotte( controleur.getJ4().getJeuSurTable())+"</html>");
+	  			this.feuVertInitJ4.setText("Feu vert initial: "+controleur.getEtatFeuVertInitial( controleur.getJ4().getJeuSurTable()));
+	  		}
+	  		
   			
   		} else if(arg0 instanceof Humain && arg1 == "coupFourree") {
   			Integer choix = JOptionPane.showConfirmDialog(null, ((Joueur) arg0).getNom()+", vous pouvez jouer un coup fourrée, souhaitez vous le jouer ?");

@@ -2,7 +2,11 @@ package tasDeCartes;
 
 import java.util.*;
 
-
+/**
+ * Represente la defausse
+ * @author Damien
+ *
+ */
 public class Defausse extends TasDeCarte {
 
 	private LinkedList<Carte> pileCarte;
@@ -57,7 +61,10 @@ public class Defausse extends TasDeCarte {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+	/**
+	 * Permet de savoir si une pile est vide
+	 * @return boolean
+	 */
 	public boolean isEmpty() {
 		return this.pileCarte.isEmpty();
 	}

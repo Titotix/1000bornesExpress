@@ -14,7 +14,11 @@ import carte.attaque.*;
 import carte.bottes.*;
 import carte.etape.*;
 import carte.parade.*;
-
+/**
+ * Controleur faisant le lien entre la vue et le modele
+ * @author Damien
+ *
+ */
 public class Controleur {
 	
 	private static Controleur controleur = null;
@@ -31,7 +35,10 @@ public class Controleur {
 	}
 	
 	/**
-	 * 
+	 * Permet de savoir si une carte est posable sur la pileBataille
+	 * @param joueurActuel
+	 * @param adversaire
+	 * @param carte
 	 * 
 	 */
 	public boolean isPosableSurAttaque(Joueur joueurActuel, Joueur adversaire,  Carte carte) {
@@ -52,7 +59,13 @@ public class Controleur {
 		return false;
 	}
 	
-
+	/**
+	 * Permet de savoir si une carte est posable sur la pile Vitesse
+	 * @param joueurActuel
+	 * @param joueurChoisi
+	 * @param carte
+	 * 
+	 */
 	
 	public boolean isPosableSurEtape(Joueur joueurActuel, Joueur joueurChoisi, Carte carte) {
 		if (carte instanceof Etape && joueurChoisi == joueurActuel) {
@@ -64,6 +77,13 @@ public class Controleur {
 		return false;
 	}
 	
+	/**
+	 * Permet de savoir si une carte est posable sur la pile Limite Vitesse
+	 * @param joueurActuel
+	 * @param joueurChoisi
+	 * @param carte
+	 * 
+	 */
 	public boolean isPosableSurLimiteVitesse(Joueur joueurActuel,Joueur joueurChoisi,  Carte carte) {
 		if(carte instanceof LimiteVitesse && joueurActuel != joueurChoisi) {
 			if(carte.isJouable(joueurActuel, joueurChoisi )) {
@@ -82,11 +102,21 @@ public class Controleur {
 		return false;
 	}
 	
-
+	/**
+	 * Determine si la defausse est vide
+	 * @return boolean
+	 */
 	public boolean isDefausseEmpty() {
 		return Defausse.getInstance().isEmpty();
 	}
-
+	
+	/**
+	 * Determine si la carte est posable sur la pile Botte
+	 * @param joueurActuel
+	 * @param joueurChoisi
+	 * @param carte
+	 * 
+	 */
 	public boolean isPosableSurBotte(Joueur joueurActuel, Joueur joueurChoisi, Carte carte) {
 		if(carte instanceof Botte && joueurActuel == joueurChoisi) {
 			if(carte.isJouable(joueurActuel, null)) {
@@ -96,17 +126,33 @@ public class Controleur {
 		return false;
 	}
 	
+	/**
+	 * Determine si le joueur a pioché
+	 * @param joueur
+	 * 
+	 */
 	public boolean hasPioche(Joueur joueur) {
 		if(joueur.getJeuEnMain().getMain().size() == 5) {
 			return true;
 		}
 		return false;
 	}
-	
+	/**
+	 * Appelle les methodes jouer du modele
+	 * @param joueurActuel
+	 * @param joueurChoisi
+	 * @param carte
+	 */
 	public void jouer(Joueur joueurActuel, Joueur joueurChoisi, Carte carte) {
 		carte.jouer(joueurActuel, joueurChoisi);
 	}
 	
+	/**
+	 * Appelle les methodes canCoupFourre du modele
+	 * @param joueurActuel
+	 * @param joueurChoisi
+	 * 
+	 */
 	public Botte canCoupFourre(Joueur joueurActuel, Joueur joueurChoisi) {
 		return joueurChoisi.canCoupFourre();
 	}
@@ -123,6 +169,10 @@ public class Controleur {
 		return joueur.getNom();
 	}
 	
+	/**
+	 * Donne le nom de la carte visible de la defausse
+	 * @return String
+	 */
 	public String getCarteVisibleDefausse() {
 		if(Defausse.getInstance().getPileCarte().isEmpty() == false) {
 			return Defausse.getInstance().getPileCarte().getFirst().toString();
@@ -150,6 +200,11 @@ public class Controleur {
 	}
 
 
+	
+	/**
+	 * Donne le nom de la carte de la pile bataille du JeuSurTable indiqué.
+	 * @return String
+	 */
 	public String getCarteBataille(JeuSurTable jeu) {
 		if(jeu.getPileBataille().isEmpty() == false) {
 			return jeu.getPileBataille().get(0).toString();
@@ -159,6 +214,10 @@ public class Controleur {
 		}
 	}
 	
+	/**
+	 * Donne le nom de la carte de la pile Limite vitesse
+	 * @return String
+	 */
 	public String getCarteLimiteVitesse(JeuSurTable jeu) {
 		if(jeu.getPileVitesse().isEmpty() == false) {
 			return jeu.getPileVitesse().get(0).toString();
@@ -168,6 +227,10 @@ public class Controleur {
 		}
 	}
 	
+	/**
+	 * Donne le nom de la carte de la pile botte
+	 * @return String
+	 */
 	public String getCarteBotte(JeuSurTable jeu) {
 		if(jeu.getPileBotte().isEmpty() == false) {
 			return jeu.getPileBotte().toString();
@@ -177,6 +240,10 @@ public class Controleur {
 		}
 	}
 	
+	/**
+	 * Donne le nom de la carte de la pile feu vert initial
+	 * @return String
+	 */
 	public String getEtatFeuVertInitial(JeuSurTable jeu){
 		if(jeu.getPileFeuVertInitial().isEmpty()==false){
 			return "Feu vert";
@@ -190,17 +257,40 @@ public class Controleur {
 		
 		return arg0.getNbKmParcouruTotal();
 	}
-
+	
+	/**
+	 * Enclenche le coup fourre
+	 * @param joueur
+	 * @param botte
+	 */
 	public void jouerCoupFourre(Joueur joueur, Botte botte) {
 		botte.coupFourre(joueur);
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() - 1);
-		
+			
 	}
 
-	public void nextJoueur() {
-		PartieDeJeu.getInstance().setNumeroJoueurActuel(this.getJoueurActuel().getNumPassage() - 1);
-		
+	public boolean isPartieFinie() {
+		return PartieDeJeu.getInstance().isTerminee();
+	}
+
+	public Joueur getGagnant() {
+	
+		return PartieDeJeu.getInstance().getGagnant();
 	}
 	
+	public Joueur getJ1() {
+		return PartieDeJeu.getInstance().getJoueurs().get(0);
+	}
+	
+	public Joueur getJ2() {
+		return PartieDeJeu.getInstance().getJoueurs().get(1);
+	}
+
+	public Joueur getJ3() {
+		return PartieDeJeu.getInstance().getJoueurs().get(2);
+	}
+
+	public Joueur getJ4() {
+		return PartieDeJeu.getInstance().getJoueurs().get(3);
+	}
 
 }

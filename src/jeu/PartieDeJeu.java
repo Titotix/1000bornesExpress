@@ -3,12 +3,19 @@ package jeu;
 import java.util.*;
 
 import joueurs.Joueur;
+import tasDeCartes.Carte;
 import vue.*;
+/**
+ * Represente une partie de jeu entière : contient le numero du joueur actuel, lance et termine la partie, selectionne le nombre de km Max
+ * @author Damien
+ *
+ */
 public class PartieDeJeu  extends Observable {
 	
 	private boolean termine;
 	private int nbRobot;
 	private int nbHumain;
+	private Joueur gagnant;
 	/**
 	 *  numero du joueur dont c'est le tour.
 	 */
@@ -22,7 +29,7 @@ public class PartieDeJeu  extends Observable {
 
 
 	private PartieDeJeu() {
-		
+		this.gagnant = null;
 		this.nbKmMax = 1000;
 		this.termine=false;
 		Menu menu = Menu.getInstance();
@@ -30,10 +37,15 @@ public class PartieDeJeu  extends Observable {
 		this.nbHumain = menu.getNbHumain();
 		this.joueurs = new LinkedList<Joueur>();
 		this.numeroJoueurActuel = 0;
-		//On concatène ici les deux LinkedList (d'Humain et de Robot) dans la LinkedList de Joueur.
+		/**
+		 * On concatène ici les deux LinkedList (d'Humain et de Robot) dans la LinkedList de Joueur.
+		 */
 		
 	}
-	
+	/**
+	 * Singleton
+	 * 
+	 */
 	public synchronized static PartieDeJeu getInstance() {
 		
 		if(partie == null) {
@@ -83,20 +95,28 @@ public class PartieDeJeu  extends Observable {
 
 
 			if(joueurActuel.isGagnant()) {
+				this.gagnant = joueurActuel;
 				this.setTermine(true, joueurActuel);
+				
 			}
 			
 		}
 		
 	}
 	
-
+	/**
+	 * Recupere le numero du joueur actuel
+	 *
+	 */
 	
 	public int getNumeroJoueurActuel() {
 		return this.numeroJoueurActuel;
 	}
 
-
+	/**
+	 * Definit le numero du joueur actuel
+	 * @param numeroJoueurActuel
+	 */
 	public void setNumeroJoueurActuel(int numeroJoueurActuel) {
 		
 		this.numeroJoueurActuel = numeroJoueurActuel;
@@ -110,11 +130,15 @@ public class PartieDeJeu  extends Observable {
 		this.setChanged();
 		this.notifyObservers();		
 	}
-
+	
 	public int getNbKmMax() {
 		return this.nbKmMax;
 	}
 	
+	/**
+	 * Definit le nombre de km max
+	 * @param nbKmMax
+	 */
 	public void setNbKmMax(int nbKmMax) {
 		/**
 		 * 700 bornes a parcourir est la seule variante accepté.
@@ -134,13 +158,25 @@ public class PartieDeJeu  extends Observable {
 	public void setTermine(boolean termine, Joueur gagnant) {
 		this.termine = termine;
 		this.setChanged();
-		this.notifyObservers(gagnant);
+		this.notifyObservers();
 		
 	}
-
+	
+	/**
+	 * Recupere le booleen termine
+	 *
+	 */
 	public boolean isTerminee() {
 		
 		return this.termine;
+	}
+	public Joueur getGagnant() {
+	
+		return this.gagnant;
+	}
+	public LinkedList<Joueur> getJoueurs() {
+	
+		return this.joueurs;
 	}
 
 

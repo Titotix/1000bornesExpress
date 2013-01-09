@@ -2,7 +2,11 @@ package joueurs;
 
 import carte.bottes.Botte;
 import jeu.PartieDeJeu;
-
+/**
+ * Represente les actions des humains
+ * @author Damien
+ *
+ */
 public class Humain extends Joueur {
 
 
@@ -11,7 +15,7 @@ public class Humain extends Joueur {
 		super(nomJoueur, numPassage);
 				
 	}
-
+	
 	@Override
 	public synchronized void jouer() { 
 	
@@ -23,7 +27,11 @@ public class Humain extends Joueur {
 		}
 
 	}
-
+	
+	/**
+	 * Notifie les coup fourrés
+	 * @param botte
+	 */
 	@Override
 	public synchronized void coupFourre(Botte botte) {
 		this.setChanged();

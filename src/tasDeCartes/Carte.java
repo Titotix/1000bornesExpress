@@ -1,7 +1,11 @@
 package tasDeCartes;
 
 import joueurs.Joueur;
-
+/**
+ * Classe abstraite contenant les principaux elements des cartes 
+ * @author Damien
+ *
+ */
 public abstract class Carte {
 	/**
 	 * Réalise l'effet de la carte.

@@ -3,13 +3,19 @@ package vue;
 import javax.swing.*;
 
 import jeu.Menu;
-
+/**
+ * Correspond au menu graphique du debut de partie
+ * @author Damien
+ *
+ */
 public class MenuGraphique {
 
 	public MenuGraphique() {
 		this.choix();
 	}
-	
+	/**
+	 * Permet le choix et l'affichage du nombre de joueurs
+	 */
 	public void choix() {
 		int nbHumain=0, nbRobot=0;
 		try {

@@ -19,7 +19,11 @@ import carte.etape.Etape;
 import carte.parade.FeuVert;
 import carte.parade.FinLimiteVitesse;
 import carte.parade.Parade;
-
+/**
+ * Permet a l'IA d'attaquer tous les joueurs un par un
+ * @author Damien
+ *
+ */
 public class AggressifTousJoueurs implements Strategy {
 
 /**

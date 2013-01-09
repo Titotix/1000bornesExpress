@@ -10,7 +10,11 @@ import carte.bottes.Botte;
 import carte.etape.Etape;
 import carte.parade.FeuVert;
 
-
+/**
+ * Represente le jeu sur table des joueurs
+ * @author Damien
+ *
+ */
 public class JeuSurTable extends Observable {
 	
 
@@ -39,6 +43,7 @@ public class JeuSurTable extends Observable {
 	
 	
 	/** 
+	 * Ajoute une carte Etape sur le bon tas
 	 * @param carte
 	 * 
 	 */
@@ -50,6 +55,11 @@ public class JeuSurTable extends Observable {
 		this.notifyObservers();
 	}
 	
+	/** 
+	 * Ajoute une carte attaque sur le bon tas
+	 * @param carte
+	 * 
+	 */
 	public void ajouterCarteBataille(Attaque carte)
 	{
 		if(this.pileBataille.isEmpty()) {			
@@ -59,6 +69,11 @@ public class JeuSurTable extends Observable {
 		} 
 	}
 	
+	/** 
+	 * Ajoute une carte vitesse sur le bon tas
+	 * @param carte
+	 * 
+	 */
 	public void ajouterCarteVitesse(LimiteVitesse carte)
 	{
 		if(this.pileVitesse.isEmpty()) {
@@ -68,6 +83,11 @@ public class JeuSurTable extends Observable {
 		}
 	}
 	
+	/** 
+	 * Ajoute une carte botte sur le bon tas
+	 * @param carte
+	 * 
+	 */
 	public void ajouterCarteBotte(Botte carte)
 	{
 		this.pileBotte.add(carte);
@@ -75,12 +95,22 @@ public class JeuSurTable extends Observable {
 		this.notifyObservers();
 	}
 	
+	/** 
+	 * Ajoute une carte feu vert  sur le bon tas au debut de la partie
+	 * @param feuVert
+	 * 
+	 */
 	public void ajouterFeuVertInitial(FeuVert feuVert) {
 		this.pileFeuVertInitial.add(feuVert);
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/** 
+	 * Retire une carte vitesse depuis le bon tas
+	 * @param carte
+	 * 
+	 */
 	public void retirerCarteVitesse(LimiteVitesse carte)
 	{
 		this.pileVitesse.remove(carte);
@@ -88,6 +118,11 @@ public class JeuSurTable extends Observable {
 		this.notifyObservers();
 	}
 	
+	/** 
+	 * Retire une carte attaque depuis le bon tas
+	 * @param carte
+	 * 
+	 */
 	public void retirerCarteBataille(Attaque carte)
 	{
 		this.pileBataille.remove(carte);
@@ -95,6 +130,10 @@ public class JeuSurTable extends Observable {
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Donne la valeur des km parcourus par le joueur
+	 * 
+	 */
 	public int getNbKmParcouruTotal() {	
 		return this.getNbKmParcouruEtape() + this.nbKmParcouruBotte;
 	}

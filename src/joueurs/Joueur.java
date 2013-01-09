@@ -13,7 +13,11 @@ import jeu.PartieDeJeu;
 
 
 import carte.bottes.Botte;
-
+/**
+ * Represente les parametres du joueur
+ * @author Damien
+ *
+ */
 
 public abstract class Joueur extends Observable {
 
@@ -37,6 +41,10 @@ public abstract class Joueur extends Observable {
 
 	public abstract void coupFourre(Botte botte) ;
 	
+	/**
+	 * determine si le joueur est gagnant
+	 * 
+	 */
 	public boolean isGagnant() {
 		PartieDeJeu partie = PartieDeJeu.getInstance();
 		if(this.getJeuSurTable().getNbKmParcouruTotal() >= partie.getNbKmMax() ) {
@@ -45,6 +53,10 @@ public abstract class Joueur extends Observable {
 		return false;
 	}
 	
+	/**
+	 * Verifie si un coup fourre est realisable
+	 * 
+	 */
 	public Botte canCoupFourre() {
 		for(Iterator<Carte> it = this.getJeuEnMain().getMain().iterator() ; it.hasNext() ; ) {
 			Carte carte = it.next();
@@ -58,6 +70,10 @@ public abstract class Joueur extends Observable {
 	}
 	
 	
+	/**
+	 * Permet de piocher dans le talon, puis dans la defausse
+	 * @param pioche
+	 */
 	public void piocher(TasDeCarte pioche) {
 		if(pioche instanceof Talon) {
 			this.piocherTalon();
@@ -66,12 +82,19 @@ public abstract class Joueur extends Observable {
 		}
 			
 	}
+	
+	/**
+	 * Pioche dans le talon
+	 */
 	public void piocherTalon() {
 		Talon talon = Talon.getInstance();
 		this.jeuEnMain.ajouterCarte(talon.piocher());
 		
 	}
 	
+	/**
+	 * Pioche dans la defausse
+	 */
 	public void piocherDefausse() {
 		Defausse defausse = Defausse.getInstance();
 		this.jeuEnMain.ajouterCarte(defausse.piocher());
@@ -79,7 +102,10 @@ public abstract class Joueur extends Observable {
 	
 
 
-	
+	/**
+	 * Permet de defausser une carte
+	 * @param carte
+	 */
 	public void defausser(Carte carte) {
 		Defausse defausse = Defausse.getInstance();
 		this.jeuEnMain.retirerCarte(carte);  

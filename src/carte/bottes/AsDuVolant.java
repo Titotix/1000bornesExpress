@@ -41,7 +41,7 @@ public class AsDuVolant extends Botte {
 	 * Affiche "AsDuVolant"
 	 */
 	public String toString() {
-		return "AsDuVolant<br>";
+		return "AsDuVolant";
 	}
 
 }
