@@ -32,7 +32,7 @@ public class Talon extends TasDeCarte {
 	
 	/**
 	 * Calcul du nombre de cartes a distribuer
-	 * @param menu
+	 * 
 	 * @return nombre de carte a distribuer au total
 	 */
 	public int nbCarteADistribuer(){
@@ -83,7 +83,7 @@ public class Talon extends TasDeCarte {
 	/**
 	 * 
 	 * Piocher dans le talon
-	 * @return
+	 * @return carte
 	 */
 	public Carte piocher(){
 		try {

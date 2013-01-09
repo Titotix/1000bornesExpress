@@ -26,6 +26,7 @@ import tasDeCartes.Carte;
 import tasDeCartes.Defausse;
 
 import jeu.Menu;
+import jeu.PartieDeJeu;
 import joueurs.*;
 import jeu.*;
 public class FenetrePrincipale extends JFrame implements Observer{
@@ -46,7 +47,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JButton limiteJ1=new JButton("Limite de vitesse");
 	private JButton botteJ1=new JButton("Bottes");
 	private JLabel kmJ1=new JLabel("Bornes : 0");
-	private JLabel bottePossJ1=new JLabel("Bottes :");
+	private JLabel bottePossJ1=new JLabel("Bottes : vide");
 	private JLabel isAttaqueJ1=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ1=new JLabel("Pile Limite : vide");
 	
@@ -59,7 +60,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JButton limiteJ2=new JButton("Limite de vitesse");
 	private JButton botteJ2=new JButton("Bottes");
 	private JLabel kmJ2=new JLabel("Bornes : 0");
-	private JLabel bottePossJ2=new JLabel("Bottes :");
+	private JLabel bottePossJ2=new JLabel("Bottes : vide");
 	private JLabel isAttaqueJ2=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ2=new JLabel("Pile Limite : vide");
 	
@@ -71,7 +72,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JButton limiteJ3=new JButton("Limite de vitesse");
 	private JButton botteJ3=new JButton("Bottes");
 	private JLabel kmJ3=new JLabel("Bornes : 0");
-	private JLabel bottePossJ3=new JLabel("Bottes :");
+	private JLabel bottePossJ3=new JLabel("Bottes : vide");
 	private JLabel isAttaqueJ3=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ3=new JLabel("Pile Limite : vide");
 	
@@ -83,7 +84,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	private JButton limiteJ4=new JButton("Limite de vitesse");
 	private JButton botteJ4=new JButton("Bottes");
 	private JLabel kmJ4=new JLabel("Bornes : 0");
-	private JLabel bottePossJ4=new JLabel("Bottes :");
+	private JLabel bottePossJ4=new JLabel("Bottes : vide");
 	private JLabel isAttaqueJ4=new JLabel("Pile Bataille : vide");
 	private JLabel isLimiteJ4=new JLabel("Pile Limite : vide");
 	
@@ -106,7 +107,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	 */
 	private JButton talonBouton=new JButton("Piocher");
 	private JButton defausseBouton=new JButton("Piocher/Defausser");
-	private JLabel eventLabel = new JLabel("Ici les evenements");
+	private JLabel eventLabel = new JLabel("");
 	
 	private JInternalFrame talon = new JInternalFrame(); 
 	private JInternalFrame defausse = new JInternalFrame(); 
@@ -161,12 +162,15 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	 */
 	etapeJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
-			
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee != null){
-				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				
+				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				} else {
 					eventLabel.setText("Vous ne pouvez pas jouer cette carte ici, re-selectionnez une carte");}
@@ -186,17 +190,21 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	attaqueJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(0);
+			Joueur joueurActuel = controleur.getJoueurActuel();
+		
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				
+				if (controleur.isPosableSurAttaque(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+				
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						if(joueurChoisi instanceof Robot) {
 							joueurChoisi.coupFourre(botte);
 						}
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				} else {
 					eventLabel.setText("Vous ne pouvez pas jouer cette carte ici, re-selectionnez une carte");	}
@@ -218,16 +226,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ1.addActionListener(new ActionListener(){
 		public synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			Joueur joueurChoisi = controleur.getJoueurs().get(0);
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -246,12 +256,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ1.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez posé la carte sur le tas de bottes du premier joueur");
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -288,11 +299,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -312,15 +325,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	attaqueJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(1);
+			Joueur joueurActuel = controleur.getJoueurActuel();
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -340,15 +356,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	limiteJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(1);
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -367,12 +385,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ2.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
-			eventLabel.setText("Vous avez pose la carte sur le tas de bottes du deuxieme joueur");
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -413,11 +432,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -437,17 +458,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+    				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -468,16 +491,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
-					if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-						controleur.jouer(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee);
-						Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+					if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+						controleur.jouer(joueurActuel, joueurChoisi, carteSelectionnee);
+						Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-						synchronized (controleur.getJoueurActuel()) {
-							controleur.getJoueurActuel().notify(); 
+						synchronized (joueurActuel) {
+							joueurActuel.notify(); 
 						}
     				}
     				else{
@@ -496,11 +521,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -536,11 +563,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -559,16 +588,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -587,16 +618,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(1);
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -615,11 +648,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -654,11 +689,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -677,17 +714,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	attaqueJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
 					
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 					}
 				else{
@@ -705,16 +744,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -732,11 +773,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -776,11 +819,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -799,18 +844,19 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	attaqueJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
-    			
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+    				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     					}
     				else{
@@ -830,16 +876,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	limiteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			Joueur joueurChoisi = controleur.getJoueurs().get(0);
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -858,11 +906,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ1.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(0), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(0), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -897,12 +947,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	etapeJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
-    		
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -921,16 +972,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	attaqueJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurChoisi = controleur.getJoueurs().get(1);
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+    				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
     					
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -949,15 +1002,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	limiteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
     			Joueur joueurChoisi = controleur.getJoueurs().get(1);
+    			Joueur joueurActuel = controleur.getJoueurActuel();
+
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi , carteSelectionnee)){
-    					controleur.jouer(controleur.getJoueurActuel(), joueurChoisi , carteSelectionnee);
-    					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+    				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi , carteSelectionnee)){
+    					controleur.jouer(joueurActuel, joueurChoisi , carteSelectionnee);
+    					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
     					if(botte != null) {
     						joueurChoisi.coupFourre(botte);
     					}
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -975,11 +1030,12 @@ public class FenetrePrincipale extends JFrame implements Observer{
     	
     	botteJ2.addActionListener(new ActionListener(){
     		public  synchronized void actionPerformed(ActionEvent event){
+    			Joueur joueurActuel = controleur.getJoueurActuel();
     			if (carteSelectionnee!=null){
-    				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee)==true){
-    					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(1), carteSelectionnee);
-    					synchronized (controleur.getJoueurActuel()) {
-    						controleur.getJoueurActuel().notify(); 
+    				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee)==true){
+    					controleur.jouer(joueurActuel,controleur.getJoueurs().get(1), carteSelectionnee);
+    					synchronized (joueurActuel) {
+    						joueurActuel.notify(); 
     					}
     				}
     				else{
@@ -1013,11 +1069,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1036,16 +1094,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	attaqueJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(2);
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(), joueurChoisi, carteSelectionnee);
+				if (controleur.isPosableSurAttaque(joueurActuel, joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel, joueurChoisi, carteSelectionnee);
 					
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1063,16 +1123,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	limiteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			Joueur joueurChoisi = controleur.getJoueurs().get(2);
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1090,11 +1152,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ3.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(2), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(2), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1128,11 +1192,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	etapeJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurEtape(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurEtape(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1151,16 +1217,17 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	attaqueJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(3);
-			
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurAttaque(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+				if (controleur.isPosableSurAttaque(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1179,16 +1246,18 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	limiteJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
 			Joueur joueurChoisi = controleur.getJoueurs().get(3);
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurLimiteVitesse(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),joueurChoisi, carteSelectionnee);
+				if (controleur.isPosableSurLimiteVitesse(joueurActuel,joueurChoisi, carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,joueurChoisi, carteSelectionnee);
 					
-					Botte botte = controleur.canCoupFourre(controleur.getJoueurActuel(), joueurChoisi); 
+					Botte botte = controleur.canCoupFourre(joueurActuel, joueurChoisi); 
 					if(botte != null) {
 						joueurChoisi.coupFourre(botte);
 					}
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				}
 				else{
@@ -1206,11 +1275,13 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	botteJ4.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
+			Joueur joueurActuel = controleur.getJoueurActuel();
+
 			if (carteSelectionnee!=null){
-				if (controleur.isPosableSurBotte(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee)==true){
-					controleur.jouer(controleur.getJoueurActuel(),controleur.getJoueurs().get(3), carteSelectionnee);
-					synchronized (controleur.getJoueurActuel()) {
-						controleur.getJoueurActuel().notify(); 
+				if (controleur.isPosableSurBotte(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee)==true){
+					controleur.jouer(joueurActuel,controleur.getJoueurs().get(3), carteSelectionnee);
+					synchronized (joueurActuel) {
+						joueurActuel.notify(); 
 					}
 				} else {
 					
@@ -1250,7 +1321,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	carte1Joueur.addActionListener(new ActionListener(){
 		public  synchronized void actionPerformed(ActionEvent event){
-			
+
 			if(controleur.getJoueurActuel() instanceof Humain) {
 				if(controleur.hasPioche(controleur.getJoueurActuel()) ){
 					eventLabel.setText("Vous avez choisi la premiere carte");
@@ -1435,7 +1506,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	JInternalFrame evenement = new JInternalFrame(); 
 	eventLabel.setForeground(Color.BLUE);
 	evenement.setSize(30, 20);
-	evenement.setTitle("Evenements");
+	evenement.setTitle("Guide de jeu");
 	evenement.setVisible(true);
 	evenement.add(eventLabel);
 	b3.add(evenement);
@@ -1458,7 +1529,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof Defausse) {
-			this.defausse.setTitle("Defausse : "+this.controleur.getCarteVisibleDefausse().toString());
+			this.defausse.setTitle("Defausse : "+this.controleur.getCarteVisibleDefausse());
 			
 		} else if (arg0 instanceof JeuEnMain) {
 			this.carte5.setVisible(false);//On cache la 5e carte qui est vide a ce moment
@@ -1500,10 +1571,10 @@ public class FenetrePrincipale extends JFrame implements Observer{
 
 	  		}
 	  		
-	  		if (controleur.getJoueurActuel() instanceof Humain && arg1 == "debut") {
-	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
-	  		}
 	  		
+	  		if(controleur.getJoueurActuel() instanceof Humain && arg1 =="debut") {
+	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
+  		}
 	  		
 		} else if(arg0 instanceof JeuSurTable) {
 			
@@ -1514,7 +1585,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  			this.bottePossJ1.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  		
 			}
-  			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
+			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 2) {	
 	  			this.isAttaqueJ2.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ2.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ2.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
@@ -1522,14 +1593,14 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  		
 	  			
   			}
-  			if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 3) {	
+			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 3) {	
 	  			this.isAttaqueJ3.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ3.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ3.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
 	  			this.bottePossJ3.setText("<html>Bottes :<br>"+controleur.getCarteBotte((JeuSurTable)arg0)+"</html>");
 	  			
   			}
-	  		if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
+			else if( ((JeuSurTable) arg0).getJoueur().getNumPassage() == 4) {	
 	  			this.isAttaqueJ4.setText("Pile Bataille : "+controleur.getCarteBataille( (JeuSurTable) arg0));
 	  			this.isLimiteJ4.setText("Pile Vitesse : "+controleur.getCarteLimiteVitesse( (JeuSurTable) arg0));
 	  			this.kmJ4.setText("Bornes : "+controleur.getKm((JeuSurTable)arg0));
@@ -1541,6 +1612,9 @@ public class FenetrePrincipale extends JFrame implements Observer{
   			Integer choix = JOptionPane.showConfirmDialog(null, ((Joueur) arg0).getNom()+", vous pouvez jouer un coup fourrée, souhaitez vous le jouer ?");
   			if(choix ==0) {
   				controleur.jouerCoupFourre((Joueur) arg0, ((Joueur) arg0).canCoupFourre());
+  			}
+  			synchronized(arg0) {
+  				arg0.notify();
   			}
   		}
 	}

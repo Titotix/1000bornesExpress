@@ -15,7 +15,11 @@ public abstract class Attaque extends Carte {
 		
 		
 	}
-	
+	/**
+	 * Indique la compatibilité entre l'instance de cette classe et la botte mise ne paramètre.
+	 * @param botte
+	 * @return boolean
+	 */
 	public abstract boolean isCompatible(Botte botte);
 	
 	public boolean isJouable(Joueur joueurActuel, Joueur adversaire) { 
@@ -62,9 +66,25 @@ public abstract class Attaque extends Carte {
 		} else if(this instanceof LimiteVitesse) {
 			
 			if(adversaire.getJeuSurTable().getPileVitesse().isEmpty()) {		
-				return true;
+				/**
+				 * On regarde alors si la pile botte ne contient pas la botte adequate pour bloquer l'attaque.	
+				 */
+				if( adversaire.getJeuSurTable().getPileBotte().isEmpty() == false) {
+				
+					for(Iterator<Botte> it = adversaire.getJeuSurTable().getPileBotte().iterator() ; it.hasNext() ;) {	
+						/**
+						 * si c'est le cas, on retourne faux, la carte attaque n'est pas jouable contre cette adversaire.
+						 */
+						if(this.isCompatible(it.next())) {
+							
+							return false;
+						}
+					}
+				} else {
+					return true;
+				}
 			}
-			
+			return false;
 		}
 		return false;
 	}

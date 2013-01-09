@@ -50,17 +50,11 @@ public class Robot extends Joueur {
 					if(adversaire instanceof Robot) {	
 						adversaire.coupFourre(botte);
 					}
-					
-
-					//Pour que ce soit au joueur qui a fait un coup fourre de jouer
-
 				
 				}
 			} else {
 				carteChoisie.jouer(this, null);
 				
-				
-
 			}
 			
 		}

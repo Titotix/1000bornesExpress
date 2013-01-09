@@ -41,7 +41,9 @@ public class PartieDeJeu  extends Observable {
 		}
 		return partie;
 	}
-	
+	/**
+	 * Synchronise la création de la partie entre les thread.
+	 */
 	public void initPartie() {
 		synchronized(this) {
 			try {
@@ -57,6 +59,10 @@ public class PartieDeJeu  extends Observable {
 		this.joueurs.addAll(Menu.getInstance().getRobot());
 	}
 	
+	/**
+	 * Lance la partie de mille bornes à proprement dit.
+	 * Une fois la nouvelle partie crée, cette méthode s'occupe de faire jouer les joueur chacun à leur tour de jeu.
+	 */
 	public void jouerPartie() {
 		this.initPartie();
 		/**
@@ -69,8 +75,13 @@ public class PartieDeJeu  extends Observable {
 			this.notifyObservers("debut");
 					
 			joueurActuel = this.joueurs.get(this.numeroJoueurActuel);
+			System.out.println(""+joueurActuel.getNom());
+			System.out.println(""+joueurActuel.getJeuEnMain().getMain().toString());
+			System.out.println(""+joueurActuel.getJeuSurTable().toString());
+
 			joueurActuel.jouer();
-			
+
+
 			if(joueurActuel.isGagnant()) {
 				this.setTermine(true, joueurActuel);
 			}
@@ -115,6 +126,11 @@ public class PartieDeJeu  extends Observable {
 		this.notifyObservers();
 	}
 
+	/**
+	 * Indique que la partie a été gagné ou non. Si c'est le cas, notification de la vue avec comme argument le gagnant.
+	 * @param termine
+	 * @param gagnant
+	 */
 	public void setTermine(boolean termine, Joueur gagnant) {
 		this.termine = termine;
 		this.setChanged();

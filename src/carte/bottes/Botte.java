@@ -38,6 +38,11 @@ public abstract class Botte extends Carte  {
 			if(joueur.getJeuSurTable().getPileVitesse().isEmpty() == false) {
 				Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileVitesse().remove(0));
 			}
+			if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {
+				if(this.isCompatible(joueur.getJeuSurTable().getPileBataille().get(0))) {
+					Defausse.getInstance().ajouterCarte(joueur.getJeuSurTable().getPileBataille().remove(0));
+				}
+			}
 		}
 		else {
 			if(joueur.getJeuSurTable().getPileBataille().isEmpty() == false) {

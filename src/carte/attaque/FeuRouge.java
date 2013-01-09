@@ -1,5 +1,6 @@
 package carte.attaque;
 
+import jeu.PartieDeJeu;
 import joueurs.Joueur;
 import carte.bottes.AsDuVolant;
 import carte.bottes.Botte;
@@ -27,6 +28,6 @@ public class FeuRouge extends Attaque {
 		
 		adversaire.getJeuSurTable().ajouterCarteBataille(this);		
 		joueur.getJeuEnMain().retirerCarte(this);
-		
+		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() );
 	}
 }

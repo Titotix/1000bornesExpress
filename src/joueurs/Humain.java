@@ -15,14 +15,12 @@ public class Humain extends Joueur {
 	@Override
 	public synchronized void jouer() { 
 	
-		
 		try {
 			wait();
 		} catch (InterruptedException e) {
 			
 			e.printStackTrace();
 		}
-
 
 	}
 
