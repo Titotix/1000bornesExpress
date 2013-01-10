@@ -47,6 +47,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	/**
 	 * Variables pour le premier joueur
 	 */
+	   
 	private JButton etapeJ1=new JButton("Etape");
 	private JButton attaqueJ1=new JButton("Pile Bataille");
 	private JButton limiteJ1=new JButton("Limite de vitesse");
@@ -150,7 +151,6 @@ public class FenetrePrincipale extends JFrame implements Observer{
     /**
      * On crée une fenetre pour le premier joueur (idem pour chaque joueur)
      */
-    
     JInternalFrame joueur1 = new JInternalFrame(); 
     joueur1.setSize(30, 20);
     
@@ -1655,6 +1655,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	  		
 	  		if(controleur.getJoueurActuel() instanceof Humain && arg1 =="debut") {
 	  			JOptionPane.showMessageDialog(null, controleur.getJoueurActuel().getNom()+", à vous de jouer.");
+	  			
 	  			
 	  		}
 	  		

@@ -87,10 +87,7 @@ public class PartieDeJeu  extends Observable {
 			this.notifyObservers("debut");
 					
 			joueurActuel = this.joueurs.get(this.numeroJoueurActuel);
-			System.out.println(""+joueurActuel.getNom());
-			System.out.println(""+joueurActuel.getJeuEnMain().getMain().toString());
-			System.out.println(""+joueurActuel.getJeuSurTable().toString());
-
+			
 			joueurActuel.jouer();
 
 
