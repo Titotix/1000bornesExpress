@@ -6,7 +6,7 @@ import carte.attaque.Attaque;
 /**
  * Represente la carte botte As du volant
  * On y trouve les booleens precisant si elle est jouable en coup fourré et quelle attaque elle bloque
- * @author Damien
+ * 
  *
  */
 public class AsDuVolant extends Botte {
@@ -17,7 +17,7 @@ public class AsDuVolant extends Botte {
 	
 	/**
 	 * Indique si elle est jouable en coup fourré
-	 * @param notreJeu
+	 * 
 	 */
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
 		if(notreJeu.getPileBataille().isEmpty() == false) {	
@@ -29,7 +29,7 @@ public class AsDuVolant extends Botte {
 	}
 	
 	/**
-	 * indique la compatibilité avec la carte Accident
+	 * indique la compatibilité avec l'Attaque indiqué.
 	 */
 	public boolean isCompatible(Attaque attaque) {
 		if(attaque instanceof Accident) {
@@ -38,7 +38,7 @@ public class AsDuVolant extends Botte {
 	}
 	
 	/**
-	 * Affiche "AsDuVolant"
+	 * Retourne "AsDuVolant"
 	 */
 	public String toString() {
 		return "AsDuVolant";

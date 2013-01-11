@@ -31,7 +31,7 @@ import joueurs.*;
 import jeu.*;
 /**
  * Correspond a la fenetre de jeu : interface graphique
- * @author Damien
+ * 
  *
  */
 public class FenetrePrincipale extends JFrame implements Observer{
@@ -1555,7 +1555,7 @@ public class FenetrePrincipale extends JFrame implements Observer{
 	
 	///////
 	defausse.setSize(30, 20);
-	defausse.setTitle("Defausse");
+	defausse.setTitle("Defausse : Aucune carte dans la défausse.");
 	defausse.setVisible(true);
 	
 	

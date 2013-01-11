@@ -7,11 +7,11 @@ import carte.bottes.Prioritaire;
 /**
  * 
  * Carte de type Attaque Limite de vitesse
- * On y trouve la correspondance avec Prioritaire et 
- * la methode permettant de la poser sur le bon tas,
- * ainsi que la variante permettant de definir la borne max jouable en etant limité
+ * On y trouve la correspondance avec sa botte et 
+ * la methode permettant de la jouer.
  * 
- * @author Damien
+ * 
+ * 
  *
  */
 public class LimiteVitesse extends Attaque {
@@ -26,14 +26,14 @@ public class LimiteVitesse extends Attaque {
 	}
 	
 	/**
-	 * affiche "LimiteVitesse"
+	 * Retourne "Limite de Vitesse"
 	 */
 	public String toString() {
-		return "LimiteVitesse";
+		return "Limite de Vitesse";
 	}
 
 	/**
-	 * Indique la compatibilité entre cette carte et la botte Prioritaire
+	 * Indique la compatibilité entre cette carte et la botte indiqué.
 	 * @param botte
 	 */
 	public boolean isCompatible(Botte botte) {
@@ -42,7 +42,7 @@ public class LimiteVitesse extends Attaque {
 		} else { return false; }
 	}
 	/**
-	 * Permet de poser la carte sur le bon tas 
+	 * Permet de poser la carte sur le jeu adverse, de retirer la carte de la main du joueur et indique à l'instance de PartieDeJeu le joueur suivant.
 	 * @param joueur
 	 * @param adversaire
 	 */
@@ -56,7 +56,7 @@ public class LimiteVitesse extends Attaque {
 		
 	}
 	/**
-	 * Valeur max des bornes jouables sous limite
+	 * Valeur max des bornes jouables lorsque l'on es tlimité par Limite de vitesse.
 	 * @return borneMaxJouable
 	 */
 	public static int getBorneMaxJouable() {
@@ -64,7 +64,7 @@ public class LimiteVitesse extends Attaque {
 	}
 
 	/**
-	 * Permet de definir la valeur max des bornes jouables sous limite
+	 * Permet de definir la valeur de bornes max jouable lorsque l'on est limité par la limite de vitesse.
 	 * @param borneMaxJouable
 	 */
 	public static void setBorneMaxJouable(int borneMaxJouable) {

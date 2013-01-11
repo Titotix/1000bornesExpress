@@ -11,8 +11,7 @@ import joueurs.Joueur;
  * Regroupe tous les types d'attaque
  * On y trouve la verification que la carte selectionnée est bien jouable
  * 
- * @author Damien
- *
+ * 
  */
 public abstract class Attaque extends Carte {
 	
@@ -43,9 +42,9 @@ public abstract class Attaque extends Carte {
 	}
 	
 	/**
-	 * Permet de savoir si la carte peut etre posee sur le tas
+	 * Permet de savoir si l'instance d'Attaque est jouable contre l'adversaire indiqué.
 	 * @param adversaire
-	 * 
+	 * @return boolean
 	 */
 	public boolean isJouableContre(Joueur adversaire) {
 		
@@ -110,8 +109,9 @@ public abstract class Attaque extends Carte {
 	
 	/**
 	 * Va placer la carte Attaque au bon endroit sur le jeu adverse et va retirer la carte Attaque de la main du joueur.
-	 * @param joueur qui est en train de jouer.
-	 * @param adversaire visé par l'attaque.
+	 * De plus, elle indiquera à l'instance PartieDeJeu le joueur dont c'est le tour après cette action.
+	 * @param joueur Joueur qui est en train de jouer.
+	 * @param adversaire Joueur visé par l'attaque.
 	 * 
 	 */
 

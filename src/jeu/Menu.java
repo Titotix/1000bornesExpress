@@ -107,7 +107,7 @@ public class Menu implements Runnable {
 		}
 	}
 	/**
-	 * Initialise les joueurs en Observer de la fenetre
+	 * Ajoute les joueurs, la défausse et la PartieDeJeu en Observer de l'interface.
 	 */
 	public void initObserver() {
 		FenetrePrincipale fenetre = FenetrePrincipale.getInstance();

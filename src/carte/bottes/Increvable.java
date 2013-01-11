@@ -6,7 +6,7 @@ import carte.attaque.Crevaison;
 /**
  * Represente la carte Increvable
  * On y trouve les booleens precisant si elle est jouable en coup fourré et quelle attaque elle bloque
- * @author Damien
+ * 
  *
  */
 public class Increvable extends Botte {
@@ -15,8 +15,9 @@ public class Increvable extends Botte {
 		
 	}
 	/**
-	 * Indique que la carte est jouable en coup fourre contre Crevaison
+	 * Retourne vrai si Increvable est jouable en tant que coupo fourré contre le JeuSurTable indiqué.
 	 * @param notreJeu
+	 * @return boolean
 	 */
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
 		if(notreJeu.getPileBataille().isEmpty() == false) {
@@ -27,7 +28,7 @@ public class Increvable extends Botte {
 		return false;
 	}
 	/**
-	 * Indique la compatibilité avec la carte Crevaison
+	 * Indique la compatibilité avec l'Attaque indiqué.
 	 * @param attaque
 	 */
 	public boolean isCompatible(Attaque attaque) {
@@ -37,7 +38,7 @@ public class Increvable extends Botte {
 	}
 	
 	/**
-	 * affiche "increvable"
+	 * Retourne "increvable"
 	 */
 	public String toString() {
 		return "Increvable";

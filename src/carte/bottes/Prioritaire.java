@@ -7,7 +7,7 @@ import carte.attaque.LimiteVitesse;
 /**
  * Represente la carte Prioritaire
  * On y trouve les booleens precisant si elle est jouable en coup fourré et quelle attaque elle bloque
- * @author Damien
+ * 
  *
  */
 public class Prioritaire extends Botte {
@@ -16,7 +16,7 @@ public class Prioritaire extends Botte {
 		
 	}
 	/**
-	 * Indique que la carte est jouable en coup fourre contre Feu rouge
+	 * Retourne vrai si Prioritaire est jouable en tant que coup fourré contre le JeuSurTable indiqué.
 	 * @param notreJeu
 	 */
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
@@ -34,8 +34,9 @@ public class Prioritaire extends Botte {
 	}
 	
 	/**
-	 * Indique que la carte est compatible avec Feu Rouge
+	 * Indique si la carte est compatible avec l'Attaque indiqué.
 	 * @param attaque
+	 * @return boolean
 	 */
 	public boolean isCompatible(Attaque attaque) {
 		if(attaque instanceof FeuRouge) {
@@ -44,7 +45,7 @@ public class Prioritaire extends Botte {
 	}
 	
 	/**
-	 * Affiche "Prioritaire"
+	 * Retourne "Prioritaire"
 	 */
 	public String toString() {
 		return "Prioritaire";

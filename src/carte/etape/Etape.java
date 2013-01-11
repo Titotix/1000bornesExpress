@@ -1,19 +1,14 @@
 package carte.etape;
 
 import java.util.*;
-
 import tasDeCartes.Carte;
-
 import jeu.PartieDeJeu;
-
 import joueurs.Joueur;
-
-
 import carte.attaque.LimiteVitesse;
+
 /**
  * Represente la carte Etape 
- * On y trouve les valeurs des cartes etapes, les booleens precisant si elle est jouable en coup fourré et quelle attaque elle bloque
- * et la methode permettant d'obtenir le nombre de km
+ * On y trouve les nombres de bornes de l'Etape, une méthod epour jouer la carte e tune méthode pour savoir si elle est jouable.
  * @author Damien
  *
  */
@@ -21,16 +16,13 @@ public class Etape extends Carte {
 	
 	private int nbKm;
 
-	
-	
 	public Etape (int nombreKilometres){
 		this.nbKm = nombreKilometres;
 		
 	}
 	
-	
 	/**
-	 * Affiche la valeur de la carte et "bornes"
+	 * Retourne la valeur de bornes de l'Etape.
 	 */
 	public String toString() {
 		return "" + this.nbKm+" bornes"; 
@@ -44,7 +36,7 @@ public class Etape extends Carte {
 	}
 	
 	/**
-	 * Permet de poser la carte au bon endroit
+	 * Permet de poser la carte sur son jeu, de retirer la carte de sa main ainsi que d'indiquer qui est le joueur suivant.
 	 * @param joueur
 	 * @param inutile
 	 * 
@@ -57,8 +49,10 @@ public class Etape extends Carte {
 	}
 	
 	/**
-	 * On verifie qu'on ne depasse pas le nombre de km max, que on joue 2 carte de 200 maximum et on peut ainsi verifier si 
-	 * la carte est jouable
+	 * Retourne vrai si la carte Etape est jouable sur son propre jeu.
+	 * Retourne faux dans le cas contraire.
+	 * @param joueur Joueur qui joue l'Etape.
+	 * @return boolean
 	 */
 	public boolean isJouable(Joueur joueur, Joueur inutile) {
 		

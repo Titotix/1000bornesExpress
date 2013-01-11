@@ -9,7 +9,7 @@ import carte.bottes.Increvable;
  * 
  * Carte de type Attaque Crevaison
  * On y trouve la correspondance a Increvable et 
- * la methode permettant de la poser sur le bon tas
+ * la methode permettant de jouer l'instance de Crevaison.
  * @author Damien
  *
  */
@@ -20,15 +20,17 @@ public class Crevaison extends Attaque {
 		
 	}
 	/**
-	 * Affiche "crevaison"
+	 * Retourne "crevaison"
 	 */
 	public String toString() {
 		return "Crevaison";
 	}
 	
 	/**
-	 * Indique la compatiblité entre cette carte et la botte Increvable
+	 * Indique la compatiblité entre cette carte et la botte indiqué.
+	 * Retourne vrai si botte est Increvable.
 	 * @param botte
+	 * @return boolean
 	 */
 	public boolean isCompatible(Botte botte) {
 		if(botte instanceof Increvable) {

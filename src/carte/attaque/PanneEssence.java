@@ -20,14 +20,14 @@ public class PanneEssence extends Attaque {
 		
 	}
 	/**
-	 * affiche "panne essence"
+	 * Retourne "panne essence"
 	 */
 	public String toString() {
 		return "Panne Essence";
 	}
 	
 	/**
-	 * Indique la compatibilité entre cette carte et la botte Citerne d'Essence
+	 * Indique la compatibilité entre cette carte et la botte indiqué.
 	 * @param botte
 	 */
 	public boolean isCompatible(Botte botte) {
@@ -35,10 +35,8 @@ public class PanneEssence extends Attaque {
 			return true;
 		} else { return false; }
 	}
-	
-	@Override
 	/**
-	 * Permet de poser la carte au bon endroit
+	 * Permet de poser la carte sur le jeu adverse, de retirer la carte de la main du joueur et indique à l'instance de PartieDeJeu le joueur suivant.
 	 * @param joueur
 	 * @param adversaire
 	 */

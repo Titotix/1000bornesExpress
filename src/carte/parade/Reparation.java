@@ -41,7 +41,11 @@ public class Reparation extends Parade {
 	@Override
 	public void jouer(Joueur joueur, Joueur inutile) {
 		joueur.getJeuEnMain().retirerCarte(this); 
-		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
+		
+		Attaque carte = joueur.getJeuSurTable().getPileBataille().get(0);
+		Defausse.getInstance().ajouter2Carte( carte , this);
+		joueur.getJeuSurTable().retirerCarteBataille(carte);
+		
 		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 
 		

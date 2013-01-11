@@ -7,8 +7,7 @@ import carte.attaque.Attaque;
 import carte.attaque.Crevaison;
 /**
  * Represente la carte Roue de secours
- * On y trouve les methodes verifiant que la carte se pose au bon endroit, et avec quelle attaque elle est compatible
- * @author Damien
+ * On y trouve les methodes permettant de jouer la carte ainsi que savoir si elle est comaptible avec une attaque.
  *
  */
 public class RoueSecours extends Parade {
@@ -34,15 +33,14 @@ public class RoueSecours extends Parade {
 		} else { return false; }
 	}
 	
-	/**
-	 * Permet de poser la carte au bon endroit 
-	 * @param joueur 
-	 * @param inutile
-	 */
 	@Override
 	public void jouer(Joueur joueur, Joueur inutile) {
 		joueur.getJeuEnMain().retirerCarte(this); 
-		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
+		
+		Attaque carte = joueur.getJeuSurTable().getPileBataille().get(0);
+		Defausse.getInstance().ajouter2Carte( carte , this);
+		joueur.getJeuSurTable().retirerCarteBataille(carte);
+		
 		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 
 		

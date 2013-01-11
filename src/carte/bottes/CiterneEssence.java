@@ -6,7 +6,7 @@ import carte.attaque.PanneEssence;
 /**
  * Represente la carte Citerne D'essence
  * On y trouve les booleens precisant si elle est jouable en coup fourré et quelle attaque elle bloque
- * @author Damien
+ * 
  *
  */
 public class CiterneEssence extends Botte{
@@ -16,7 +16,7 @@ public class CiterneEssence extends Botte{
 	}
 /**
  * Indique qu'elle est jouable en coup fourre contre Panne d'essence
- * @param notreJeu
+ * @param jeuSurTable JeuSurTable du joueur préalablement attaqué.
  */
 	public boolean isJouableCoupFourre(JeuSurTable notreJeu) {
 		if(notreJeu.getPileBataille().isEmpty() == false) {
@@ -27,8 +27,9 @@ public class CiterneEssence extends Botte{
 		return false;
 	}
 /**
- * Indique la compatibilité avec la carte Panne essence
+ * Indique la compatibilité avec l'Attaque indiqué.
  * @param attaque
+ * @return boolean
  */
 	public boolean isCompatible(Attaque attaque) {
 		if(attaque instanceof PanneEssence) {
@@ -37,7 +38,7 @@ public class CiterneEssence extends Botte{
 	}
 	
 	/**
-	 * Affiche "Citerne essence"
+	 * Retourne "Citerne essence"
 	 */
 	public String toString() {
 		return "Citerne Essence";

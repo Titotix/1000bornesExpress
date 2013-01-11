@@ -8,10 +8,10 @@ import carte.attaque.Attaque;
 
 
 /**
- * Represente les cartes de type Botte
- * On y trouve la methode permettant l'utilisation de la botte en jeu de plusieurs facons
- * et la valeur des km qu'elle ajoute aux km parcourus.
- * @author Damien
+ * Represente les cartes de types Botte
+ * On y trouve la methode permettant l'utilisation de la botte en jeu de plusieurs facons : en coup fourré ou en la jouant normalement.
+ * 
+ * 
  *
  */
 public abstract class Botte extends Carte  {
@@ -26,7 +26,7 @@ public abstract class Botte extends Carte  {
 	}
 	
 	/**
-	 * Permet de jouer la botte en coup classique ou en coup fourré
+	 * Permet de jouer la botte en coup classique.
 	 * @param joueur
 	 * @param inutile
 	 */
@@ -74,7 +74,11 @@ public abstract class Botte extends Carte  {
 	
 	public abstract boolean isCompatible(Attaque carte);
 	
-	
+	/**
+	 * Joue la botte en tant que coupo fourré.
+	 * 
+	 * @param joueur Joueur qui pose le coup fourré.
+	 */
 	public void coupFourre(Joueur joueur) {
 		joueur.getJeuSurTable().ajouterCarteBotte(this);
 		
@@ -120,7 +124,8 @@ public abstract class Botte extends Carte  {
 	}
 	
 	/**
-	 *Retourne vraie si la botte est jouable
+	 * Indique si la botte est jouable en coup classique.
+	 * Retourne toujours vrai puisque rien n'empêche d eposer une botte en coup classique.
 	 * 
 	 */
 	public boolean isJouable(Joueur joueur, Joueur inutile) {

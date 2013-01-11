@@ -9,8 +9,8 @@ import carte.bottes.Prioritaire;
  * 
  * Carte de type Attaque Feu Rouge
  * On y trouve la correspondance avec Prioritaire et
- * la methode permettant de la poser sur le bon tas
- * @author Damien
+ * la methode permettant de jouer la carte.
+ *
  *
  */
 public class FeuRouge extends Attaque {
@@ -21,15 +21,16 @@ public class FeuRouge extends Attaque {
 	}
 	
 	/**
-	 * afficher "feu rouge"
+	 * Retourne "Feu Rouge"
 	 */
 	public String toString() {
 		return "Feu Rouge";
 	}
 	
 	/**
-	 * Indique la compatibilité entre cette carte et la botte Prioritaire
+	 * Indique la compatibilité entre cette carte et la botte indiqué.
 	 * @param botte
+	 * @return boolean
 	 */
 	public boolean isCompatible(Botte botte) {
 		if(botte instanceof Prioritaire) {
@@ -39,7 +40,7 @@ public class FeuRouge extends Attaque {
 	
 	@Override
 	/**
-	 * Permet de poser la carte sur le tas
+	 * Permet de poser la carte sur le jeu adverse, de retirer la carte de la main du joueur et indique à l'instance de PartieDeJeu le joueur suivant.
 	 * @param joueur
 	 * @param adversaire
 	 */

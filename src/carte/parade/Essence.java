@@ -7,8 +7,7 @@ import carte.attaque.Attaque;
 import carte.attaque.PanneEssence;
 /**
  * Represente la carte parade Essence
- * On y trouve les methodes verifiant que la carte se pose au bon endroit, et avec quelle attaque elle est compatible
- * @author Damien
+ * On y trouve les methodes pour jouer la carte e tpour vérifier si elle est compatible avec une attaque.
  *
  */
 public class Essence extends Parade{
@@ -18,13 +17,13 @@ public class Essence extends Parade{
 		
 	}
     /**
-     * Affiche "essence"
+     * Retourne "essence"
      */
 	public String toString() {
 		return "Essence";
 	}
 	/**
-	 * Indique que le carte est compatible avec Panne d'essence
+	 * Indique si la carte est compatible avec l'Attaque indiqué.
 	 * @param attaque
 	 */
 	public boolean isCompatible(Attaque attaque) {
@@ -34,14 +33,19 @@ public class Essence extends Parade{
 	}
 	
 	/**
-	 * Permet de poser la carte au bon endroit
+	 * Permet de jouer la carte.
+	 * Cela retire la carte de la main du joueur, l'ajoute a son jeuSurTable. Indique de plus qui est le joueur suivant.
 	 * @param joueur
 	 * @param inutile
 	 */
 	@Override
 	public void jouer(Joueur joueur, Joueur inutile) {
 		joueur.getJeuEnMain().retirerCarte(this);
-		Defausse.getInstance().ajouter2Carte(joueur.getJeuSurTable().getPileBataille().remove(0), this);
+		
+		Attaque carte = joueur.getJeuSurTable().getPileBataille().get(0);
+		
+		Defausse.getInstance().ajouter2Carte( carte , this);
+		joueur.getJeuSurTable().retirerCarteBataille(carte);
 		PartieDeJeu.getInstance().setNumeroJoueurActuel(joueur.getNumPassage() ); 
 
 		
